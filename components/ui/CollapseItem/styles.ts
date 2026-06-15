@@ -36,5 +36,8 @@ export const styles = StyleSheet.create({
     fontWeight: FONT_WEIGHT.MEDIUM,
     lineHeight: LINE_HEIGHT.BASE
   },
-  triggerArrowContainer: {}
+  triggerArrowContainer: {},
+  triggerArrowContainerOpened: {
+    transform: [{rotate: "180deg"}]
+  },
 })

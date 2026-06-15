@@ -1,6 +1,6 @@
-import { ChevronRight } from "lucide-react-native";
-import { JSX, ReactElement } from "react";
-import { Text, View } from "react-native";
+import { ChevronDown } from "lucide-react-native";
+import { JSX, ReactElement, useState } from "react";
+import { Pressable, Text, View } from "react-native";
 import { styles } from "./styles";
 import { COLOR } from "@/sdk/constants/styles";
 
@@ -21,9 +21,14 @@ export default function CollapseItem(props: CollapseItemProps) {
     CollapseContent
   } = props
 
+  const [opened, setOpened] = useState<boolean>(false)
+
   return (
     <View style={styles.container}>
-      <View style={styles.triggerContainer}>
+      <Pressable
+        style={styles.triggerContainer}
+        onPress={() => setOpened(prev => !prev)}
+      >
         {!!Icon && (
           <View style={styles.triggerIconContainer}>
             {Icon}
@@ -43,15 +48,21 @@ export default function CollapseItem(props: CollapseItemProps) {
         </View>
 
         {showArrowIcon && (
-          <View style={styles.triggerArrowContainer}>
-            <ChevronRight color={COLOR.GRAY_500}/>
+          <View 
+          style={[
+            styles.triggerArrowContainer,
+            opened && styles.triggerArrowContainerOpened 
+            ]}>
+            <ChevronDown color={COLOR.GRAY_500} />
           </View>
         )}
-      </View>
+      </Pressable>
 
-      <View>
-        {CollapseContent}
-      </View>
+      {opened && (
+        <View>
+          {CollapseContent}
+        </View>
+      )}
     </View>
   )
 }
