@@ -56,6 +56,13 @@ export const LINE_HEIGHT = {
   XXXL: 40,
 }
 
+export const FONT_WEIGHT = {
+  REGULAR: "400" as const,
+  MEDIUM: "500" as const,
+  SEMI_BOLD: "600" as const,
+  BOLD: "700" as const
+}
+
 export const SPACING = {
   SM: 8,
   SSM: 12,

@@ -1,47 +1,51 @@
 import { ChevronRight } from "lucide-react-native";
 import { JSX, ReactElement } from "react";
 import { Text, View } from "react-native";
+import { styles } from "./styles";
+import { COLOR } from "@/sdk/constants/styles";
 
 type CollapseItemProps = {
   title: string
   CollapseContent: ReactElement | JSX.Element
   description?: string
   showArrowIcon?: boolean
-  TextIcon?: ReactElement
+  Icon?: ReactElement
 }
 
 export default function CollapseItem(props: CollapseItemProps) {
   const {
     title,
     description,
-    TextIcon,
+    Icon,
     showArrowIcon = true,
     CollapseContent
   } = props
 
   return (
-    <View>
-      <View>
-        {!!TextIcon && (
-          <View>
-            {TextIcon}
+    <View style={styles.container}>
+      <View style={styles.triggerContainer}>
+        {!!Icon && (
+          <View style={styles.triggerIconContainer}>
+            {Icon}
           </View>
         )}
 
-        <View>
-          <Text>
+        <View style={styles.triggerTextContainer}>
+          <Text style={styles.triggerTitle}>
             {title}
           </Text>
 
           {!!description && (
-            <Text>
+            <Text style={styles.triggerDescription}>
               {description}
             </Text>
           )}
         </View>
 
         {showArrowIcon && (
-          <ChevronRight />
+          <View style={styles.triggerArrowContainer}>
+            <ChevronRight color={COLOR.GRAY_500}/>
+          </View>
         )}
       </View>
 
