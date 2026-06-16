@@ -1,5 +1,5 @@
-import { ChevronDown } from "lucide-react-native";
-import { JSX, ReactElement, useState } from "react";
+import { ChevronDown, LucideProps } from "lucide-react-native";
+import { ComponentType, JSX, ReactElement, useState } from "react";
 import { Pressable, Text, View } from "react-native";
 import { styles } from "./styles";
 import { COLOR } from "@/sdk/constants/styles";
@@ -9,7 +9,7 @@ type CollapseItemProps = {
   CollapseContent: ReactElement | JSX.Element
   description?: string
   showArrowIcon?: boolean
-  Icon?: ReactElement
+  Icon?: ComponentType<LucideProps>
 }
 
 export default function CollapseItem(props: CollapseItemProps) {
@@ -31,7 +31,7 @@ export default function CollapseItem(props: CollapseItemProps) {
       >
         {!!Icon && (
           <View style={styles.triggerIconContainer}>
-            {Icon}
+            <Icon color={COLOR.WHITE}/>
           </View>
         )}
 
