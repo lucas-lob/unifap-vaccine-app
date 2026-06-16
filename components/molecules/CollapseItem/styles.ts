@@ -8,6 +8,7 @@ export const styles = StyleSheet.create({
     gap: SPACING.SSM,
     padding: SPACING.MD,
     boxShadow: [SHADOW.SM],
+    backgroundColor: COLOR.WHITE,
     borderRadius: BORDER_RADIUS.LG
   },
   triggerContainer: {
