@@ -12,7 +12,7 @@ type CollapseItemProps = {
   Icon?: ComponentType<LucideProps>
 }
 
-export default function CollapseItem(props: CollapseItemProps) {
+export function CollapseItem(props: CollapseItemProps) {
   const {
     title,
     description,

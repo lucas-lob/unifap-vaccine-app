@@ -1,5 +1,5 @@
 import { CircleAlert } from "lucide-react-native";
-import { StyleProp, Text, View, ViewStyle } from "react-native";
+import { Text, View, ViewStyle } from "react-native";
 import { generalStyles, stylesBlue, stylesGreen, stylesOrange } from "./styles";
 
 type TextContainerProps = {
@@ -30,7 +30,7 @@ const getIcon = (
   }
 }
 
-export default function TextContainer(props: TextContainerProps) {
+export function TextContainer(props: TextContainerProps) {
   const {
     title,
     description,

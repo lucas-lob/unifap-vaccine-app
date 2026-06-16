@@ -1,7 +1,7 @@
 import { View } from "react-native";
 
-import CollapseItem from "@/components/molecules/CollapseItem";
-import TextContainer from "@/components/molecules/TextContainer";
+import { CollapseItem } from "@/components/molecules/CollapseItem";
+import { TextContainer } from "@/components/molecules/TextContainer";
 
 import type { ComponentType } from "react";
 import type { LucideProps } from "lucide-react-native";
@@ -21,7 +21,7 @@ type StoryTabProps = {
 const CREATION_TITLE = 'Como foi criada?'
 const DISEASE_TITLE = 'Doenças que previne'
 
-export default function StoryTab(props: StoryTabProps) {
+export function StoryTab(props: StoryTabProps) {
   const {
     title,
     description,
