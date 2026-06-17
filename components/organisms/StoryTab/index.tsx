@@ -5,6 +5,7 @@ import { TextContainer } from "@/components/molecules/TextContainer";
 
 import type { ComponentType } from "react";
 import type { LucideProps } from "lucide-react-native";
+import { styles } from "./styles";
 
 type ColorsEnum = 'blue' | 'red' | 'orange' | 'green' | 'purple'
 
@@ -41,7 +42,7 @@ export function StoryTab(props: StoryTabProps) {
       Icon={Icon}
       iconColor={iconColor}
       CollapseContent={
-        <View>
+        <View style={styles.container}>
           <TextContainer
             title={CREATION_TITLE}
             description={creationDescription}
