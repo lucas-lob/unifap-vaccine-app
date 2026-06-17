@@ -18,6 +18,14 @@ export default function TabLayout() {
           headerShown: false
         }}
       />
+
+      <Tabs.Screen
+        name="(disease)"
+        options={{
+          title: "Disease",
+          headerShown: false
+        }}
+      />
     </Tabs>
   )
 }

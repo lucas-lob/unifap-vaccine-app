@@ -73,3 +73,27 @@ export const stylesBlue = StyleSheet.create({
     color: COLOR.BLUE_DARK,
   }
 })
+
+export const stylesRed = StyleSheet.create({
+  containerColor: {
+    backgroundColor: COLOR.RED_LIGHT
+  },
+  iconColor: {
+    color: COLOR.RED_DARK
+  },
+  titleColor: {
+    color: COLOR.RED_DARK,
+  }
+})
+
+export const stylesPurple = StyleSheet.create({
+  containerColor: {
+    backgroundColor: COLOR.PURPLE_LIGHT
+  },
+  iconColor: {
+    color: COLOR.PURPLE_DARK
+  },
+  titleColor: {
+    color: COLOR.PURPLE_DARK,
+  }
+})

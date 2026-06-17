@@ -10,26 +10,26 @@ type ColorsEnum = 'blue' | 'red' | 'orange' | 'green' | 'purple'
 
 type StoryTabProps = {
   title: string,
-  creationDescription: string
+  symptomsTitle: string
   diseaseDescription: string
   description?: string,
   Icon?: ComponentType<LucideProps>
   iconColor?: ColorsEnum
-  creationDescriptionColor?: ColorsEnum
+  symptomsTitleColor?: ColorsEnum
   diseaseDescriptionColor?: ColorsEnum
 }
 
-const CREATION_TITLE = 'Como foi criada?'
+const SYMPTOMS_TITLE = 'Sintomas e Impactos'
 const DISEASE_TITLE = 'Doenças que previne'
 
-export function StoryTab(props: StoryTabProps) {
+export function DiseaseTab(props: StoryTabProps) {
   const {
     title,
     description,
-    creationDescription,
-    creationDescriptionColor = 'blue',
+    symptomsTitle,
+    symptomsTitleColor = 'orange',
     diseaseDescription,
-    diseaseDescriptionColor = 'green',
+    diseaseDescriptionColor = 'blue',
     Icon,
     iconColor
   } = props
@@ -43,9 +43,9 @@ export function StoryTab(props: StoryTabProps) {
       CollapseContent={
         <View>
           <TextContainer
-            title={CREATION_TITLE}
-            description={creationDescription}
-            color={creationDescriptionColor}
+            title={SYMPTOMS_TITLE}
+            description={symptomsTitle}
+            color={symptomsTitleColor}
           />
 
           <TextContainer

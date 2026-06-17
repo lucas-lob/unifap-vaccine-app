@@ -1,4 +1,12 @@
-import { BORDER_RADIUS, COLOR, FONT_SIZE, FONT_WEIGHT, LINE_HEIGHT, SHADOW, SPACING } from "@/sdk/constants/styles";
+import {
+  BORDER_RADIUS,
+  COLOR,
+  FONT_SIZE,
+  FONT_WEIGHT,
+  LINE_HEIGHT,
+  SHADOW,
+  SPACING
+} from "@/sdk/constants/styles";
 import { StyleSheet } from "react-native";
 
 export const styles = StyleSheet.create({
@@ -20,7 +28,6 @@ export const styles = StyleSheet.create({
   triggerIconContainer: {
     padding: SPACING.SSM,
     borderRadius: BORDER_RADIUS.XL,
-    backgroundColor: COLOR.BLUE_DARK,
   },
   triggerTextContainer: {
     flex: 1
@@ -39,6 +46,51 @@ export const styles = StyleSheet.create({
   },
   triggerArrowContainer: {},
   triggerArrowContainerOpened: {
-    transform: [{rotate: "180deg"}]
+    transform: [{ rotate: "180deg" }]
   },
+})
+
+export const blueIconStyles = StyleSheet.create({
+  triggerIconContainer: {
+    backgroundColor: COLOR.BLUE_DARK
+  },
+  iconColor: {
+    color: COLOR.WHITE
+  }
+})
+
+export const redIconStyles = StyleSheet.create({
+  triggerIconContainer: {
+    backgroundColor: COLOR.RED_LIGHT
+  },
+  iconColor: {
+    color: COLOR.RED_DARK
+  }
+})
+
+export const greenIconStyles = StyleSheet.create({
+  triggerIconContainer: {
+    backgroundColor: COLOR.GREEN_LIGHT
+  },
+  iconColor: {
+    color: COLOR.GREEN_DARK
+  }
+})
+
+export const orangeIconStyles = StyleSheet.create({
+  triggerIconContainer: {
+    backgroundColor: COLOR.ORANGE_LIGHT
+  },
+  iconColor: {
+    color: COLOR.ORANGE_DARK
+  }
+})
+
+export const purpleIconStyles = StyleSheet.create({
+  triggerIconContainer: {
+    backgroundColor: COLOR.PURPLE_LIGHT
+  },
+  iconColor: {
+    color: COLOR.PURPLE_DARK
+  }
 })

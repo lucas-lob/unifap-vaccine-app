@@ -1,11 +1,11 @@
 import { CircleAlert } from "lucide-react-native";
 import { Text, View, ViewStyle } from "react-native";
-import { generalStyles, stylesBlue, stylesGreen, stylesOrange } from "./styles";
+import { generalStyles, stylesBlue, stylesGreen, stylesOrange, stylesPurple, stylesRed } from "./styles";
 
 type TextContainerProps = {
   title: string
   description: string
-  color: 'orange' | 'blue' | 'green'
+  color: 'blue' | 'red' | 'orange' | 'green' | 'purple'
   icon?: 'none' | 'warning'
 }
 
@@ -15,6 +15,10 @@ const getColorStyles = (color: TextContainerProps['color']) => {
       return stylesOrange
     case 'blue':
       return stylesBlue
+    case 'purple':
+      return stylesPurple
+    case 'red':
+      return stylesRed
     default:
       return stylesGreen
   }
