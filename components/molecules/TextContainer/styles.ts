@@ -48,6 +48,11 @@ export const stylesOrange = StyleSheet.create({
   titleColor: {
     color: COLOR.ORANGE_DARK
   },
+  border: {
+    borderColor: COLOR.ORANGE_DARK,
+    borderLeftWidth: 4,
+    borderStyle: 'solid'
+  }
 })
 
 export const stylesGreen = StyleSheet.create({
@@ -59,6 +64,11 @@ export const stylesGreen = StyleSheet.create({
   },
   titleColor: {
     color: COLOR.GREEN_DARK
+  },
+  border: {
+    borderColor: COLOR.GREEN_DARK,
+    borderLeftWidth: 4,
+    borderStyle: 'solid'
   }
 })
 
@@ -71,6 +81,11 @@ export const stylesBlue = StyleSheet.create({
   },
   titleColor: {
     color: COLOR.BLUE_DARK,
+  },
+  border: {
+    borderColor: COLOR.BLUE_BORDER,
+    borderLeftWidth: 4,
+    borderStyle: 'solid'
   }
 })
 
@@ -83,6 +98,11 @@ export const stylesRed = StyleSheet.create({
   },
   titleColor: {
     color: COLOR.RED_DARK,
+  },
+  border: {
+    borderColor: COLOR.RED_DARK,
+    borderLeftWidth: 4,
+    borderStyle: 'solid'
   }
 })
 
@@ -95,5 +115,10 @@ export const stylesPurple = StyleSheet.create({
   },
   titleColor: {
     color: COLOR.PURPLE_DARK,
+  },
+  border: {
+    borderColor: COLOR.PURPLE_DARK,
+    borderLeftWidth: 4,
+    borderStyle: 'solid'
   }
 })

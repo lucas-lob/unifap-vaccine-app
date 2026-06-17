@@ -46,6 +46,8 @@ export function DiseaseTab(props: StoryTabProps) {
             title={SYMPTOMS_TITLE}
             description={symptomsTitle}
             color={symptomsTitleColor}
+            showBorder={true}
+            icon='warning'
           />
 
           <TextContainer

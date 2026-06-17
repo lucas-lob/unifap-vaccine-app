@@ -6,6 +6,7 @@ type TextContainerProps = {
   title: string
   description: string
   color: 'blue' | 'red' | 'orange' | 'green' | 'purple'
+  showBorder?: boolean
   icon?: 'none' | 'warning'
 }
 
@@ -39,6 +40,7 @@ export function TextContainer(props: TextContainerProps) {
     title,
     description,
     color,
+    showBorder = false,
     icon = 'none'
   } = props
 
@@ -48,7 +50,8 @@ export function TextContainer(props: TextContainerProps) {
     <View
       style={[
         styles.container,
-        styles.containerColor
+        styles.containerColor,
+        showBorder ? styles.border : null
       ]}
     >
       {icon !== 'none' && (
