@@ -1,11 +1,12 @@
-import { View } from "react-native";
 
-import { CollapseItem } from "@/components/molecules/CollapseItem";
-import { TextContainer } from "@/components/molecules/TextContainer";
+import { DisclosureLayout } from "@/components/molecules/DisclosureLayout";
+import { DisclosureContent } from "@/components/molecules/DisclosureLayout/DisclosureContent";
+import { DisclosureTrigger } from "@/components/molecules/DisclosureLayout/DisclosureTrigger";
+import { StylizedTextContainer } from "@/components/molecules/StylizedTextContainer";
+import { TabItem } from "@/components/molecules/TabItem";
 
-import type { ComponentType } from "react";
 import type { LucideProps } from "lucide-react-native";
-import { styles } from "./styles";
+import type { ComponentType } from "react";
 
 type ColorsEnum = 'blue' | 'red' | 'orange' | 'green' | 'purple'
 
@@ -36,26 +37,29 @@ export function StoryTab(props: StoryTabProps) {
   } = props
 
   return (
-    <CollapseItem
-      title={title}
-      description={description}
-      Icon={Icon}
-      iconColor={iconColor}
-      CollapseContent={
-        <View style={styles.container}>
-          <TextContainer
-            title={CREATION_TITLE}
-            description={creationDescription}
-            color={creationDescriptionColor}
-          />
+    <DisclosureLayout showArrowIcon={true}>
+      <DisclosureTrigger>
+        <TabItem
+          title={title}
+          description={description}
+          Icon={Icon}
+          iconColor={iconColor}
+        />
+      </DisclosureTrigger>
 
-          <TextContainer
-            title={DISEASE_TITLE}
-            description={diseaseDescription}
-            color={diseaseDescriptionColor}
-          />
-        </View>
-      }
-    />
+      <DisclosureContent>
+        <StylizedTextContainer
+          title={CREATION_TITLE}
+          description={creationDescription}
+          color={creationDescriptionColor}
+        />
+
+        <StylizedTextContainer
+          title={DISEASE_TITLE}
+          description={diseaseDescription}
+          color={diseaseDescriptionColor}
+        />
+      </DisclosureContent>
+    </DisclosureLayout>
   )
 }

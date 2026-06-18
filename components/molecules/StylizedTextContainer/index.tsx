@@ -2,7 +2,7 @@ import { CircleAlert } from "lucide-react-native";
 import { Text, View, ViewStyle } from "react-native";
 import { generalStyles, stylesBlue, stylesGreen, stylesOrange, stylesPurple, stylesRed } from "./styles";
 
-type TextContainerProps = {
+type StylizedTextContainerProps = {
   title: string
   description: string
   color: 'blue' | 'red' | 'orange' | 'green' | 'purple'
@@ -10,7 +10,7 @@ type TextContainerProps = {
   icon?: 'none' | 'warning'
 }
 
-const getColorStyles = (color: TextContainerProps['color']) => {
+const getColorStyles = (color: StylizedTextContainerProps['color']) => {
   switch (color) {
     case 'orange':
       return stylesOrange
@@ -26,7 +26,7 @@ const getColorStyles = (color: TextContainerProps['color']) => {
 }
 
 const getIcon = (
-  icon: TextContainerProps['icon'],
+  icon: StylizedTextContainerProps['icon'],
   iconStyle: Record<string, string>
 ) => {
   switch (icon) {
@@ -35,7 +35,7 @@ const getIcon = (
   }
 }
 
-export function TextContainer(props: TextContainerProps) {
+export function StylizedTextContainer(props: StylizedTextContainerProps) {
   const {
     title,
     description,

@@ -12,26 +12,16 @@ import { StyleSheet } from "react-native";
 export const styles = StyleSheet.create({
   container: {
     display: 'flex',
-    flexDirection: 'column',
-    gap: SPACING.SSM,
-    padding: SPACING.MD,
-    boxShadow: [SHADOW.SM],
-    backgroundColor: COLOR.WHITE,
-    borderRadius: BORDER_RADIUS.LG
-  },
-  triggerContainer: {
-    display: 'flex',
     flexDirection: 'row',
     alignItems: 'center',
     gap: SPACING.SSM,
+    backgroundColor: COLOR.WHITE
   },
   triggerIconContainer: {
     padding: SPACING.SSM,
     borderRadius: BORDER_RADIUS.XL,
   },
-  triggerTextContainer: {
-    flex: 1
-  },
+  triggerTextContainer: {},
   triggerTitle: {
     color: COLOR.GRAY_900,
     fontSize: FONT_SIZE.LG,
