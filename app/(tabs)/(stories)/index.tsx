@@ -5,12 +5,12 @@ import { SafeAreaView } from 'react-native-safe-area-context'
 import { StoryTab } from '@/components/organisms/StoryTab'
 
 import {
-  COLOR,
-  FONT_SIZE,
-  FONT_WEIGHT,
-  LINE_HEIGHT,
-  SPACING
-} from '@/sdk/constants/styles'
+    COLOR,
+    FONT_SIZE,
+    FONT_WEIGHT,
+    LINE_HEIGHT,
+    SPACING
+} from '@/style/tokens'
 
 export default function StoriesScreen() {
   return (

@@ -5,7 +5,7 @@ import { Pressable, View } from "react-native"
 import { DisclosureContent } from "./DisclosureContent"
 import { DisclosureTrigger } from "./DisclosureTrigger"
 
-import { COLOR } from "@/sdk/constants/styles"
+import { COLOR } from "@/style/tokens"
 
 import { styles } from "./styles"
 

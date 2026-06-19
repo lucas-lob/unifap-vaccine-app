@@ -1,6 +1,6 @@
 import { StyleSheet } from "react-native";
 
-import { COLOR, FONT_SIZE, FONT_WEIGHT, LINE_HEIGHT, SPACING } from "@/sdk/constants/styles";
+import { COLOR, FONT_SIZE, FONT_WEIGHT, LINE_HEIGHT, SPACING } from "@/style/tokens";
 
 export const styles = StyleSheet.create({
   container: {

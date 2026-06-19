@@ -1,4 +1,4 @@
-import { SPACING } from "@/sdk/constants/styles";
+import { SPACING } from "@/style/tokens";
 import { StyleSheet } from "react-native";
 
 export const styles = StyleSheet.create({

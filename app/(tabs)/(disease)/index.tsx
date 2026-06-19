@@ -1,14 +1,14 @@
+import { Bug, CircleDot } from 'lucide-react-native'
 import { ScrollView, StyleSheet, Text, View } from 'react-native'
 import { SafeAreaView } from 'react-native-safe-area-context'
-import { Bug, CircleDot } from 'lucide-react-native'
 
 import {
-  COLOR,
-  FONT_SIZE,
-  FONT_WEIGHT,
-  LINE_HEIGHT,
-  SPACING
-} from '@/sdk/constants/styles'
+    COLOR,
+    FONT_SIZE,
+    FONT_WEIGHT,
+    LINE_HEIGHT,
+    SPACING
+} from '@/style/tokens'
 
 import { DiseaseTab } from '@/components/organisms/DiseaseTab'
 

@@ -1,13 +1,13 @@
-import { StyleSheet } from 'react-native';
 import {
-  BORDER_RADIUS,
-  COLOR,
-  FONT_SIZE,
-  FONT_WEIGHT,
-  LINE_HEIGHT,
-  SHADOW,
-  SPACING
-} from '@/sdk/constants/styles';
+    BORDER_RADIUS,
+    COLOR,
+    FONT_SIZE,
+    FONT_WEIGHT,
+    LINE_HEIGHT,
+    SHADOW,
+    SPACING
+} from '@/style/tokens';
+import { StyleSheet } from 'react-native';
 
 export const generalStyles = StyleSheet.create({
   wrapper: {

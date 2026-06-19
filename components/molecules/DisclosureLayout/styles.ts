@@ -1,4 +1,4 @@
-import { BORDER_RADIUS, COLOR, SHADOW, SPACING } from "@/sdk/constants/styles";
+import { BORDER_RADIUS, COLOR, SHADOW, SPACING } from "@/style/tokens";
 import { StyleSheet } from "react-native";
 
 export const styles = StyleSheet.create({

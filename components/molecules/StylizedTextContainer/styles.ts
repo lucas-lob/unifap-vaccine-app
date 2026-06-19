@@ -5,7 +5,7 @@ import {
   FONT_WEIGHT,
   LINE_HEIGHT,
   SPACING
-} from "@/sdk/constants/styles";
+} from "@/style/tokens";
 import { StyleSheet } from "react-native";
 
 export const generalStyles = StyleSheet.create({
