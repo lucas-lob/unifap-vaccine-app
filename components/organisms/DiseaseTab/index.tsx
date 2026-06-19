@@ -9,8 +9,6 @@ import { TabItem } from "@/components/molecules/TabItem";
 import type { LucideProps } from "lucide-react-native";
 import type { ComponentType } from "react";
 
-type ColorsEnum = 'blue' | 'red' | 'orange' | 'green' | 'purple'
-
 type StoryTabProps = {
   title: string,
   symptomsTitle: string

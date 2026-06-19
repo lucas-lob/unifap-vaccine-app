@@ -1,0 +1,1 @@
+type ColorsEnum = 'blue' | 'red' | 'orange' | 'green' | 'purple'
