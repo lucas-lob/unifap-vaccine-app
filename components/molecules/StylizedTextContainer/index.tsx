@@ -1,28 +1,14 @@
+import { getThemeColors } from "@/sdk/utils/getThemeColors";
 import { CircleAlert } from "lucide-react-native";
-import { Text, View, ViewStyle } from "react-native";
-import { generalStyles, stylesBlue, stylesGreen, stylesOrange, stylesPurple, stylesRed } from "./styles";
+import { Text, View } from "react-native";
+import { styles } from "./styles";
 
 type StylizedTextContainerProps = {
   title: string
   description: string
-  color: 'blue' | 'red' | 'orange' | 'green' | 'purple'
+  color: ThemeColorsEnum
   showBorder?: boolean
   icon?: 'none' | 'warning'
-}
-
-const getColorStyles = (color: StylizedTextContainerProps['color']) => {
-  switch (color) {
-    case 'orange':
-      return stylesOrange
-    case 'blue':
-      return stylesBlue
-    case 'purple':
-      return stylesPurple
-    case 'red':
-      return stylesRed
-    default:
-      return stylesGreen
-  }
 }
 
 const getIcon = (
@@ -44,33 +30,33 @@ export function StylizedTextContainer(props: StylizedTextContainerProps) {
     icon = 'none'
   } = props
 
-  const styles = { ...generalStyles, ...getColorStyles(color) }
+  const generalStyles = { ...styles, ...getThemeColors(color) }
 
   return (
     <View
       style={[
-        styles.container,
-        styles.containerColor,
-        showBorder ? styles.border : null
+        generalStyles.container,
+        generalStyles.containerColor,
+        showBorder ? generalStyles.border : null
       ]}
     >
       {icon !== 'none' && (
-        <View style={styles.iconContainer}>
-          {getIcon(icon, styles.iconColor)}
+        <View style={generalStyles.iconContainer}>
+          {getIcon(icon, generalStyles.iconColor)}
         </View>
       )}
 
-      <View style={styles.textsContainer}>
+      <View style={generalStyles.textsContainer}>
         <Text
           style={[
-            styles.title,
-            styles.titleColor,
+            generalStyles.title,
+            generalStyles.textColor,
           ]}
         >
           {title}
         </Text>
 
-        <Text style={styles.description}>
+        <Text style={generalStyles.description}>
           {description}
         </Text>
       </View>

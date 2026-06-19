@@ -11,12 +11,14 @@ export const styles = StyleSheet.create({
     padding: SPACING.MD,
     backgroundColor: COLOR.WHITE
   },
+
   title: {
     color: COLOR.BLUE_DARK,
     fontSize: FONT_SIZE.BASE,
     fontWeight: FONT_WEIGHT.SEMI_BOLD,
     lineHeight: LINE_HEIGHT.BASE
   },
+  
   content: {
     color: COLOR.GRAY_900,
     fontSize: FONT_SIZE.BASE,

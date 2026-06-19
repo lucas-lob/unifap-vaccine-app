@@ -1,1 +1,1 @@
-type ColorsEnum = 'blue' | 'red' | 'orange' | 'green' | 'purple'
+type ThemeColorsEnum = 'blue' | 'red' | 'orange' | 'green' | 'purple'

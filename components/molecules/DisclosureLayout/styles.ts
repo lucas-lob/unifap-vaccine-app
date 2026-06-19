@@ -11,6 +11,7 @@ export const styles = StyleSheet.create({
     backgroundColor: COLOR.WHITE,
     borderRadius: BORDER_RADIUS.LG
   },
+
   triggerContainer: {
     display: 'flex',
     flexDirection: 'row',
@@ -18,15 +19,19 @@ export const styles = StyleSheet.create({
     justifyContent: 'space-between',
     gap: SPACING.SSM
   },
+
   triggerChild: {
     flexShrink: 1
   },
+
   contentChild: {
       display: 'flex',
       flexDirection: 'column',
       gap: SPACING.MD
   },
+
   arrowContainer: {},
+  
   arrowContainerOpened: {
     transform: [{ rotate: "180deg" }]
   },

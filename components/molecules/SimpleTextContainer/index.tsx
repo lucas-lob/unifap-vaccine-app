@@ -1,22 +1,34 @@
+import { getThemeColors } from "@/sdk/utils/getThemeColors"
 import { Text, View } from "react-native"
 import { styles } from "./styles"
 
 type SimpleTextContainerProps = {
   title: string
   content: string
+  themeColor?: ThemeColorsEnum
 }
 
 export function SimpleTextContainer(props: SimpleTextContainerProps) {
   const {
     title,
-    content
+    content,
+    themeColor = 'blue'
   } = props
 
-  return (
-    <View style={styles.container}>
-      <Text style={styles.title}>{title}</Text>
+  const generalStyles = { ...styles, ...getThemeColors(themeColor) }
 
-      <Text style={styles.content}>{content}</Text>
+  return (
+    <View style={generalStyles.container}>
+      <Text
+        style={[
+          generalStyles.title,
+          generalStyles.textColor
+        ]}
+      >
+        {title}
+      </Text>
+
+      <Text style={generalStyles.content}>{content}</Text>
     </View>
   )
 }

@@ -1,14 +1,8 @@
 import { Text, View } from "react-native";
 
-import {
-  blueIconStyles,
-  greenIconStyles,
-  orangeIconStyles,
-  purpleIconStyles,
-  redIconStyles,
-  styles
-} from "./styles";
+import { styles } from "./styles";
 
+import { getThemeColors } from "@/sdk/utils/getThemeColors";
 import type { LucideProps } from "lucide-react-native";
 import type { ComponentType } from "react";
 
@@ -16,22 +10,7 @@ type TabItemProps = {
   title: string
   description?: string
   Icon?: ComponentType<LucideProps>
-  iconColor?: 'blue' | 'red' | 'orange' | 'green' | 'purple'
-}
-
-const getIconStyles = (iconColor: TabItemProps['iconColor']) => {
-  switch (iconColor) {
-    case 'blue':
-      return blueIconStyles
-    case 'red':
-      return redIconStyles
-    case 'green':
-      return greenIconStyles
-    case 'orange':
-      return orangeIconStyles
-    default:
-      return purpleIconStyles
-  }
+  iconColor?: ThemeColorsEnum
 }
 
 export function TabItem(props: TabItemProps) {
@@ -42,20 +21,20 @@ export function TabItem(props: TabItemProps) {
     iconColor = 'blue',
   } = props
 
-  const iconStyles = getIconStyles(iconColor)
+  const generalStyles = { ...styles, ...getThemeColors(iconColor) }
 
   return (
     <View style={styles.container}>
       {!!Icon && (
         <View style={[
-          styles.triggerIconContainer,
-          iconStyles.triggerIconContainer
+          generalStyles.triggerIconContainer,
+          generalStyles.containerColor
         ]}>
-          <Icon color={iconStyles.iconColor.color} />
+          <Icon color={generalStyles.iconColor.color} />
         </View>
       )}
 
-      <View style={styles.triggerTextContainer}>
+      <View style={generalStyles.triggerTextContainer}>
         <Text style={styles.triggerTitle}>
           {title}
         </Text>

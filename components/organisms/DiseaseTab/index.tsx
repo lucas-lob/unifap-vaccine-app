@@ -15,9 +15,9 @@ type StoryTabProps = {
   diseaseDescription: string
   description?: string,
   Icon?: ComponentType<LucideProps>
-  iconColor?: ColorsEnum
-  symptomsTitleColor?: ColorsEnum
-  diseaseDescriptionColor?: ColorsEnum
+  iconColor?: ThemeColorsEnum
+  symptomsTitleColor?: ThemeColorsEnum
+  diseaseDescriptionColor?: ThemeColorsEnum
 }
 
 const SYMPTOMS_TITLE = 'Sintomas e Impactos'
