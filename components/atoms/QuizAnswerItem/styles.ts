@@ -7,12 +7,13 @@ export const styles = StyleSheet.create({
     padding: SPACING.SM,
     borderRadius: BORDER_RADIUS.LG,
     borderWidth: 1,
-    borderStyle: 'solid'
+    borderStyle: 'solid',
   },
   answer: {
     fontSize: FONT_SIZE.BASE,
     lineHeight: LINE_HEIGHT.BASE,
-    fontWeight: FONT_WEIGHT.SEMI_BOLD
+    fontWeight: FONT_WEIGHT.SEMI_BOLD,
+    textAlign: 'center'
   }
 })
 

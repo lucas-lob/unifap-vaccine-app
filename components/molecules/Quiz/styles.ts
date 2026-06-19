@@ -40,6 +40,7 @@ export const styles = StyleSheet.create({
     color: COLOR.GREEN_DARK,
     fontSize: FONT_SIZE.BASE,
     lineHeight: LINE_HEIGHT.BASE,
-    fontWeight: FONT_WEIGHT.REGULAR
+    fontWeight: FONT_WEIGHT.REGULAR,
+    textAlign: 'center'
   }
 })
