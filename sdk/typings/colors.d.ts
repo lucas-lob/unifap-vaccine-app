@@ -1,1 +1,0 @@
-type ThemeColorsEnum = 'blue' | 'red' | 'orange' | 'green' | 'purple'
