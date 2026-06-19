@@ -1,14 +1,14 @@
 import { StyleSheet } from "react-native";
 
-import { COLOR, FONT_SIZE, FONT_WEIGHT, LINE_HEIGHT, SPACING } from "@/style/tokens";
+import { BORDER_RADIUS, COLOR, FONT_SIZE, FONT_WEIGHT, LINE_HEIGHT, SPACING } from "@/style/tokens";
 
 export const styles = StyleSheet.create({
   container: {
     display: 'flex',
     flexDirection: 'column',
-    alignItems: 'center',
     gap: SPACING.SSM,
-    padding: SPACING.MD,
+    padding: SPACING.LG,
+    borderRadius: BORDER_RADIUS.LG,
     backgroundColor: COLOR.WHITE
   },
 

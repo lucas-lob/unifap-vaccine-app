@@ -11,6 +11,7 @@ import {
 } from '@/style/tokens'
 
 import { DiseaseTab } from '@/components/organisms/DiseaseTab'
+import { SimpleTextContainer } from '@/components/molecules/SimpleTextContainer'
 
 export default function DiseaseScreen() {
   return (
@@ -41,6 +42,11 @@ export default function DiseaseScreen() {
             iconColor={'orange'}
             symptomsTitle='Causa verrugas genitais e câncer cervical, vaginal, peniano e de garganta. Aproximadamente 80% das pessoas sexualmente ativas terão contato com HPV ao longo da vida.'
             diseaseDescription='Previne infecções por HPV que podem causar câncer de colo do útero, vagina, vulva, pênis, ânus e orofaringe, além de verrugas genitais.'
+          />
+
+          <SimpleTextContainer 
+            title='💡 Você sabia?'
+            content='As vacinas salvam 2-3 milhões de vidas por ano no mundo, segundo a OMS. Elas são uma das maiores conquistas da medicina moderna!'
           />
         </View>
       </SafeAreaView>
