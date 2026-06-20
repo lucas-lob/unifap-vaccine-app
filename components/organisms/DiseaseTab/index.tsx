@@ -1,12 +1,13 @@
+import { Play } from "lucide-react-native";
 
-
+import Button from "@/components/atoms/Button";
 import { DisclosureLayout } from "@/components/molecules/DisclosureLayout";
 import { DisclosureContent } from "@/components/molecules/DisclosureLayout/DisclosureContent";
 import { DisclosureTrigger } from "@/components/molecules/DisclosureLayout/DisclosureTrigger";
 import { StylizedTextContainer } from "@/components/molecules/StylizedTextContainer";
 import { TabItem } from "@/components/molecules/TabItem";
 
-import type { LucideProps } from "lucide-react-native";
+import type { LucideProps } from 'lucide-react-native'
 import type { ComponentType } from "react";
 
 type StoryTabProps = {
@@ -60,8 +61,12 @@ export function DiseaseTab(props: StoryTabProps) {
           description={diseaseDescription}
           color={diseaseDescriptionColor}
         />
+
+        <Button
+          label="Ver vídeo educativo"
+          Icon={Play}
+        />
       </DisclosureContent>
     </DisclosureLayout>
-
   )
 }

@@ -1,11 +1,11 @@
 import {
-    BORDER_RADIUS,
-    COLOR,
-    FONT_SIZE,
-    FONT_WEIGHT,
-    LINE_HEIGHT,
-    SHADOW,
-    SPACING
+  BORDER_RADIUS,
+  COLOR,
+  FONT_SIZE,
+  FONT_WEIGHT,
+  LINE_HEIGHT,
+  SHADOW,
+  SPACING
 } from '@/style/tokens';
 import { StyleSheet } from 'react-native';
 
@@ -15,6 +15,7 @@ export const generalStyles = StyleSheet.create({
     display: 'flex',
     flexDirection: 'row',
     alignItems: 'center',
+    gap: SPACING.SM,
     justifyContent: 'center',
     borderRadius: BORDER_RADIUS.LG
   },
@@ -27,7 +28,6 @@ export const generalStyles = StyleSheet.create({
 
 export const primarySolidStyles = StyleSheet.create({
   wrapperVariant: {
-    gap: SPACING.SM,
     boxShadow: [SHADOW.SM],
     backgroundColor: COLOR.BLUE_DARK
   },
