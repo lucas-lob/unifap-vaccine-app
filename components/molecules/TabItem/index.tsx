@@ -28,9 +28,9 @@ export function TabItem(props: TabItemProps) {
       {!!Icon && (
         <View style={[
           generalStyles.triggerIconContainer,
-          generalStyles.containerColor
+          generalStyles.lightBackground
         ]}>
-          <Icon color={generalStyles.iconColor.color} />
+          <Icon color={generalStyles.darkColor.color} />
         </View>
       )}
 

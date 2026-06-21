@@ -36,13 +36,13 @@ export function StylizedTextContainer(props: StylizedTextContainerProps) {
     <View
       style={[
         generalStyles.container,
-        generalStyles.containerColor,
+        generalStyles.lightBackground,
         showBorder ? generalStyles.borderColor : null
       ]}
     >
       {icon !== 'none' && (
         <View style={generalStyles.iconContainer}>
-          {getIcon(icon, generalStyles.iconColor)}
+          {getIcon(icon, generalStyles.darkColor)}
         </View>
       )}
 
@@ -50,7 +50,7 @@ export function StylizedTextContainer(props: StylizedTextContainerProps) {
         <Text
           style={[
             generalStyles.title,
-            generalStyles.textColor,
+            generalStyles.darkColor,
           ]}
         >
           {title}
