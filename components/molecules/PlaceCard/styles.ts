@@ -1,4 +1,5 @@
 import {
+  BORDER_RADIUS,
   COLOR,
   FONT_SIZE,
   FONT_WEIGHT,
@@ -13,6 +14,7 @@ export const styles = StyleSheet.create({
     flexDirection: 'column',
     gap: SPACING.SM,
     padding: SPACING.MD,
+    borderRadius: BORDER_RADIUS.LG,
     backgroundColor: COLOR.WHITE
   },
   title: {

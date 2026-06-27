@@ -26,6 +26,14 @@ export default function TabLayout() {
           headerShown: false
         }}
       />
+
+      <Tabs.Screen
+        name="(places)"
+        options={{
+          title: "Places",
+          headerShown: false
+        }}
+      />
     </Tabs>
   )
 }

@@ -16,7 +16,6 @@ import { SimpleTextContainer } from '@/components/molecules/SimpleTextContainer'
 export default function DiseaseScreen() {
   return (
     <ScrollView
-
       showsVerticalScrollIndicator={false}
       style={styles.container}
     >
