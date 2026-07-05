@@ -1,21 +1,25 @@
-import { Pressable, Modal as ReactModal, Text, View } from "react-native"
+import { useCallback, useMemo } from "react"
+import { Pressable, Modal as NativeModal, Text, View } from "react-native"
 import { X } from "lucide-react-native"
 
 import { centerAlignmentStyles, endAlignmentStyles, generalStyles } from "./styles"
 
 type AlignmentEnum = 'center' | 'end'
 
-type ModalProps = {
-  visible: boolean
-  setVisible: (visible: boolean) => void
-  children: React.ReactNode
-  onClose?: () => void
+export type ModalOptions = {
   title?: string
   showCloseIcon?: boolean,
   alignment?: AlignmentEnum
 }
 
-export function Modal(props: ModalProps) {
+type ModalProps = {
+  visible: boolean
+  setVisible: (visible: boolean) => void
+  children: React.ReactNode
+  onClose?: () => void
+}
+
+export function Modal(props: ModalProps & ModalOptions) {
   const {
     visible,
     setVisible,
@@ -25,23 +29,27 @@ export function Modal(props: ModalProps) {
     alignment = 'end',
     children
   } = props
+  const {showHeader, styles} = useMemo(() => {
+    const showHeader = !!title || showCloseIcon
+
+    const alignmentStyles = alignment === 'center'
+      ? centerAlignmentStyles
+      : endAlignmentStyles
+
+    const styles = {...generalStyles, ...alignmentStyles}
+
+    return {showHeader, styles}
+  }, [title, showCloseIcon, alignment])
+
+  const handleClose = useCallback(() => {
+    onClose()
+    setVisible(false)
+  }, [onClose, setVisible])
 
   if (!visible) return null
 
-  const showHeader = !!title || showCloseIcon
-
-  const alignmentStyles = alignment === 'center'
-    ? centerAlignmentStyles
-    : endAlignmentStyles
-  const styles = { ...generalStyles, ...alignmentStyles }
-
-  const handleClose = () => {
-    onClose()
-    setVisible(false)
-  }
-
   return (
-    <ReactModal visible={visible} transparent={true} animationType="fade">
+    <NativeModal visible={visible} transparent={true} animationType="fade">
       <View style={[styles.container, styles.containerAlignment]}>
         <Pressable style={styles.overlayContainer} onPress={handleClose} />
 
@@ -61,6 +69,6 @@ export function Modal(props: ModalProps) {
           </View>
         </View>
       </View>
-    </ReactModal>
+    </NativeModal>
   )
 }
