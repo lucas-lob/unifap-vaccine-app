@@ -1,8 +1,10 @@
 import { useCallback, useMemo } from "react"
 import { Pressable, Modal as NativeModal, Text, View } from "react-native"
+import { SafeAreaView, useSafeAreaInsets } from "react-native-safe-area-context"
 import { X } from "lucide-react-native"
 
 import { centerAlignmentStyles, endAlignmentStyles, generalStyles } from "./styles"
+import { COLOR } from "@/style/tokens"
 
 type AlignmentEnum = 'center' | 'end'
 
@@ -26,19 +28,21 @@ export function Modal(props: ModalProps & ModalOptions) {
     title,
     onClose = () => { },
     showCloseIcon = true,
-    alignment = 'end',
+    alignment = 'center',
     children
   } = props
-  const {showHeader, styles} = useMemo(() => {
+  const insets = useSafeAreaInsets()
+
+  const { showHeader, styles } = useMemo(() => {
     const showHeader = !!title || showCloseIcon
 
     const alignmentStyles = alignment === 'center'
       ? centerAlignmentStyles
       : endAlignmentStyles
 
-    const styles = {...generalStyles, ...alignmentStyles}
+    const styles = { ...generalStyles, ...alignmentStyles }
 
-    return {showHeader, styles}
+    return { showHeader, styles }
   }, [title, showCloseIcon, alignment])
 
   const handleClose = useCallback(() => {
@@ -49,26 +53,33 @@ export function Modal(props: ModalProps & ModalOptions) {
   if (!visible) return null
 
   return (
-    <NativeModal visible={visible} transparent={true} animationType="fade">
-      <View style={[styles.container, styles.containerAlignment]}>
-        <Pressable style={styles.overlayContainer} onPress={handleClose} />
+    <NativeModal visible={visible} transparent={true} animationType="none" statusBarTranslucent={true}
+      navigationBarTranslucent={true}>
+      <SafeAreaView>
+        <View style={[styles.container, styles.containerAlignment]}>
+          <Pressable style={styles.overlayContainer} onPress={handleClose} />
 
-        <View style={[styles.contentContainer, styles.contentContainerAlignment]}>
-          <View style={[styles.contentWrapper, styles.contentWrapperAlignment]}>
-            {showHeader && (
-              <View style={styles.headerContainer}>
-                {!!title && <Text style={styles.headerTitle}>{title}</Text>}
+          <View style={[
+            styles.contentContainer,
+            styles.contentContainerAlignment,
+            alignment === 'end' && { paddingBottom: insets.bottom }
+          ]}>
+            <View style={[styles.contentWrapper, styles.contentWrapperAlignment]}>
+              {showHeader && (
+                <View style={styles.headerContainer}>
+                  {!!title && <Text style={styles.headerTitle}>{title}</Text>}
 
-                {showCloseIcon && <X size={24} onPress={handleClose} />}
+                  {showCloseIcon && <X size={24} color={COLOR.GRAY_900} onPress={handleClose} />}
+                </View>
+              )}
+
+              <View style={styles.childrenContainer}>
+                {children}
               </View>
-            )}
-
-            <View>
-              {children}
             </View>
           </View>
         </View>
-      </View>
+      </SafeAreaView>
     </NativeModal>
   )
 }

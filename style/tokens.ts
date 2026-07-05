@@ -25,6 +25,8 @@ export const COLOR = {
   GRAY_100: "#F6F3F4",
   GRAY_50: "#FBF9FA",
 
+  PLACEHOLDER_COLOR: "#6A7282",
+
   BLACK: "#000",
   WHITE: "#FFF",
 }

@@ -14,7 +14,7 @@ export const generalStyles = StyleSheet.create({
     width: '100%',
     height: '100%',
     display: 'flex',
-    flexDirection: 'row'
+    flexDirection: 'row',
   },
   overlayContainer: {
     position: 'absolute',
@@ -24,7 +24,8 @@ export const generalStyles = StyleSheet.create({
     backgroundColor: 'rgba(0, 0, 0, 0.5)'
   },
   contentContainer: {
-    width: '100%'
+    width: '100%',
+    maxHeight: '60%'
   },
   contentWrapper: {
     width: '100%',
@@ -49,6 +50,9 @@ export const generalStyles = StyleSheet.create({
     fontSize: FONT_SIZE.LG,
     lineHeight: LINE_HEIGHT.LG,
     fontWeight: FONT_WEIGHT.MEDIUM
+  },
+  childrenContainer: {
+    flexShrink: 1
   }
 })
 
