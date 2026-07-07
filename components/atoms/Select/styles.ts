@@ -10,6 +10,9 @@ import {
 } from "@/style/tokens";
 
 export const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+  },
   inputContainer: {
     display: 'flex',
     flexDirection: 'column',

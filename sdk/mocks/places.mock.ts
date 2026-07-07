@@ -10,7 +10,7 @@ type PlacesSchema = {
   workingHours: string
 }
 
-export const PLACES_MOCK: PlacesSchema[] = [
+export const UBS_MOCK: PlacesSchema[] = [
   {
     name: 'UBS Centro de Saúde',
     street: 'Rua das Flores',
@@ -29,6 +29,17 @@ export const PLACES_MOCK: PlacesSchema[] = [
     neighborhood: 'Centro',
     city: 'Macapá',
     state: 'Amapá',
+    ddd: '11',
+    phone: '3333-4445',
+    workingHours: 'Seg-Sex: 7h-19h'
+  },
+  {
+    name: 'UBS Jardinho',
+    street: 'Av. Jorge Almeida',
+    number: '12',
+    neighborhood: 'Jardinho',
+    city: 'Belém',
+    state: 'Pará',
     ddd: '11',
     phone: '3333-4445',
     workingHours: 'Seg-Sex: 7h-19h'

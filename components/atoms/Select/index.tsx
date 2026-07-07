@@ -13,6 +13,7 @@ type SelectProps = {
   modalOptions?: ModalOptions
   label?: string
   placeholder?: string
+  disabled?: boolean
 }
 
 export function Select(props: SelectProps) {
@@ -21,12 +22,11 @@ export function Select(props: SelectProps) {
     placeholder = '',
     items,
     onChange = () => { },
-    modalOptions
+    modalOptions,
+    disabled
   } = props
   const [selectedValue, setSelectedValue] = useState<string | null>(null)
   const [isModalOpened, setIsModalOpened] = useState<boolean>(false)
-
-  if (items.length === 0) return null
 
   const handleItemPress = (item: string) => {
     setSelectedValue(item)
@@ -35,11 +35,11 @@ export function Select(props: SelectProps) {
   }
 
   return (
-    <View>
+    <View style={styles.container}>
       <View style={styles.inputContainer}>
         {!!label && <Text style={styles.inputLabel}>{label}</Text>}
 
-        <Pressable onPress={() => setIsModalOpened(true)}>
+        <Pressable onPress={() => {if (!disabled) setIsModalOpened(true)}} disabled={disabled}>
           <View style={styles.input}>
             <Text
               style={[

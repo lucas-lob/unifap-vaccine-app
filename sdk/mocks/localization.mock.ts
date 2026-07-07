@@ -13,7 +13,7 @@ type StateSchema = {
   cities: CitySchema[]
 }
 
-export const LOCATIONS_MOCK: StateSchema[] = [
+export const STATES_MOCK: StateSchema[] = [
   {
     acronym: "AP",
     name: "Amapá",
