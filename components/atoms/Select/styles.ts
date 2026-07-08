@@ -38,7 +38,8 @@ export const styles = StyleSheet.create({
   },
   inputText: {
     fontSize: FONT_SIZE.BASE,
-    lineHeight: LINE_HEIGHT.BASE
+    lineHeight: LINE_HEIGHT.BASE,
+    flexShrink: 1
   },
   listContainer: {
     display: 'flex',

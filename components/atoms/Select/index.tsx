@@ -14,6 +14,7 @@ type SelectProps = {
   label?: string
   placeholder?: string
   disabled?: boolean
+  inputTextLines?: number
 }
 
 export function Select(props: SelectProps) {
@@ -23,7 +24,8 @@ export function Select(props: SelectProps) {
     items,
     onChange = () => { },
     modalOptions,
-    disabled
+    disabled,
+    inputTextLines
   } = props
   const [selectedValue, setSelectedValue] = useState<string | null>(null)
   const [isModalOpened, setIsModalOpened] = useState<boolean>(false)
@@ -42,6 +44,7 @@ export function Select(props: SelectProps) {
         <Pressable onPress={() => {if (!disabled) setIsModalOpened(true)}} disabled={disabled}>
           <View style={styles.input}>
             <Text
+              numberOfLines={inputTextLines}
               style={[
                 styles.inputText,
                 { color: selectedValue ? COLOR.GRAY_900 : COLOR.PLACEHOLDER_COLOR }
