@@ -1,8 +1,6 @@
 import { ScrollView, StyleSheet, Text, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
-import { PlaceCard } from "@/components/molecules/PlaceCard";
-import { PLACES_MOCK } from "@/sdk/mocks/places.mock";
 import {
   COLOR,
   FONT_SIZE,
@@ -10,6 +8,7 @@ import {
   LINE_HEIGHT,
   SPACING
 } from "@/style/tokens";
+import { UbsList } from "@/components/organisms/UbsList";
 
 export default function PlacesScreen() {
   return (
@@ -22,22 +21,7 @@ export default function PlacesScreen() {
           UBS próximas de você
         </Text>
 
-        <View style={styles.placesList}>
-          {PLACES_MOCK.map((place, index) => {
-            return (
-              <PlaceCard
-                key={`${index}-${place.name}`}
-                name={place.name}
-                street={place.street}
-                neighborhood={place.neighborhood}
-                number={place.number}
-                workingHours={place.workingHours}
-                ddd={place.ddd}
-                phone={place.phone}
-              />
-            )
-          })}
-        </View>
+        <UbsList />
       </SafeAreaView>
     </ScrollView>
   )
@@ -56,9 +40,5 @@ const styles = StyleSheet.create({
     lineHeight: LINE_HEIGHT.XL,
     marginBottom: SPACING.XL
   },
-  placesList: {
-    display: 'flex',
-    flexDirection: 'column',
-    gap: SPACING.MD
-  },
+
 })

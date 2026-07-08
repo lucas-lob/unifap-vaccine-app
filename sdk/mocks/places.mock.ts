@@ -21,6 +21,17 @@ export const UBS_MOCK: PlacesSchema[] = [
     ddd: '11',
     phone: '3333-4444',
     workingHours: 'Seg-Sex: 8h-17h'
+  },  
+  {
+    name: 'UBS Centro de Saúde',
+    street: 'Rua das Flores',
+    number: '123',
+    neighborhood: 'Centro',
+    city: 'Macapá',
+    state: 'Amapá',
+    ddd: '11',
+    phone: '3333-4444',
+    workingHours: 'Seg-Sex: 8h-17h'
   },
   {
     name: 'UBS Central',
