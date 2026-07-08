@@ -5,6 +5,7 @@ import { Select } from "@/components/atoms/Select"
 import { PlaceCard } from "@/components/molecules/PlaceCard"
 import { STATES_MOCK } from "@/sdk/mocks/localization.mock"
 import { UBS_MOCK } from "@/sdk/mocks/places.mock"
+
 import { styles } from "./styles"
 
 export function UbsList() {
