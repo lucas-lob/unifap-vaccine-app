@@ -36,6 +36,9 @@ export const styles = StyleSheet.create({
     borderWidth: 1,
     borderStyle: 'solid'
   },
+  inputDisabled: {
+    backgroundColor: COLOR.GRAY_200
+  },
   inputText: {
     fontSize: FONT_SIZE.BASE,
     lineHeight: LINE_HEIGHT.BASE,

@@ -41,8 +41,11 @@ export function Select(props: SelectProps) {
       <View style={styles.inputContainer}>
         {!!label && <Text style={styles.inputLabel}>{label}</Text>}
 
-        <Pressable onPress={() => {if (!disabled) setIsModalOpened(true)}} disabled={disabled}>
-          <View style={styles.input}>
+        <Pressable onPress={() => setIsModalOpened(true)} disabled={disabled}>
+          <View style={[
+            styles.input,
+            disabled ? styles.inputDisabled : {}
+          ]}>
             <Text
               numberOfLines={inputTextLines}
               style={[
@@ -53,7 +56,7 @@ export function Select(props: SelectProps) {
               {selectedValue ? selectedValue : placeholder}
             </Text>
 
-            <ChevronDown size={24} color={COLOR.GRAY_900} />
+            <ChevronDown size={24} color={disabled ? COLOR.GRAY_500 : COLOR.GRAY_900} />
           </View>
         </Pressable>
       </View>
