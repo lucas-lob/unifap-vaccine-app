@@ -76,7 +76,12 @@ export function Select(props: SelectProps) {
                 key={`${index}-${item}`}
                 onPress={() => handleItemPress(item)}
               >
-                <Text style={styles.listItem}>{item}</Text>
+                <Text 
+                style={[
+                  styles.listItem,
+                  item === selectedValue ? styles.listItemSelected : {}
+                ]}
+                  >{item}</Text>
               </Pressable>
             ))}
           </View>

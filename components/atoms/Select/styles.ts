@@ -53,5 +53,9 @@ export const styles = StyleSheet.create({
     color: COLOR.GRAY_700,
     fontSize: FONT_SIZE.BASE,
     lineHeight: LINE_HEIGHT.BASE
+  },
+  listItemSelected: {
+    color: COLOR.BLUE_DARK,
+    fontWeight: FONT_WEIGHT.BOLD
   }
 })
