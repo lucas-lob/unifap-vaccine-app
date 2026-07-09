@@ -7,6 +7,7 @@ import { STATES_MOCK } from "@/sdk/mocks/localization.mock"
 import { UBS_MOCK } from "@/sdk/mocks/places.mock"
 
 import { styles } from "./styles"
+import { EmptyUbsInformation } from "./EmptyUbsInformation"
 
 export function UbsList() {
   const [selectedState, setSelectedState] = useState<string | null>(null)
@@ -60,22 +61,31 @@ export function UbsList() {
         />
       </View>
 
-      <View style={styles.listContainer}>
-        {ubsList.map((ubs, index) => {
-          return (
-            <PlaceCard
-              key={`${index}-${ubs.name}`}
-              name={ubs.name}
-              street={ubs.street}
-              neighborhood={ubs.neighborhood}
-              number={ubs.number}
-              workingHours={ubs.workingHours}
-              ddd={ubs.ddd}
-              phone={ubs.phone}
-            />
-          )
-        })}
-      </View>
+      {ubsList.length > 0
+        ? (
+          <View style={styles.listContainer}>
+            {ubsList.map((ubs, index) => {
+              return (
+                <PlaceCard
+                  key={`${index}-${ubs.name}`}
+                  name={ubs.name}
+                  street={ubs.street}
+                  neighborhood={ubs.neighborhood}
+                  number={ubs.number}
+                  workingHours={ubs.workingHours}
+                  ddd={ubs.ddd}
+                  phone={ubs.phone}
+                />
+              )
+            })}
+          </View>
+        )
+        : (
+          <EmptyUbsInformation />
+        )
+      }
+
+
     </View>
   )
 }
