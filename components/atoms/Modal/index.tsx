@@ -69,7 +69,9 @@ export function Modal(props: ModalProps & ModalOptions) {
                 <View style={styles.headerContainer}>
                   {!!title && <Text style={styles.headerTitle}>{title}</Text>}
 
-                  {showCloseIcon && <X size={24} color={COLOR.GRAY_900} onPress={handleClose} />}
+                  <View style={styles.headerCloseIconContainer}>
+                    {showCloseIcon && <X size={24} color={COLOR.GRAY_900} onPress={handleClose} />}
+                  </View>
                 </View>
               )}
 

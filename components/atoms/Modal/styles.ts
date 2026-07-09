@@ -43,13 +43,21 @@ export const generalStyles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
-    gap: SPACING.MD
+    gap: SPACING.MD,
   },
   headerTitle: {
     color: COLOR.GRAY_900,
     fontSize: FONT_SIZE.LG,
     lineHeight: LINE_HEIGHT.LG,
-    fontWeight: FONT_WEIGHT.MEDIUM
+    fontWeight: FONT_WEIGHT.MEDIUM,
+    flexShrink: 1,
+  },
+  headerCloseIconContainer: {
+    display: 'flex',
+    flexDirection: 'row',
+    justifyContent: 'flex-end',
+    flexGrow: 1,
+    flexShrink: 1,
   },
   childrenContainer: {
     flexShrink: 1
