@@ -25,6 +25,8 @@ export const COLOR = {
   GRAY_100: "#F6F3F4",
   GRAY_50: "#FBF9FA",
 
+  PLACEHOLDER_COLOR: "#6A7282",
+
   BLACK: "#000",
   WHITE: "#FFF",
 }
@@ -64,6 +66,7 @@ export const FONT_WEIGHT = {
 }
 
 export const SPACING = {
+  XM: 4,
   SM: 8,
   SSM: 12,
   MD: 16,

@@ -1,8 +1,8 @@
 import { QuizAnswerItem } from "@/components/atoms/QuizAnswerItem"
+import { getThemeColors } from "@/sdk/utils/getThemeColors"
 import { useState } from "react"
 import { Text, View } from "react-native"
 import { styles } from "./styles"
-import { getThemeColors } from "@/sdk/utils/getThemeColors"
 
 type QuizProps = {
   title: string
@@ -33,7 +33,7 @@ export function Quiz(props: QuizProps) {
     <View style={generalStyles.container}>
       <Text style={[
         generalStyles.title,
-        generalStyles.textColor
+        generalStyles.darkColor
       ]}
       >
         {title}

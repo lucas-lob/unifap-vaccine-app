@@ -22,7 +22,7 @@ export function SimpleTextContainer(props: SimpleTextContainerProps) {
       <Text
         style={[
           generalStyles.title,
-          generalStyles.textColor
+          generalStyles.darkColor
         ]}
       >
         {title}
