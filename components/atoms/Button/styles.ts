@@ -15,6 +15,7 @@ export const generalStyles = StyleSheet.create({
     display: 'flex',
     flexDirection: 'row',
     alignItems: 'center',
+    flexShrink: 1,
     gap: SPACING.SM,
     justifyContent: 'center',
     borderRadius: BORDER_RADIUS.LG
@@ -28,7 +29,6 @@ export const generalStyles = StyleSheet.create({
 
 export const primarySolidStyles = StyleSheet.create({
   wrapperVariant: {
-    boxShadow: [SHADOW.SM],
     backgroundColor: COLOR.BLUE_DARK
   },
   labelVariant: {
@@ -49,7 +49,6 @@ export const primaryOutlineStyles = StyleSheet.create({
 
 export const secondarySolidStyles = StyleSheet.create({
   wrapperVariant: {
-    boxShadow: [SHADOW.SM],
     backgroundColor: COLOR.GREEN_DARK
   },
   labelVariant: {

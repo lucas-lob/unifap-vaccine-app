@@ -53,6 +53,8 @@ export function DiseaseTab(props: StoryTabProps) {
           description={symptomsTitle}
           color={symptomsTitleColor}
           showBorder={true}
+          isHighlightedBorder={true}
+          isTitleColored={true}
           icon='warning'
         />
 
@@ -60,6 +62,7 @@ export function DiseaseTab(props: StoryTabProps) {
           title={DISEASE_TITLE}
           description={diseaseDescription}
           color={diseaseDescriptionColor}
+          isTitleColored={true}
         />
 
         <Button
