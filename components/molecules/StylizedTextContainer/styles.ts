@@ -16,16 +16,17 @@ export const styles = StyleSheet.create({
     padding: SPACING.MD,
     borderRadius: BORDER_RADIUS.LG,
   },
+  containerBorder: {
+    borderLeftWidth: 4
+  },
 
   iconContainer: {},
 
   icon: {},
 
   textsContainer: {
-    display: 'flex',
-    flexDirection: 'column',
     flexShrink: 1,
-    gap: SPACING.SM
+    gap: SPACING.XM
   },
 
   title: {

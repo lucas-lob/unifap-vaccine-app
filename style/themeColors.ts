@@ -17,7 +17,6 @@ export const themeOrange = StyleSheet.create({
   },
   borderColor: {
     borderColor: COLOR.ORANGE_DARK,
-    borderWidth: 1,
     borderStyle: 'solid'
   }
 })
@@ -37,7 +36,6 @@ export const themeGreen = StyleSheet.create({
   },
   borderColor: {
     borderColor: COLOR.GREEN_DARK,
-    borderWidth: 1,
     borderStyle: 'solid'
   }
 })
@@ -57,7 +55,6 @@ export const themeBlue = StyleSheet.create({
   },
   borderColor: {
     borderColor: COLOR.BLUE_BORDER,
-    borderWidth: 1,
     borderStyle: 'solid'
   }
 })
@@ -77,7 +74,6 @@ export const themeRed = StyleSheet.create({
   },
   borderColor: {
     borderColor: COLOR.RED_DARK,
-    borderWidth: 1,
     borderStyle: 'solid'
   }
 })
@@ -97,7 +93,6 @@ export const themePurple = StyleSheet.create({
   },
   borderColor: {
     borderColor: COLOR.PURPLE_DARK,
-    borderWidth: 1,
     borderStyle: 'solid'
   }
 })

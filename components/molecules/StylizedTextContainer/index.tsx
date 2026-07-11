@@ -37,7 +37,10 @@ export function StylizedTextContainer(props: StylizedTextContainerProps) {
       style={[
         generalStyles.container,
         generalStyles.lightBackground,
-        showBorder ? generalStyles.borderColor : null
+        ...(showBorder
+          ? [generalStyles.borderColor, generalStyles.containerBorder]
+          : []
+        )
       ]}
     >
       {icon !== 'none' && (
