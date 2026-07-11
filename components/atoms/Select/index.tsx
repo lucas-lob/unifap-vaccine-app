@@ -2,7 +2,7 @@ import { ChevronDown } from "lucide-react-native"
 import { useState } from "react"
 import { Pressable, ScrollView, Text, View } from "react-native"
 
-import { Modal, ModalOptions } from "../Modal"
+import { Modal, ModalOptions } from "../../molecules/Modal"
 
 import { COLOR } from "@/style/tokens"
 import { styles } from "./styles"
