@@ -66,6 +66,7 @@ export const FONT_WEIGHT = {
 }
 
 export const SPACING = {
+  XM: 4,
   SM: 8,
   SSM: 12,
   MD: 16,
