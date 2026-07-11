@@ -12,11 +12,14 @@ export const styles = StyleSheet.create({
   container: {
     display: 'flex',
     flexDirection: 'row',
-    gap: SPACING.SM,
+    gap: SPACING.SSM,
     padding: SPACING.MD,
     borderRadius: BORDER_RADIUS.LG,
   },
   containerBorder: {
+    borderWidth: 1
+  },
+  containerHighlightedBorder: {
     borderLeftWidth: 4
   },
 
@@ -30,6 +33,7 @@ export const styles = StyleSheet.create({
   },
 
   title: {
+    color: COLOR.GRAY_900,
     fontSize: FONT_SIZE.BASE,
     fontWeight: FONT_WEIGHT.MEDIUM,
     lineHeight: LINE_HEIGHT.BASE

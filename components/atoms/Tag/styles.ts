@@ -10,12 +10,13 @@ import {
 
 export const styles = StyleSheet.create({
   container: {
-    paddingInline: SPACING.SM,
+    paddingInline: SPACING.SSM,
+    paddingBlock: SPACING.XM,
     borderRadius: BORDER_RADIUS.XL
   },
   label: {
-    fontWeight: FONT_WEIGHT.MEDIUM,
-    fontSize: FONT_SIZE.BASE,
-    lineHeight: LINE_HEIGHT.XXL
+    fontWeight: FONT_WEIGHT.REGULAR,
+    fontSize: FONT_SIZE.SM,
+    lineHeight: LINE_HEIGHT.SM
   }
 })
