@@ -13,6 +13,8 @@ export function UbsList() {
   const [selectedState, setSelectedState] = useState<string | null>(null)
   const [selectedCity, setSelectedCity] = useState<string | null>(null)
 
+  const isUnselected = !selectedState || !selectedCity
+
   const availableStates = useMemo(() => STATES_MOCK.map(state => state.name), [])
 
   const availableCities = useMemo(() => {
@@ -23,7 +25,7 @@ export function UbsList() {
   }, [selectedState])
 
   const ubsList = useMemo(() => {
-    if (!selectedState || !selectedCity) return []
+    if (isUnselected) return []
 
     return UBS_MOCK.filter(ubs => ubs.city === selectedCity && ubs.state === selectedState)
   }, [selectedCity])
@@ -61,7 +63,7 @@ export function UbsList() {
         />
       </View>
 
-      {ubsList.length > 0
+      {ubsList.length > 0 || isUnselected
         ? (
           <View style={styles.listContainer}>
             {ubsList.map((ubs, index) => {
