@@ -32,7 +32,7 @@ export function DisclosureLayout(props: DisclosureLayoutProps) {
     )
 
     if (!isValidChild) {
-      console.error('[DisclosureLayout Error]: The child must be DisclosureLayout or DisclosureTrigger')
+      console.error('[DisclosureLayout Error]: The child must be DisclosureContent or DisclosureTrigger')
       return null
     }
 

@@ -3,8 +3,6 @@ import { StyleSheet } from "react-native";
 
 export const styles = StyleSheet.create({
   container: {
-    display: 'flex',
-    flexDirection: 'column',
     gap: SPACING.SSM,
     padding: SPACING.MD,
     boxShadow: [SHADOW.SM],
@@ -13,7 +11,6 @@ export const styles = StyleSheet.create({
   },
 
   triggerContainer: {
-    display: 'flex',
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
@@ -25,8 +22,6 @@ export const styles = StyleSheet.create({
   },
 
   contentChild: {
-      display: 'flex',
-      flexDirection: 'column',
       gap: SPACING.MD
   },
 

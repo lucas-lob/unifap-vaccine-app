@@ -10,7 +10,6 @@ import { StyleSheet } from "react-native";
 
 export const styles = StyleSheet.create({
   container: {
-    display: 'flex',
     flexDirection: 'row',
     gap: SPACING.SSM,
     padding: SPACING.MD,

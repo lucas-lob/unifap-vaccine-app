@@ -4,8 +4,6 @@ import { BORDER_RADIUS, COLOR, FONT_SIZE, FONT_WEIGHT, LINE_HEIGHT, SPACING } fr
 
 export const styles = StyleSheet.create({
   container: {
-    display: 'flex',
-    flexDirection: 'column',
     gap: SPACING.SSM,
     padding: SPACING.LG,
     borderRadius: BORDER_RADIUS.LG,

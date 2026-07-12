@@ -12,8 +12,6 @@ import {
 
 export const styles = StyleSheet.create({
   container: {
-    display: 'flex',
-    flexDirection: 'column',
     gap: SPACING.MD,
     padding: SPACING.LG,
     borderRadius: BORDER_RADIUS.LG,
@@ -31,8 +29,6 @@ export const styles = StyleSheet.create({
     fontWeight: FONT_WEIGHT.MEDIUM
   },
   answersList: {
-    display: 'flex',
-    flexDirection: 'column',
     gap: SPACING.SSM,
     marginTop: SPACING.LG
   },

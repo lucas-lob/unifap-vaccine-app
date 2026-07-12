@@ -1,9 +1,9 @@
 import { Tabs } from "expo-router";
+import { StyleSheet } from "react-native";
+import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { BookOpen, Bug, CreditCard, MapPin } from "lucide-react-native";
 
 import { COLOR, SPACING } from "@/style/tokens";
-import { StyleSheet } from "react-native";
-import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { NavigationBarItem } from "@/components/molecules/NavigationBarItem";
 
 export default function TabLayout() {
@@ -91,7 +91,6 @@ export default function TabLayout() {
 
 const styles = StyleSheet.create({
   tabBarContainer: {
-    display: 'flex',
     flexDirection: 'row',
     alignItems: 'center',
     paddingInline: SPACING.MD,

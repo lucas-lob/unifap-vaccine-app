@@ -10,8 +10,6 @@ import { StyleSheet } from "react-native";
 
 export const styles = StyleSheet.create({
   container: {
-    display: 'flex',
-    flexDirection: 'column',
     gap: SPACING.SM,
     padding: SPACING.MD,
     borderRadius: BORDER_RADIUS.LG,
@@ -25,7 +23,6 @@ export const styles = StyleSheet.create({
     fontWeight: FONT_WEIGHT.MEDIUM
   },
   textContainer: {
-    display: 'flex',
     flexDirection: 'row',
     alignItems: 'center',
     gap: SPACING.SM
@@ -37,7 +34,6 @@ export const styles = StyleSheet.create({
     fontWeight: FONT_WEIGHT.REGULAR
   },
   buttonsContainer: {
-    display: 'flex',
     flexDirection: 'row',
     gap: SPACING.SM,
     marginTop: SPACING.SM

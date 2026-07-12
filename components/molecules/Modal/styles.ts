@@ -13,7 +13,6 @@ export const generalStyles = StyleSheet.create({
   container: {
     width: '100%',
     height: '100%',
-    display: 'flex',
     flexDirection: 'row',
   },
   overlayContainer: {
@@ -31,15 +30,12 @@ export const generalStyles = StyleSheet.create({
     width: '100%',
     position: 'relative',
     zIndex: 2,
-    display: 'flex',
-    flexDirection: 'column',
     gap: SPACING.LG,
     padding: SPACING.LG,
     borderRadius: BORDER_RADIUS.LG,
     backgroundColor: COLOR.WHITE,
   },
   headerContainer: {
-    display: 'flex',
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
@@ -53,7 +49,6 @@ export const generalStyles = StyleSheet.create({
     flexShrink: 1,
   },
   headerCloseIconContainer: {
-    display: 'flex',
     flexDirection: 'row',
     justifyContent: 'flex-end',
     flexGrow: 1,
