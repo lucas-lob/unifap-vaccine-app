@@ -1,4 +1,4 @@
-type VaccinesMock = {
+type VaccinesSchema = {
   name: string
   dose: number
   applied: boolean
@@ -6,7 +6,7 @@ type VaccinesMock = {
   dateOfAplication?: string
 }
 
-export const VACCINES_MOCK: VaccinesMock[] = [
+export const VACCINES_MOCK: VaccinesSchema[] = [
   {
     name: 'HPV',
     dose: 1,

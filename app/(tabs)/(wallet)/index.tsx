@@ -1,26 +1,26 @@
-import { CircleCheckBig } from "lucide-react-native";
 import { useMemo } from "react";
-import { ScrollView, Text, View } from "react-native";
+import { ScrollView, StyleSheet, Text } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
 import { ProgressBar } from "@/components/molecules/ProgressBar";
-import { StylizedTextContainer } from "@/components/molecules/StylizedTextContainer";
 import { VACCINES_MOCK } from "@/sdk/mocks/vaccines.mock";
+import { VaccinesList } from "@/components/organisms/VaccinesList";
+import { COLOR, FONT_SIZE, FONT_WEIGHT, LINE_HEIGHT, SPACING } from "@/style/tokens";
 
 export default function WalletScreen() {
 
-  const [vaccines, vaccinesQuantity, appliedVaccinesQuantity] = useMemo(() => {
-    const appliedVaccinesQuantity = VACCINES_MOCK.reduce((acc, value) => ( 
+  const [vaccinesQuantity, appliedVaccinesQuantity] = useMemo(() => {
+    const appliedVaccinesQuantity = VACCINES_MOCK.reduce((acc, value) => (
       value.applied ? ++acc : acc
     ), 0)
 
-    return [VACCINES_MOCK, VACCINES_MOCK.length, appliedVaccinesQuantity]
+    return [VACCINES_MOCK.length, appliedVaccinesQuantity]
   }, [])
 
   return (
-    <ScrollView showsVerticalScrollIndicator={true}>
+    <ScrollView showsVerticalScrollIndicator={true} style={styles.container}>
       <SafeAreaView>
-        <Text>Carteira de Vacina Digital</Text>
+        <Text style={styles.title}>Carteira de Vacina Digital</Text>
 
         <ProgressBar
           title="Progresso de vacinação"
@@ -31,39 +31,22 @@ export default function WalletScreen() {
         />
       </SafeAreaView>
 
-      <View>
-        <Text>Histórico de Vacinas</Text>
-
-        {vaccines.map((vaccine, index) => {
-          let formattedApplicationDate: string | null = null
-
-          if (vaccine.dateOfAplication) {
-            const applicationDate = new Date(vaccine.dateOfAplication)
-            const formatter = new Intl.DateTimeFormat('pt-BR', {timeZone: 'UTC'})
-
-            formattedApplicationDate = formatter.format(applicationDate)
-          }
-
-          const descriptionLines = [
-            `${vaccine.dose}ª dose`,
-            ...(formattedApplicationDate
-              ? [`Aplicada em: ${formattedApplicationDate}`]
-              : [])
-          ]
-
-          return (
-            <StylizedTextContainer
-              key={`${index}_${vaccine.name}-${vaccine.dose}`}
-              title={vaccine.name}
-              description={descriptionLines}
-              Icon={CircleCheckBig}
-              color={vaccine.applied ? 'green' : 'orange'}
-              tagLabel={vaccine.applied ? 'Tomada' : 'Pendente'}
-              showBorder={true}
-            />
-          )
-        })}
-      </View>
+      <VaccinesList title={"Histórico de Vacinas"} />
     </ScrollView>
   )
 }
+
+const styles = StyleSheet.create({
+  container: {
+    height: '100%',
+    padding: SPACING.LG,
+    backgroundColor: COLOR.BLUE_DARK
+  },
+  title: {
+    color: COLOR.WHITE,
+    fontSize: FONT_SIZE.XL,
+    fontWeight: FONT_WEIGHT.MEDIUM,
+    lineHeight: LINE_HEIGHT.XL,
+    marginBottom: SPACING.XL
+  },
+})
