@@ -1,0 +1,25 @@
+{
+	"Container": {
+		"scope": "typescript",
+		"prefix": "ctn",
+		"body": [
+			"container: {",
+      "  padding: SPACING.LG,",
+      "  borderRadius: BORDER_RADIUS.LG,",
+      "  backgroundColor: COLOR.WHITE,",
+      "}",
+		]
+	},
+	"Text configuration": {
+		"scope": "typescript",
+		"prefix": "tc",
+		"body": [
+			"${1:name}: {",
+			"  color: COLOR.GRAY_900,",
+			"  fontSize: FONT_SIZE.BASE,",
+			"  lineHeight: LINE_HEIGHT.BASE,",
+			"  fontWeight: FONT_WEIGHT.REGULAR",
+			"}",
+		]
+	}
+}

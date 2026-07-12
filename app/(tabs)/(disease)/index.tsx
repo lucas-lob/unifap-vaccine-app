@@ -67,8 +67,6 @@ const styles = StyleSheet.create({
     marginBottom: SPACING.XL
   },
   storiesList: {
-    display: 'flex',
-    flexDirection: 'column',
     gap: SPACING.MD
   },
 })

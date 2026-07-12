@@ -10,7 +10,6 @@ import { StyleSheet } from "react-native";
 
 export const styles = StyleSheet.create({
   container: {
-    display: 'flex',
     flexDirection: 'row',
     gap: SPACING.SSM,
     padding: SPACING.MD,
@@ -28,6 +27,7 @@ export const styles = StyleSheet.create({
   icon: {},
 
   textsContainer: {
+    width: '100%',
     flexShrink: 1,
     gap: SPACING.XM
   },

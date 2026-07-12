@@ -14,8 +14,6 @@ export const styles = StyleSheet.create({
     flex: 1,
   },
   inputContainer: {
-    display: 'flex',
-    flexDirection: 'column',
     gap: SPACING.SM
   },
   inputLabel: {
@@ -25,7 +23,6 @@ export const styles = StyleSheet.create({
     fontWeight: FONT_WEIGHT.BOLD
   },
   input: {
-    display: 'flex',
     flexDirection: 'row',
     justifyContent: 'space-between',
     gap: SPACING.SSM,
@@ -45,8 +42,6 @@ export const styles = StyleSheet.create({
     flexShrink: 1
   },
   listContainer: {
-    display: 'flex',
-    flexDirection: 'column',
     gap: SPACING.LG
   },
   listItem: {

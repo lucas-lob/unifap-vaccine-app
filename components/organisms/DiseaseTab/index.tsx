@@ -1,4 +1,4 @@
-import { Play } from "lucide-react-native";
+import { CircleAlert, Play } from "lucide-react-native";
 
 import Button from "@/components/atoms/Button";
 import { DisclosureLayout } from "@/components/molecules/DisclosureLayout";
@@ -55,7 +55,7 @@ export function DiseaseTab(props: StoryTabProps) {
           showBorder={true}
           isHighlightedBorder={true}
           isTitleColored={true}
-          icon='warning'
+          Icon={CircleAlert}
         />
 
         <StylizedTextContainer

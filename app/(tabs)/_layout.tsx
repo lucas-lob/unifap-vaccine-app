@@ -1,9 +1,9 @@
 import { Tabs } from "expo-router";
-import { BookOpen, Bug, Home, MapPin } from "lucide-react-native";
-
-import { COLOR, SPACING } from "@/style/tokens";
 import { StyleSheet } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
+import { BookOpen, Bug, CreditCard, MapPin } from "lucide-react-native";
+
+import { COLOR, SPACING } from "@/style/tokens";
 import { NavigationBarItem } from "@/components/molecules/NavigationBarItem";
 
 export default function TabLayout() {
@@ -11,32 +11,17 @@ export default function TabLayout() {
 
   return (
     <Tabs
+      initialRouteName="(wallet)"
       screenOptions={{
         tabBarLabelVisibilityMode: "unlabeled",
         tabBarActiveTintColor: COLOR.BLUE_DARK,
         tabBarInactiveTintColor: COLOR.GRAY_500,
         tabBarStyle: [
-          styles.container,
+          styles.tabBarContainer,
           { height: 60 + insets.bottom }
         ],
         tabBarIconStyle: { width: '100%' }
       }}>
-      <Tabs.Screen
-        name="index"
-        options={{
-          title: "Home",
-          headerShown: false,
-          tabBarIcon: ({ color, focused }) =>
-            <NavigationBarItem
-              label="Home"
-              focused={focused}
-              color={color}
-              iconSize={24}
-              Icon={Home}
-            />,
-        }}
-      />
-
       <Tabs.Screen
         name="(stories)"
         options={{
@@ -70,6 +55,22 @@ export default function TabLayout() {
       />
 
       <Tabs.Screen
+        name="(wallet)"
+        options={{
+          title: "Carteira",
+          headerShown: false,
+          tabBarIcon: ({ color, focused }) =>
+            <NavigationBarItem
+              label="Carteira"
+              focused={focused}
+              color={color}
+              iconSize={24}
+              Icon={CreditCard}
+            />,
+        }}
+      />
+
+      <Tabs.Screen
         name="(places)"
         options={{
           title: "Locais",
@@ -89,8 +90,7 @@ export default function TabLayout() {
 }
 
 const styles = StyleSheet.create({
-  container: {
-    display: 'flex',
+  tabBarContainer: {
     flexDirection: 'row',
     alignItems: 'center',
     paddingInline: SPACING.MD,

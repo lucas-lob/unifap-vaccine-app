@@ -10,23 +10,16 @@ import {
 
 export const styles = StyleSheet.create({
   container: {
-    display: 'flex',
-    flexDirection: 'column',
     gap: SPACING.MD
   },
   selectorsContainer: {
-    display: 'flex',
     flexDirection: 'row',
     gap: SPACING.MD
   },
   listContainer: {
-    display: 'flex',
-    flexDirection: 'column',
     gap: SPACING.MD
   },
   emptyListContainer: {
-    display: 'flex',
-    flexDirection: 'column',
     alignItems: 'center',
     gap: SPACING.MD,
     marginTop: SPACING.XXL

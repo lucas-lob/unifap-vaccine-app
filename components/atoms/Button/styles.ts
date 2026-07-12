@@ -12,7 +12,6 @@ import { StyleSheet } from 'react-native';
 export const generalStyles = StyleSheet.create({
   wrapper: {
     height: 52,
-    display: 'flex',
     flexDirection: 'row',
     alignItems: 'center',
     flexShrink: 1,
