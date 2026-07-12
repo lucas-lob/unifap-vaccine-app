@@ -1,5 +1,5 @@
 import { Tabs } from "expo-router";
-import { BookOpen, Bug, Home, MapPin } from "lucide-react-native";
+import { BookOpen, Bug, CreditCard, Home, MapPin } from "lucide-react-native";
 
 import { COLOR, SPACING } from "@/style/tokens";
 import { StyleSheet } from "react-native";
@@ -65,6 +65,22 @@ export default function TabLayout() {
               color={color}
               iconSize={24}
               Icon={Bug}
+            />,
+        }}
+      />
+
+      <Tabs.Screen
+        name="(wallet)"
+        options={{
+          title: "Carteira",
+          headerShown: false,
+          tabBarIcon: ({ color, focused }) =>
+            <NavigationBarItem
+              label="Carteira"
+              focused={focused}
+              color={color}
+              iconSize={24}
+              Icon={CreditCard}
             />,
         }}
       />
