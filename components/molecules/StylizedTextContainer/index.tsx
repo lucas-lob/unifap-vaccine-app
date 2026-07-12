@@ -1,8 +1,13 @@
-import { getThemeColors } from "@/sdk/utils/getThemeColors";
-import { CircleAlert } from "lucide-react-native";
 import { Text, View } from "react-native";
-import { styles } from "./styles";
+import { LucideProps } from "lucide-react-native";
+
 import { Tag } from "@/components/atoms/Tag";
+import { getThemeColors } from "@/sdk/utils/getThemeColors";
+
+import type { ComponentType } from "react";
+
+import { styles } from "./styles";
+
 
 type StylizedTextContainerProps = {
   title: string
@@ -11,18 +16,8 @@ type StylizedTextContainerProps = {
   showBorder?: boolean
   isHighlightedBorder?: boolean
   isTitleColored?: boolean
-  icon?: 'none' | 'warning'
+  Icon?: ComponentType<LucideProps> 
   tagLabel?: string
-}
-
-const getIcon = (
-  icon: StylizedTextContainerProps['icon'],
-  iconStyle: Record<string, string>
-) => {
-  switch (icon) {
-    case 'warning':
-      return <CircleAlert style={iconStyle} />
-  }
 }
 
 export function StylizedTextContainer(props: StylizedTextContainerProps) {
@@ -33,7 +28,7 @@ export function StylizedTextContainer(props: StylizedTextContainerProps) {
     showBorder,
     isHighlightedBorder,
     isTitleColored,
-    icon = 'none',
+    Icon,
     tagLabel
   } = props
 
@@ -52,9 +47,9 @@ export function StylizedTextContainer(props: StylizedTextContainerProps) {
         ...(showBorder ? [generalStyles.borderColor, borderStyle] : [])
       ]}
     >
-      {icon !== 'none' && (
+      {!!Icon && (
         <View style={generalStyles.iconContainer}>
-          {getIcon(icon, generalStyles.darkColor)}
+          <Icon color={generalStyles.darkColor.color}/>
         </View>
       )}
 

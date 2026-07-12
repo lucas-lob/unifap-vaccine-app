@@ -28,6 +28,7 @@ export const styles = StyleSheet.create({
   icon: {},
 
   textsContainer: {
+    width: '100%',
     flexShrink: 1,
     gap: SPACING.XM
   },
