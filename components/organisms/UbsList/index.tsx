@@ -30,7 +30,7 @@ export function UbsList() {
     return UBS_MOCK.filter(ubs => ubs.city === selectedCity && ubs.state === selectedState)
   }, [selectedCity])
 
-  const handleStateChange = (state: string) => {
+  const handleStateChange = (state: string | null) => {
     setSelectedState(state)
     setSelectedCity(null)
   }

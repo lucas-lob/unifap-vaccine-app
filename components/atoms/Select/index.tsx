@@ -1,5 +1,5 @@
-import { ChevronDown } from "lucide-react-native"
-import { useState } from "react"
+import { ChevronDown, LucideProps } from "lucide-react-native"
+import { ComponentType, useEffect, useState } from "react"
 import { Pressable, ScrollView, Text, View } from "react-native"
 
 import { Modal, ModalOptions } from "../../molecules/Modal"
@@ -9,9 +9,13 @@ import { styles } from "./styles"
 
 type SelectProps = {
   items: string[]
-  onChange?: (value: string) => void
+  onChange?: (value: string | null) => void
   modalOptions?: ModalOptions
   label?: string
+  labelColor?: string
+  LabelIcon?: ComponentType<LucideProps>
+  labelIconConfigs?: LucideProps
+  error?: string
   placeholder?: string
   disabled?: boolean
   inputTextLines?: number
@@ -20,9 +24,13 @@ type SelectProps = {
 export function Select(props: SelectProps) {
   const {
     label,
+    labelColor,
     placeholder = '',
     items,
     onChange = () => { },
+    LabelIcon,
+    labelIconConfigs,
+    error,
     modalOptions,
     disabled,
     inputTextLines
@@ -30,16 +38,23 @@ export function Select(props: SelectProps) {
   const [selectedValue, setSelectedValue] = useState<string | null>(null)
   const [isModalOpened, setIsModalOpened] = useState<boolean>(false)
 
-  const handleItemPress = (item: string) => {
-    setSelectedValue(item)
-    onChange(item)
-    setIsModalOpened(false)
-  }
+  useEffect(() => { onChange(selectedValue) }, [selectedValue])
 
   return (
     <View style={styles.container}>
       <View style={styles.inputContainer}>
-        {!!label && <Text style={styles.inputLabel}>{label}</Text>}
+        {!!label && (
+          <View style={styles.labelContainer}>
+            {!!LabelIcon && <LabelIcon {...labelIconConfigs} />}
+
+            <Text style={[
+              styles.labelText,
+              ...(labelColor ? [{ color: labelColor }] : [])
+            ]}>
+              {label}
+            </Text>
+          </View>
+        )}
 
         <Pressable onPress={() => setIsModalOpened(true)} disabled={disabled}>
           <View style={[
@@ -59,6 +74,8 @@ export function Select(props: SelectProps) {
             <ChevronDown size={24} color={disabled ? COLOR.GRAY_500 : COLOR.GRAY_900} />
           </View>
         </Pressable>
+
+        {!!error && <Text style={styles.errorLabel}>{error}</Text>}
       </View>
 
       <Modal
@@ -74,14 +91,17 @@ export function Select(props: SelectProps) {
             {items.map((item, index) => (
               <Pressable
                 key={`${index}-${item}`}
-                onPress={() => handleItemPress(item)}
+                onPress={() => {
+                  setSelectedValue(item)
+                  setIsModalOpened(false)
+                }}
               >
-                <Text 
-                style={[
-                  styles.listItem,
-                  item === selectedValue ? styles.listItemSelected : {}
-                ]}
-                  >{item}</Text>
+                <Text
+                  style={[
+                    styles.listItem,
+                    item === selectedValue ? styles.listItemSelected : {}
+                  ]}
+                >{item}</Text>
               </Pressable>
             ))}
           </View>
