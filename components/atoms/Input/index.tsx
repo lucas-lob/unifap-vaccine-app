@@ -38,13 +38,13 @@ export function Input(props: InputProps) {
       )}
 
       <TextInput
+        {...textInputProps}
         style={[
           styles.inputContainer,
           textInputPropsStyle,
-          ...(!!error ? [{borderColor: COLOR.RED_DARK}] : [])
+          ...(!!error ? [{ borderColor: COLOR.RED_DARK }] : [])
         ]}
         placeholderTextColor={COLOR.GRAY_500}
-        {...textInputProps}
       />
 
       {!!error && <Text style={styles.errorLabel}>{error}</Text>}

@@ -5,8 +5,9 @@ import { getThemeColors } from "@/sdk/utils/getThemeColors";
 
 type CheckBoxProps = {
   label: string
+  isActive: boolean
   error?: string
-  onChange?: (isSelect: boolean) => void
+  onPress?: () => void
   theme?: ThemeColorsEnum
   disabled?: boolean
 }
@@ -14,17 +15,14 @@ type CheckBoxProps = {
 export function Checkbox(props: CheckBoxProps) {
   const {
     label,
+    isActive,
     error,
-    onChange = () => { },
+    onPress = () => { },
     theme = 'blue',
     disabled
   } = props
 
-  const [isActive, setIsActive] = useState<boolean>(false)
-
   const generalStyles = { ...styles, ...getThemeColors(theme) }
-
-  useEffect(() => { onChange(isActive) }, [isActive])
 
   return (
     <Pressable
@@ -32,7 +30,7 @@ export function Checkbox(props: CheckBoxProps) {
         generalStyles.container,
       ]}
       disabled={disabled}
-      onPress={() => setIsActive(prev => !prev)}
+      onPress={onPress}
     >
       <View style={styles.checkboxWrapper}>
         <View style={[

@@ -1,20 +1,21 @@
-import { ComponentType, useState } from "react"
-import { useIntl } from "react-intl"
-import { Pressable, Text, TextInput, View } from "react-native"
-import { LucideProps } from "lucide-react-native"
+import { ComponentType, useEffect, useState } from "react";
+import { useIntl } from "react-intl";
+import { Pressable, Text, TextInput, View } from "react-native";
 import DateTimePicker from '@react-native-community/datetimepicker';
+import { LucideProps } from "lucide-react-native";
 
-import type { TextInputProps } from "react-native"
+import type { TextInputProps } from "react-native";
 
-import { COLOR } from "@/style/tokens"
+import { COLOR } from "@/style/tokens";
 
-import { styles } from "./styles"
+import { styles } from "./styles";
 
 interface InputDateProps extends TextInputProps {
   label?: string
   LabelIcon?: ComponentType<LucideProps>
   error?: string
   labelIconConfigs?: LucideProps
+  onChangeText: (date: string | null) => void
 }
 
 export function InputDate(props: InputDateProps) {
@@ -23,19 +24,23 @@ export function InputDate(props: InputDateProps) {
     LabelIcon,
     labelIconConfigs,
     error,
+    onChangeText,
     style: textInputPropsStyle,
     ...textInputProps
   } = props
-  
   const intl = useIntl()
   const [openModal, setOpenModal] = useState<boolean>(false)
-  const [date, setDate] = useState<Date | undefined>(undefined)
+  const [date, setDate] = useState<Date | null>(null)
 
-  const formattedDate = intl.formatDate(date, {
-    day: '2-digit',
-    month: '2-digit',
-    year: 'numeric'
-  })
+  const formattedDate = date
+    ? intl.formatDate(date, {
+      day: '2-digit',
+      month: '2-digit',
+      year: 'numeric'
+    })
+    : null
+
+  useEffect(() => { onChangeText(formattedDate) }, [formattedDate])
 
   return (
     <View style={styles.container}>
@@ -59,7 +64,7 @@ export function InputDate(props: InputDateProps) {
           ]}
           placeholderTextColor={COLOR.GRAY_500}
           readOnly
-          value={date ? formattedDate : undefined}
+          value={formattedDate ? formattedDate : ""}
         />
       </Pressable>
 
