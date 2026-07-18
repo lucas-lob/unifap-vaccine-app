@@ -1,19 +1,20 @@
-import { zodResolver } from '@hookform/resolvers/zod';
-import { Calendar, CreditCard, MapPin, User } from "lucide-react-native";
+import { useMemo } from "react";
 import { Controller, useForm } from 'react-hook-form';
 import { StyleSheet, View } from "react-native";
+import { zodResolver } from '@hookform/resolvers/zod';
+import { Calendar, CreditCard, MapPin, User } from "lucide-react-native";
 
 import Button from "@/components/atoms/Button";
 import { Input } from "@/components/atoms/Input";
-import { IRegisterForm, registerFormSchema } from "./schema";
-
 import { InputDate } from "@/components/atoms/InputDate";
 import { Select } from "@/components/atoms/Select";
 import { CheckboxList } from "@/components/molecules/CheckboxList";
+
 import { STATES_MOCK } from "@/sdk/mocks/localization.mock";
 import { applyCpfMask } from "@/sdk/utils/masks";
+import { IRegisterForm, registerFormSchema } from "./schema";
+
 import { BORDER_RADIUS, COLOR, SPACING } from "@/style/tokens";
-import { useMemo } from "react";
 
 const FORM_INITIAL_VALUES: IRegisterForm = {
   name: "",
@@ -30,8 +31,7 @@ export default function RegisterForm() {
     control,
     handleSubmit,
     watch,
-    getValues,
-    setValue
+    getValues
   } = useForm<IRegisterForm>({
     defaultValues: FORM_INITIAL_VALUES,
     resolver: zodResolver(registerFormSchema),
@@ -175,7 +175,7 @@ export default function RegisterForm() {
               items={availableStates}
               onChange={onChange}
               error={error?.message}
-              modalOptions={{alignment: 'end'}}
+              modalOptions={{ alignment: 'end' }}
             />
           )}
         />
@@ -196,7 +196,7 @@ export default function RegisterForm() {
               disabled={!selectedState}
               onChange={onChange}
               error={error?.message}
-              modalOptions={{alignment: 'end'}}
+              modalOptions={{ alignment: 'end' }}
             />
           )}
         />
