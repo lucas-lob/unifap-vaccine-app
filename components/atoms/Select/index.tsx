@@ -33,7 +33,7 @@ export function Select(props: SelectProps) {
     error,
     modalOptions,
     disabled,
-    inputTextLines
+    inputTextLines = 1
   } = props
   const [selectedValue, setSelectedValue] = useState<string | null>(null)
   const [isModalOpened, setIsModalOpened] = useState<boolean>(false)

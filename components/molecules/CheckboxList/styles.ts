@@ -11,7 +11,7 @@ import {
 
 export const styles = StyleSheet.create({
   container: {
-    gap: SPACING.SM
+    gap: SPACING.SSM
   },
   listContainer: {
     flexDirection: 'row',

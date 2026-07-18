@@ -24,7 +24,7 @@ export const styles = StyleSheet.create({
   labelText: {
     color: COLOR.WHITE,
     fontSize: FONT_SIZE.BASE,
-    lineHeight: LINE_HEIGHT.BASE,
+    lineHeight: LINE_HEIGHT.LG,
     fontWeight: FONT_WEIGHT.BOLD
   },
   input: {
