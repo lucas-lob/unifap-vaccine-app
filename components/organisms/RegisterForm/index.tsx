@@ -2,7 +2,7 @@ import { useMemo } from "react";
 import { Controller, useForm } from 'react-hook-form';
 import { StyleSheet, View } from "react-native";
 import { zodResolver } from '@hookform/resolvers/zod';
-import { Calendar, CreditCard, MapPin, User } from "lucide-react-native";
+import { Calendar, CreditCard, Lock, Mail, MapPin, User } from "lucide-react-native";
 
 import Button from "@/components/atoms/Button";
 import { Input } from "@/components/atoms/Input";
@@ -23,7 +23,10 @@ const FORM_INITIAL_VALUES: IRegisterForm = {
   cpf: "",
   gender: "MALE",
   state: "",
-  city: ""
+  city: "",
+  email: "",
+  password: "",
+  confirmedPassword: ""
 }
 
 export default function RegisterForm() {
@@ -201,6 +204,65 @@ export default function RegisterForm() {
           )}
         />
       </View>
+
+      <Controller
+        name={'email'}
+        control={control}
+        render={({
+          field: { onChange, value },
+          fieldState: { error }
+        }) => (
+          <Input
+            label="Email"
+            LabelIcon={Mail}
+            labelIconConfigs={{ color: COLOR.BLUE_DARK }}
+            placeholder="Digite seu e-mail"
+            value={value}
+            onChangeText={onChange}
+            error={error?.message}
+          />
+        )}
+      />
+
+      <Controller
+        name={'password'}
+        control={control}
+        render={({
+          field: { onChange, value },
+          fieldState: { error }
+        }) => (
+          <Input
+            label="Senha"
+            LabelIcon={Lock}
+            labelIconConfigs={{ color: COLOR.GREEN_DARK }}
+            placeholder="Digite sua senha"
+            value={value}
+            onChangeText={onChange}
+            error={error?.message}
+            secureTextEntry
+          />
+        )}
+      />
+
+      <Controller
+        name={'confirmedPassword'}
+        control={control}
+        render={({
+          field: { onChange, value },
+          fieldState: { error }
+        }) => (
+          <Input
+            label="Confirme sua senha"
+            LabelIcon={Lock}
+            labelIconConfigs={{ color: COLOR.GREEN_DARK }}
+            placeholder="Digite sua senha"
+            value={value}
+            onChangeText={onChange}
+            error={error?.message}
+            secureTextEntry
+          />
+        )}
+      />
 
       <Button
         label="Submeter"
