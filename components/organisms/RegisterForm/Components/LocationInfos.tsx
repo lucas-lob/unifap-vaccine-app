@@ -1,0 +1,77 @@
+import { useMemo } from "react";
+import { Controller, useFormContext } from "react-hook-form";
+import { StyleSheet, View } from "react-native";
+import { MapPin } from "lucide-react-native";
+
+import { Select } from "@/components/atoms/Select";
+
+import { STATES_MOCK } from "@/sdk/mocks/localization.mock";
+import { COLOR, SPACING } from "@/style/tokens";
+
+import type { IRegisterForm } from "../schema";
+
+const styles = StyleSheet.create({
+  container: {
+    flexDirection: 'row',
+    gap: SPACING.MD
+  }
+})
+
+export function RegisterFormLocationInfos() {
+  const { control, watch } = useFormContext<IRegisterForm>()
+
+  const selectedState = watch('state')
+
+  const availableStates = useMemo(() => STATES_MOCK.map(state => state.name), [])
+  const availableCities = useMemo(() => {
+    const state = STATES_MOCK.find(state => state.name === selectedState)
+
+    return state?.cities.map(city => city.name) ?? []
+  }, [selectedState])
+
+  return (
+    <View style={styles.container}>
+      <Controller
+        name={'state'}
+        control={control}
+        render={({
+          field: { onChange },
+          fieldState: { error }
+        }) => (
+          <Select
+            label="Estado"
+            labelColor={COLOR.GRAY_700}
+            LabelIcon={MapPin}
+            labelIconConfigs={{ color: COLOR.BLUE_DARK }}
+            placeholder="UF"
+            items={availableStates}
+            onChange={onChange}
+            error={error?.message}
+            modalOptions={{ alignment: 'end' }}
+          />
+        )}
+      />
+
+      <Controller
+        name={'city'}
+        control={control}
+        render={({
+          field: { onChange },
+          fieldState: { error }
+        }) => (
+          <Select
+            key={`state-${selectedState}`}
+            label="Cidade"
+            labelColor={COLOR.GRAY_700}
+            placeholder="Cidade"
+            items={availableCities}
+            disabled={!selectedState}
+            onChange={onChange}
+            error={error?.message}
+            modalOptions={{ alignment: 'end' }}
+          />
+        )}
+      />
+    </View>
+  )
+}
