@@ -40,3 +40,16 @@ export const registerFormSchema = _object({
 })
 
 export interface IRegisterForm extends _infer<typeof registerFormSchema> { }
+
+export const FORM_INITIAL_VALUES: IRegisterForm = {
+  name: "",
+  responsableName: "",
+  birthDay: "",
+  cpf: "",
+  gender: "MALE",
+  state: "",
+  city: "",
+  email: "",
+  password: "",
+  confirmedPassword: ""
+}

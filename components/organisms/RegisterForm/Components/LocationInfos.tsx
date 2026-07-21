@@ -1,5 +1,5 @@
 import { useMemo } from "react";
-import { Controller, useFormContext } from "react-hook-form";
+import { Controller, useFormContext, useWatch } from "react-hook-form";
 import { StyleSheet, View } from "react-native";
 import { MapPin } from "lucide-react-native";
 
@@ -18,9 +18,12 @@ const styles = StyleSheet.create({
 })
 
 export function RegisterFormLocationInfos() {
-  const { control, watch } = useFormContext<IRegisterForm>()
+  const { control } = useFormContext<IRegisterForm>()
 
-  const selectedState = watch('state')
+  const selectedState = useWatch<IRegisterForm>({
+    name: "state",
+    compute: (data) => data 
+  })
 
   const availableStates = useMemo(() => STATES_MOCK.map(state => state.name), [])
   const availableCities = useMemo(() => {

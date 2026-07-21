@@ -1,28 +1,17 @@
 import { zodResolver } from '@hookform/resolvers/zod';
 import { FormProvider, useForm } from 'react-hook-form';
-import { StyleSheet, View } from "react-native";
+import { View } from "react-native";
 
 import Button from "@/components/atoms/Button";
 
-import { BORDER_RADIUS, COLOR, SPACING } from "@/style/tokens";
-
-import { type IRegisterForm, registerFormSchema } from "./schema";
+import { useCallback, useState } from 'react';
+import { RegisterFormLocationInfos } from './Components/LocationInfos';
 import { RegisterFormLoginInfos } from "./Components/LoginInfos";
 import { RegisterFormPersonalInfos } from './Components/PersonalInfos';
-import { RegisterFormLocationInfos } from './Components/LocationInfos';
+import { FORM_INITIAL_VALUES, type IRegisterForm, registerFormSchema } from "./schema";
+import { styles } from './styles';
 
-const FORM_INITIAL_VALUES: IRegisterForm = {
-  name: "",
-  responsableName: "",
-  birthDay: "",
-  cpf: "",
-  gender: "MALE",
-  state: "",
-  city: "",
-  email: "",
-  password: "",
-  confirmedPassword: ""
-}
+type TRegisterFormTabs = 'personal' | 'login'
 
 export default function RegisterForm() {
   const formProps = useForm<IRegisterForm>({
@@ -30,8 +19,12 @@ export default function RegisterForm() {
     resolver: zodResolver(registerFormSchema),
     reValidateMode: 'onSubmit',
   })
+  const { getValues, trigger, clearErrors } = formProps
 
-  const { handleSubmit, getValues } = formProps
+  const [tab, setTab] = useState<TRegisterFormTabs>('personal')
+
+  const isPersonalTab = tab === 'personal'
+  const buttonLabel = isPersonalTab ? 'Continuar' : 'Cadastrar'
 
   const onSubmit = () => {
     const values = getValues()
@@ -39,29 +32,51 @@ export default function RegisterForm() {
     console.log(values);
   }
 
+  const buttonHandle = useCallback(async () => {
+    const isValidPersonalStep = await trigger([
+      'name', 'responsableName', 'birthDay', 'cpf', 'gender', 'state', 'city'
+    ])
+    const isValidLoginStep = await trigger([
+      'email', 'password', 'confirmedPassword'
+    ])
+
+    if (isPersonalTab && isValidPersonalStep) {
+      clearErrors()
+      setTab('login')
+
+    }
+    if (!isPersonalTab && isValidLoginStep) onSubmit()
+  }, [tab])
+
   return (
     <FormProvider {...formProps}>
       <View style={styles.formContainer}>
-        <RegisterFormPersonalInfos />
+        {isPersonalTab
+          ? (
+            <>
+              <RegisterFormPersonalInfos />
+              <RegisterFormLocationInfos />
+            </>
+          )
+          : (
+            <RegisterFormLoginInfos />
+          )}
 
-        <RegisterFormLocationInfos />
+        <View style={styles.buttonsContainer}>
+          <Button
+            label={buttonLabel}
+            onPress={buttonHandle}
+          />
 
-        <RegisterFormLoginInfos />
-
-        <Button
-          label="Submeter"
-          onPress={handleSubmit(onSubmit)}
-        />
+          {!isPersonalTab && (
+            <Button
+              variant='primary-outline'
+              label='Voltar'
+              onPress={() => setTab('personal')}
+            />
+          )}
+        </View>
       </View>
     </FormProvider>
   )
 }
-
-const styles = StyleSheet.create({
-  formContainer: {
-    gap: SPACING.LG,
-    padding: SPACING.XL,
-    backgroundColor: COLOR.WHITE,
-    borderRadius: BORDER_RADIUS.XL
-  }
-})
