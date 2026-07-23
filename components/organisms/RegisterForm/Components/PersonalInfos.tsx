@@ -106,7 +106,7 @@ export function RegisterFormPersonalInfos() {
         name={'gender'}
         control={control}
         render={({
-          field: { onChange },
+          field: { onChange, value },
           fieldState: { error }
         }) => (
           <CheckboxList
@@ -117,6 +117,7 @@ export function RegisterFormPersonalInfos() {
               { id: 'MALE', label: 'Masculino' },
               { id: 'FEMALE', label: 'Feminino' },
             ]}
+            initialSelectedId={value}
             onChangeItem={onChange}
             error={error?.message}
           />

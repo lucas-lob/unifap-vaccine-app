@@ -19,9 +19,11 @@ export const registerFormSchema = _object({
   cpf: _string()
     .min(1, "Campo obrigatório")
     .regex(CPF_REGEX, "Formato inválido"),
-  gender: _enum(['MALE', 'FEMALE'], "Selecione uma opção"),
-  state: _string("Campo obrigatório"),
-  city: _string("Campo obrigatório"),
+  gender: _enum(['MALE', 'FEMALE', ''], "Selecione uma opção"),
+  state: _string()
+    .min(1, "Campo obrigatório"),
+  city: _string()
+    .min(1, "Campo obrigatório"),
   email: _email("Formato inválido")
     .min(1, "Campo obrigatório"),
   password: _string("Formato inválido")
@@ -29,6 +31,15 @@ export const registerFormSchema = _object({
   confirmedPassword: _string("Formato inválido")
     .min(1, "Campo obrigatório")
 }).superRefine((data, ctx) => {
+  if (data.gender === '') {
+    ctx.addIssue({
+      code: "invalid_value",
+      values: ["string"],
+      message: "Campo obrigatório",
+      path: ["gender"]
+    })
+  }
+
   if (data.password !== data.confirmedPassword) {
     ctx.addIssue({
       code: "invalid_value",
@@ -46,7 +57,7 @@ export const FORM_INITIAL_VALUES: IRegisterForm = {
   responsableName: "",
   birthDay: "",
   cpf: "",
-  gender: "MALE",
+  gender: "",
   state: "",
   city: "",
   email: "",

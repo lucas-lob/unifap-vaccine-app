@@ -1,8 +1,8 @@
+import { Checkbox } from "@/components/atoms/Checkbox";
 import { LucideProps } from "lucide-react-native";
 import { ComponentType, useEffect, useState } from "react";
 import { Text, View } from "react-native";
 import { styles } from "./styles";
-import { Checkbox } from "@/components/atoms/Checkbox";
 
 type CheckboxItem = {
   label: string
@@ -14,6 +14,7 @@ type CheckboxListProps = {
   title?: string
   TitleIcon?: ComponentType<LucideProps>
   titleIconConfigs?: LucideProps
+  initialSelectedId?: string
   onChangeItem?: (selectedId: string | null) => void
   error?: string
   theme?: ThemeColorsEnum
@@ -26,11 +27,12 @@ export function CheckboxList(props: CheckboxListProps) {
     TitleIcon,
     titleIconConfigs,
     error,
+    initialSelectedId,
     onChangeItem = () => {},
     theme
   } = props
 
-  const [selectedId, setSelectedId] = useState<string | null>(null)
+  const [selectedId, setSelectedId] = useState<string | null>(initialSelectedId ?? null)
 
   useEffect(() => {onChangeItem(selectedId)}, [selectedId])
 

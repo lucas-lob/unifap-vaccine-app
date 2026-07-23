@@ -10,6 +10,7 @@ import { styles } from "./styles"
 type SelectProps = {
   items: string[]
   onChange?: (value: string | null) => void
+  initialValue?: string
   modalOptions?: ModalOptions
   label?: string
   labelColor?: string
@@ -28,6 +29,7 @@ export function Select(props: SelectProps) {
     placeholder = '',
     items,
     onChange = () => { },
+    initialValue,
     LabelIcon,
     labelIconConfigs,
     error,
@@ -35,7 +37,7 @@ export function Select(props: SelectProps) {
     disabled,
     inputTextLines = 1
   } = props
-  const [selectedValue, setSelectedValue] = useState<string | null>(null)
+  const [selectedValue, setSelectedValue] = useState<string | null>(initialValue ?? null)
   const [isModalOpened, setIsModalOpened] = useState<boolean>(false)
 
   useEffect(() => { onChange(selectedValue) }, [selectedValue])

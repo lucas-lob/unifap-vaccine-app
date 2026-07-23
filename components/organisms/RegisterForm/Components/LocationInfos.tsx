@@ -38,7 +38,7 @@ export function RegisterFormLocationInfos() {
         name={'state'}
         control={control}
         render={({
-          field: { onChange },
+          field: { onChange, value },
           fieldState: { error }
         }) => (
           <Select
@@ -48,6 +48,7 @@ export function RegisterFormLocationInfos() {
             labelIconConfigs={{ color: COLOR.BLUE_DARK }}
             placeholder="UF"
             items={availableStates}
+            initialValue={value}
             onChange={onChange}
             error={error?.message}
             modalOptions={{ alignment: 'end' }}
@@ -59,7 +60,7 @@ export function RegisterFormLocationInfos() {
         name={'city'}
         control={control}
         render={({
-          field: { onChange },
+          field: { onChange, value },
           fieldState: { error }
         }) => (
           <Select
@@ -69,6 +70,7 @@ export function RegisterFormLocationInfos() {
             placeholder="Cidade"
             items={availableCities}
             disabled={!selectedState}
+            initialValue={value}
             onChange={onChange}
             error={error?.message}
             modalOptions={{ alignment: 'end' }}
