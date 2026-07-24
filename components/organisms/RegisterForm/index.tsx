@@ -1,6 +1,6 @@
 import { zodResolver } from '@hookform/resolvers/zod';
 import { FormProvider, useForm } from 'react-hook-form';
-import { View } from "react-native";
+import { Text, View } from "react-native";
 
 import Button from "@/components/atoms/Button";
 
@@ -51,6 +51,12 @@ export default function RegisterForm() {
   return (
     <FormProvider {...formProps}>
       <View style={styles.formContainer}>
+        <View style={styles.headerContainer}>
+          <Text style={styles.headerTitle}>Cadastro</Text>
+
+          <Text style={styles.headerDescription}>Preencha seus dados para começar</Text>
+        </View>
+
         {isPersonalTab
           ? (
             <>
