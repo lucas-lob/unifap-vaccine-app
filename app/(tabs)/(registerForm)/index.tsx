@@ -1,4 +1,4 @@
-import { ScrollView, StyleSheet } from "react-native";
+import { KeyboardAvoidingView, ScrollView, StyleSheet } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
 import RegisterForm from "@/components/organisms/RegisterForm";
@@ -7,11 +7,13 @@ import { COLOR, SPACING } from "@/style/tokens";
 
 export default function RegisterFormScreen() {
   return (
-    <ScrollView showsVerticalScrollIndicator={true} style={styles.container}>
-      <SafeAreaView>
-        <RegisterForm />
-      </SafeAreaView>
-    </ScrollView>
+    <KeyboardAvoidingView behavior="padding">
+      <ScrollView showsVerticalScrollIndicator={true} style={styles.container} automaticallyAdjustContentInsets={true}>
+        <SafeAreaView>
+          <RegisterForm />
+        </SafeAreaView>
+      </ScrollView>
+    </KeyboardAvoidingView>
   )
 }
 
