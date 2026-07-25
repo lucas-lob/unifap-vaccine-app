@@ -27,6 +27,7 @@ export const styles = StyleSheet.create({
   inputContainer: {
     height: 52,
     padding: SPACING.MD,
+    paddingBlock: 0,
     borderWidth: 1,
     borderColor: COLOR.GRAY_500,
     borderRadius: BORDER_RADIUS.LG,
