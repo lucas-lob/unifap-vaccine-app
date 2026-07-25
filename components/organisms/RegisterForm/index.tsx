@@ -13,7 +13,7 @@ import { styles } from './styles';
 
 type TRegisterFormTabs = 'personal' | 'login'
 
-export default function RegisterForm() {
+export function RegisterForm() {
   const formProps = useForm<IRegisterForm>({
     defaultValues: FORM_INITIAL_VALUES,
     resolver: zodResolver(registerFormSchema),
