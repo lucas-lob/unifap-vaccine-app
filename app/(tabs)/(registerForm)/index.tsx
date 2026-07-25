@@ -1,16 +1,20 @@
 import { KeyboardAvoidingView, ScrollView, StyleSheet } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
-import RegisterForm from "@/components/organisms/RegisterForm";
+import { LoginForm } from "@/components/organisms/LoginForm";
 
 import { COLOR, SPACING } from "@/style/tokens";
 
 export default function RegisterFormScreen() {
   return (
     <KeyboardAvoidingView behavior="padding">
-      <ScrollView showsVerticalScrollIndicator={true} style={styles.container} automaticallyAdjustContentInsets={true}>
+      <ScrollView 
+      showsVerticalScrollIndicator={true} 
+      automaticallyAdjustContentInsets={true}
+      contentContainerStyle={styles.container}
+      >
         <SafeAreaView>
-          <RegisterForm />
+          <LoginForm />
         </SafeAreaView>
       </ScrollView>
     </KeyboardAvoidingView>
@@ -20,6 +24,7 @@ export default function RegisterFormScreen() {
 const styles = StyleSheet.create({
   container: {
     height: '100%',
+    justifyContent: 'center',
     padding: SPACING.LG,
     backgroundColor: COLOR.BLUE_DARK
   },
