@@ -7,7 +7,7 @@
       "  padding: SPACING.LG,",
       "  borderRadius: BORDER_RADIUS.LG,",
       "  backgroundColor: COLOR.WHITE,",
-      "}",
+      "},",
 		]
 	},
 	"Text configuration": {
@@ -19,7 +19,7 @@
 			"  fontSize: FONT_SIZE.BASE,",
 			"  lineHeight: LINE_HEIGHT.BASE,",
 			"  fontWeight: FONT_WEIGHT.REGULAR",
-			"}",
+			"},",
 		]
 	}
 }
