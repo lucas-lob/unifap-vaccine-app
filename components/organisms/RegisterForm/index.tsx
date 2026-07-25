@@ -22,17 +22,23 @@ export default function RegisterForm() {
   const { getValues, trigger, clearErrors } = formProps
 
   const [tab, setTab] = useState<TRegisterFormTabs>('personal')
+  const [loading, setLoading] = useState<boolean>(false)
 
   const isPersonalTab = tab === 'personal'
   const buttonLabel = isPersonalTab ? 'Continuar' : 'Cadastrar'
 
-  const onSubmit = () => {
+  const onSubmit = async () => {
     const values = getValues()
 
     console.log(values);
+
+    // Requisition simulation
+    return new Promise((resolve) => setTimeout(() => resolve(true), 1000))
   }
 
   const buttonHandle = useCallback(async () => {
+    setLoading(true)
+
     const isValidPersonalStep = await trigger([
       'name', 'responsableName', 'birthDay', 'cpf', 'gender', 'state', 'city'
     ])
@@ -44,8 +50,11 @@ export default function RegisterForm() {
       clearErrors()
       setTab('login')
 
+    } else if (isValidLoginStep) {
+      await onSubmit()
     }
-    if (!isPersonalTab && isValidLoginStep) onSubmit()
+
+    setLoading(false)
   }, [tab])
 
   return (
@@ -72,6 +81,7 @@ export default function RegisterForm() {
           <Button
             label={buttonLabel}
             onPress={buttonHandle}
+            loading={loading}
           />
 
           {!isPersonalTab && (
