@@ -85,6 +85,13 @@ export default function TabLayout() {
             />,
         }}
       />
+
+      <Tabs.Screen
+        name="(registerForm)"
+        options={{
+          headerShown: false,
+        }}
+      />
     </Tabs>
   )
 }

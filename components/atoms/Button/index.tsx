@@ -1,38 +1,18 @@
-import { Pressable, Text } from "react-native";
+import { ActivityIndicator, Pressable, Text } from "react-native";
 
 import type { DimensionValue, PressableProps } from "react-native"
 import type { ComponentType } from "react";
+import type { LucideProps } from "lucide-react-native";
 
-import {
-  generalStyles,
-  primaryOutlineStyles,
-  primarySolidStyles,
-  secondaryOutlineStyles,
-  secondarySolidStyles,
-  tertiaryStyles
-} from "./styles";
-import { LucideProps } from "lucide-react-native";
+import { generalStyles, } from "./styles";
+import { getLoadingColor, getVariantStyles } from "./utils";
 
-interface ButtonProps extends PressableProps {
+export interface ButtonProps extends PressableProps {
   label: string
   Icon?: ComponentType<LucideProps>
   variant?: 'primary-solid' | 'primary-outline' | 'secondary-solid' | 'secondary-outline' | 'tertiary',
-  width?: DimensionValue
-}
-
-const getVariantStyles = (variant: ButtonProps['variant']) => {
-  switch (variant) {
-    case 'primary-solid':
-      return primarySolidStyles
-    case 'primary-outline':
-      return primaryOutlineStyles
-    case 'secondary-solid':
-      return secondarySolidStyles
-    case 'secondary-outline':
-      return secondaryOutlineStyles
-    default:
-      return tertiaryStyles
-  }
+  width?: DimensionValue,
+  loading?: boolean
 }
 
 export default function Button(props: ButtonProps) {
@@ -41,10 +21,12 @@ export default function Button(props: ButtonProps) {
     Icon,
     width = '100%',
     variant = 'primary-solid',
+    loading,
     ...restProps
   } = props
 
   const styles = { ...generalStyles, ...getVariantStyles(variant) }
+  const loadingColor = getLoadingColor(variant)
 
   return (
     <Pressable
@@ -55,11 +37,19 @@ export default function Button(props: ButtonProps) {
       ]}
       {...restProps}
     >
-      {!!Icon && <Icon color={styles.labelVariant.color}/>}
+      {loading
+        ? (
+          <ActivityIndicator color={loadingColor}/>
+        )
+        : (
+          <>
+            {!!Icon && <Icon color={styles.labelVariant.color} />}
 
-      <Text style={[styles.label, styles.labelVariant]}>
-        {label}
-      </Text>
+            <Text style={[styles.label, styles.labelVariant]}>
+              {label}
+            </Text>
+          </>
+        )}
     </Pressable>
   )
 }

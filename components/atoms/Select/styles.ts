@@ -16,10 +16,15 @@ export const styles = StyleSheet.create({
   inputContainer: {
     gap: SPACING.SM
   },
-  inputLabel: {
+  labelContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: SPACING.SM
+  },
+  labelText: {
     color: COLOR.WHITE,
     fontSize: FONT_SIZE.BASE,
-    lineHeight: LINE_HEIGHT.BASE,
+    lineHeight: LINE_HEIGHT.LG,
     fontWeight: FONT_WEIGHT.BOLD
   },
   input: {
@@ -52,5 +57,10 @@ export const styles = StyleSheet.create({
   listItemSelected: {
     color: COLOR.BLUE_DARK,
     fontWeight: FONT_WEIGHT.BOLD
+  },
+  errorLabel: {
+    color: COLOR.RED_DARK,
+    fontSize: FONT_SIZE.SM,
+    lineHeight: LINE_HEIGHT.SM,
   }
 })
