@@ -66,9 +66,10 @@ export const secondaryOutlineStyles = StyleSheet.create({
   },
 })
 
-export const tertiaryStyles = StyleSheet.create({
+export const  tertiaryStyles = StyleSheet.create({
   wrapperVariant: {
     boxShadow: [SHADOW.SM],
+    backgroundColor: COLOR.WHITE
   },
   labelVariant: {
     color: COLOR.BLUE_DARK

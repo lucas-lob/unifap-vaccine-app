@@ -3,6 +3,7 @@ import { Lock, Mail } from "lucide-react-native";
 import { useState } from "react";
 import { Controller, useForm } from "react-hook-form";
 import { Text, View } from "react-native";
+import { useRouter } from "expo-router";
 
 import { Input } from "@/components/atoms/Input";
 import { COLOR } from "@/style/tokens";
@@ -15,6 +16,7 @@ import { styles } from "./styles";
 
 export function LoginForm() {
   const [loading, setLoading] = useState<boolean>(false)
+  const router = useRouter()
   const { control, handleSubmit, getValues } = useForm<ILoginForm>({
     defaultValues: FORM_INITIAL_VALUES,
     resolver: zodResolver(loginFormSchema)
@@ -76,11 +78,20 @@ export function LoginForm() {
 
       <View>{/* Divider */}</View>
 
-      <Button
-        label="Entrar"
-        onPress={handleSubmit(onSubmit)}
-        loading={loading}
-      />
+      <View style={styles.actionsContainer}>
+        <Button
+          label="Entrar"
+          onPress={handleSubmit(onSubmit)}
+          loading={loading}
+        />
+
+        <Button
+          label="Voltar"
+          variant="primary-outline"
+          onPress={() => { router.replace('/(auth)') }}
+          loading={loading}
+        />
+      </View>
     </View>
   )
 }

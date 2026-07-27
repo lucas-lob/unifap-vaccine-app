@@ -26,5 +26,9 @@ export const styles = StyleSheet.create({
   formContainer: {
     width: '100%',
     gap: SPACING.LG
+  },
+  actionsContainer: {
+    width: '100%',
+    gap: SPACING.SSM
   }
 })
