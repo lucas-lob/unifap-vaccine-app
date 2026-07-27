@@ -74,3 +74,14 @@ export const tertiaryStyles = StyleSheet.create({
     color: COLOR.BLUE_DARK
   },
 })
+
+export const tertiaryOutlineStyles = StyleSheet.create({
+  wrapperVariant: {
+    borderWidth: 2,
+    borderStyle: 'solid',
+    borderColor: COLOR.WHITE,
+  },
+  labelVariant: {
+    color: COLOR.WHITE
+  },
+})
