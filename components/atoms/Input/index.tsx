@@ -7,6 +7,7 @@ import type { TextInputProps } from "react-native"
 import { COLOR } from "@/style/tokens"
 
 import { styles } from "./styles"
+import { ErrorMessage } from "../ErrorMessage"
 
 interface InputProps extends TextInputProps {
   label?: string
@@ -47,7 +48,7 @@ export function Input(props: InputProps) {
         placeholderTextColor={COLOR.GRAY_500}
       />
 
-      {!!error && <Text style={styles.errorLabel}>{error}</Text>}
+      {!!error && <ErrorMessage message={error} />}
     </View>
   )
 }

@@ -34,10 +34,5 @@ export const styles = StyleSheet.create({
     color: COLOR.GRAY_900,
     fontSize: FONT_SIZE.BASE,
     lineHeight: LINE_HEIGHT.BASE,
-  },
-  errorLabel: {
-    color: COLOR.RED_DARK,
-    fontSize: FONT_SIZE.SM,
-    lineHeight: LINE_HEIGHT.SM,
   }
 })

@@ -9,6 +9,7 @@ import type { TextInputProps } from "react-native";
 import { COLOR } from "@/style/tokens";
 
 import { styles } from "./styles";
+import { ErrorMessage } from "../ErrorMessage";
 
 interface InputDateProps extends TextInputProps {
   label?: string
@@ -69,7 +70,7 @@ export function InputDate(props: InputDateProps) {
         />
       </Pressable>
 
-      {!!error && <Text style={styles.errorLabel}>{error}</Text>}
+      {!!error && <ErrorMessage message={error} />}
 
       {
         openModal &&
