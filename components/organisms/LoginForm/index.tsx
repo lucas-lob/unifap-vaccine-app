@@ -6,16 +6,20 @@ import { Text, View } from "react-native";
 import { useRouter } from "expo-router";
 
 import { Input } from "@/components/atoms/Input";
+import { ErrorMessage } from "@/components/atoms/ErrorMessage";
+import Button from "@/components/atoms/Button";
 import { COLOR } from "@/style/tokens";
+import { useAuth } from "@/hooks/useAuth";
 
 import { FORM_INITIAL_VALUES, loginFormSchema } from "./schema";
-
-import Button from "@/components/atoms/Button";
-import type { ILoginForm } from "./schema";
 import { styles } from "./styles";
 
+import type { ILoginForm } from "./schema";
+
 export function LoginForm() {
-  const [loading, setLoading] = useState<boolean>(false)
+  const [error, setError] = useState<string | null>(null)
+
+  const { loading, checkAuth } = useAuth()
   const router = useRouter()
   const { control, handleSubmit, getValues } = useForm<ILoginForm>({
     defaultValues: FORM_INITIAL_VALUES,
@@ -23,13 +27,16 @@ export function LoginForm() {
   })
 
   const onSubmit = async () => {
-    setLoading(true)
+    setError(null)
+    const { email, password } = getValues()
 
-    // Requisition simulation
-    await new Promise((resolve) => setTimeout(() => resolve(true), 1000))
+    const authStatus = await checkAuth(email, password)
 
-    console.log('Valores', getValues());
-    setLoading(false)
+    if (authStatus === 'NOT_FOUND') {
+      setError('Email ou senha incorreto')
+    } else {
+      router.replace('/(tabs)/(stories)')
+    }
   }
 
   return (
@@ -71,25 +78,27 @@ export function LoginForm() {
               value={value}
               onChangeText={onChange}
               error={error?.message}
+              secureTextEntry
             />
           )}
         />
       </View>
 
-      <View>{/* Divider */}</View>
+      <View>{error && <ErrorMessage message={error} />}</View>
 
       <View style={styles.actionsContainer}>
         <Button
           label="Entrar"
           onPress={handleSubmit(onSubmit)}
           loading={loading}
+          disabled={loading}
         />
 
         <Button
           label="Voltar"
           variant="primary-outline"
           onPress={() => { router.replace('/(auth)') }}
-          loading={loading}
+          disabled={loading}
         />
       </View>
     </View>
