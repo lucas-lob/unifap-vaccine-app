@@ -2,16 +2,17 @@ import { Bug, CircleDot } from 'lucide-react-native'
 import { ScrollView, StyleSheet, Text, View } from 'react-native'
 import { SafeAreaView } from 'react-native-safe-area-context'
 
-import {
-    COLOR,
-    FONT_SIZE,
-    FONT_WEIGHT,
-    LINE_HEIGHT,
-    SPACING
-} from '@/style/tokens'
-
 import { DiseaseTab } from '@/components/organisms/DiseaseTab'
 import { SimpleTextContainer } from '@/components/molecules/SimpleTextContainer'
+
+import { DISEASES_MOCK } from '@/sdk/mocks/diseases.mock'
+import {
+  COLOR,
+  FONT_SIZE,
+  FONT_WEIGHT,
+  LINE_HEIGHT,
+  SPACING
+} from '@/style/tokens'
 
 export default function DiseaseScreen() {
   return (
@@ -25,25 +26,19 @@ export default function DiseaseScreen() {
         </Text>
 
         <View style={styles.storiesList}>
-          <DiseaseTab
-            title='HPV'
-            description='Papilomavírus Humano (HPV)'
-            Icon={Bug}
-            iconColor={'green'}
-            symptomsTitle='Causa verrugas genitais e câncer cervical, vaginal, peniano e de garganta. Aproximadamente 80% das pessoas sexualmente ativas terão contato com HPV ao longo da vida.'
-            diseaseDescription='Previne infecções por HPV que podem causar câncer de colo do útero, vagina, vulva, pênis, ânus e orofaringe, além de verrugas genitais.'
-          />
+          {DISEASES_MOCK.map((disease, index) =>
+            <DiseaseTab
+              key={`disease-${index}`}
+              title={disease.diseaseName}
+              description={disease.diseaseDescription}
+              Icon={disease.showWarningIcon ? CircleDot : Bug}
+              iconColor={disease.showWarningIcon ? 'red' : 'purple'}
+              symptomsTitle={disease.symptomsDescription}
+              statiscsDescription={disease.statisticsDescription}
+            />
+          )}
 
-          <DiseaseTab
-            title='Meningite Meningocócica'
-            description='Neisseria meningitidis'
-            Icon={CircleDot}
-            iconColor={'orange'}
-            symptomsTitle='Causa verrugas genitais e câncer cervical, vaginal, peniano e de garganta. Aproximadamente 80% das pessoas sexualmente ativas terão contato com HPV ao longo da vida.'
-            diseaseDescription='Previne infecções por HPV que podem causar câncer de colo do útero, vagina, vulva, pênis, ânus e orofaringe, além de verrugas genitais.'
-          />
-
-          <SimpleTextContainer 
+          <SimpleTextContainer
             title='💡 Você sabia?'
             content='As vacinas salvam 2-3 milhões de vidas por ano no mundo, segundo a OMS. Elas são uma das maiores conquistas da medicina moderna!'
           />

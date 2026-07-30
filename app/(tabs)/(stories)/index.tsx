@@ -3,7 +3,10 @@ import { ScrollView, StyleSheet, Text, View } from 'react-native'
 import { SafeAreaView } from 'react-native-safe-area-context'
 
 import { StoryTab } from '@/components/organisms/StoryTab'
+import { Quiz } from '@/components/molecules/Quiz'
 
+import { QUIZ_MOCK } from '@/sdk/mocks/quiz.mock'
+import { STORIES_MOCK } from '@/sdk/mocks/stories.mock'
 import {
   COLOR,
   FONT_SIZE,
@@ -11,8 +14,6 @@ import {
   LINE_HEIGHT,
   SPACING
 } from '@/style/tokens'
-import { Quiz } from '@/components/molecules/Quiz'
-import { QUIZ_MOCK } from '@/sdk/mocks/quiz.mock'
 
 export default function StoriesScreen() {
   return (
@@ -27,21 +28,16 @@ export default function StoriesScreen() {
         </Text>
 
         <View style={styles.storiesList}>
-          <StoryTab
-            title='HPV'
-            description='Criada em 2006'
-            Icon={Syringe}
-            creationDescription='A vacina contra o HPV foi desenvolvida após décadas de pesquisa sobre o papilomavírus humano. Em 2006, a primeira vacina foi aprovada, revolucionando a prevenção do câncer cervical. O Brasil incorporou a vacina no SUS em 2014 para meninas e, em 2017, para meninos.'
-            diseaseDescription='Previne infecções por HPV que podem causar câncer de colo do útero, vagina, vulva, pênis, ânus e orofaringe, além de verrugas genitais.'
-          />
-
-          <StoryTab
-            title='HPV'
-            description='Criada em 2006'
-            Icon={Syringe}
-            creationDescription='A vacina contra o HPV foi desenvolvida após décadas de pesquisa sobre o papilomavírus humano. Em 2006, a primeira vacina foi aprovada, revolucionando a prevenção do câncer cervical. O Brasil incorporou a vacina no SUS em 2014 para meninas e, em 2017, para meninos.'
-            diseaseDescription='Previne infecções por HPV que podem causar câncer de colo do útero, vagina, vulva, pênis, ânus e orofaringe, além de verrugas genitais.'
-          />
+          {STORIES_MOCK.map((story, index) =>
+            <StoryTab
+              key={`story-${index}`}
+              title={story.diseaseName}
+              description={`Criada em ${story.creationYear}`}
+              Icon={Syringe}
+              creationDescription={story.creationDescription}
+              diseaseDescription={story.diseasesDescription}
+            />
+          )}
 
           <Quiz
             title='Quiz de Vacinas 🎯'

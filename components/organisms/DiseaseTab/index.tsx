@@ -13,7 +13,7 @@ import type { ComponentType } from "react";
 type StoryTabProps = {
   title: string,
   symptomsTitle: string
-  diseaseDescription: string
+  statiscsDescription: string
   description?: string,
   Icon?: ComponentType<LucideProps>
   iconColor?: ThemeColorsEnum
@@ -22,7 +22,7 @@ type StoryTabProps = {
 }
 
 const SYMPTOMS_TITLE = 'Sintomas e Impactos'
-const DISEASE_TITLE = 'Doenças que previne'
+const STATISCS_TITLE = 'Estatísticas'
 
 export function DiseaseTab(props: StoryTabProps) {
   const {
@@ -30,7 +30,7 @@ export function DiseaseTab(props: StoryTabProps) {
     description,
     symptomsTitle,
     symptomsTitleColor = 'orange',
-    diseaseDescription,
+    statiscsDescription,
     diseaseDescriptionColor = 'blue',
     Icon,
     iconColor
@@ -59,8 +59,8 @@ export function DiseaseTab(props: StoryTabProps) {
         />
 
         <StylizedTextContainer
-          title={DISEASE_TITLE}
-          description={diseaseDescription}
+          title={STATISCS_TITLE}
+          description={statiscsDescription}
           color={diseaseDescriptionColor}
           isTitleColored={true}
         />
