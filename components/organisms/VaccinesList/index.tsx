@@ -44,6 +44,7 @@ export function VaccinesList(props: VaccinesListProps) {
             color={vaccine.applied ? 'green' : 'orange'}
             tagLabel={vaccine.applied ? 'Tomada' : 'Pendente'}
             showBorder={true}
+            isTitleColored={false}
           />
         )
       })}
