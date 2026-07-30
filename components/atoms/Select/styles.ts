@@ -57,10 +57,5 @@ export const styles = StyleSheet.create({
   listItemSelected: {
     color: COLOR.BLUE_DARK,
     fontWeight: FONT_WEIGHT.BOLD
-  },
-  errorLabel: {
-    color: COLOR.RED_DARK,
-    fontSize: FONT_SIZE.SM,
-    lineHeight: LINE_HEIGHT.SM,
   }
 })

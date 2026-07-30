@@ -3,6 +3,7 @@ import {
   primarySolidStyles,
   secondaryOutlineStyles,
   secondarySolidStyles,
+  tertiaryOutlineStyles,
   tertiaryStyles
 } from "./styles"
 
@@ -21,6 +22,8 @@ export const getVariantStyles = (variant: ButtonProps['variant']) => {
       return secondarySolidStyles
     case 'secondary-outline':
       return secondaryOutlineStyles
+      case 'tertiary-outline':
+        return tertiaryOutlineStyles
     default:
       return tertiaryStyles
   }

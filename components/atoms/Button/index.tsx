@@ -10,7 +10,7 @@ import { getLoadingColor, getVariantStyles } from "./utils";
 export interface ButtonProps extends PressableProps {
   label: string
   Icon?: ComponentType<LucideProps>
-  variant?: 'primary-solid' | 'primary-outline' | 'secondary-solid' | 'secondary-outline' | 'tertiary',
+  variant?: 'primary-solid' | 'primary-outline' | 'secondary-solid' | 'secondary-outline' | 'tertiary' | 'tertiary-outline',
   width?: DimensionValue,
   loading?: boolean
 }

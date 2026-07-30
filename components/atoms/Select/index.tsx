@@ -6,6 +6,7 @@ import { Modal, ModalOptions } from "../../molecules/Modal"
 
 import { COLOR } from "@/style/tokens"
 import { styles } from "./styles"
+import { ErrorMessage } from "../ErrorMessage"
 
 type SelectProps = {
   items: string[]
@@ -77,7 +78,7 @@ export function Select(props: SelectProps) {
           </View>
         </Pressable>
 
-        {!!error && <Text style={styles.errorLabel}>{error}</Text>}
+        {!!error && <ErrorMessage message={error} />}
       </View>
 
       <Modal

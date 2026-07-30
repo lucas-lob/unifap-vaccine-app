@@ -3,6 +3,7 @@ import { LucideProps } from "lucide-react-native";
 import { ComponentType, useEffect, useState } from "react";
 import { Text, View } from "react-native";
 import { styles } from "./styles";
+import { ErrorMessage } from "@/components/atoms/ErrorMessage";
 
 type CheckboxItem = {
   label: string
@@ -68,7 +69,7 @@ export function CheckboxList(props: CheckboxListProps) {
         })}
       </View>
 
-      {!!error && <Text style={styles.errorLabel}>{error}</Text>}
+      {!!error && <ErrorMessage message={error} />}
     </View>
   )
 }

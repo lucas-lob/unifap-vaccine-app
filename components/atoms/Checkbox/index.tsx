@@ -2,6 +2,7 @@ import { Pressable, Text, View } from "react-native";
 import { styles } from "./styles";
 import { useEffect, useState } from "react";
 import { getThemeColors } from "@/sdk/utils/getThemeColors";
+import { ErrorMessage } from "../ErrorMessage";
 
 type CheckBoxProps = {
   label: string
@@ -53,7 +54,7 @@ export function Checkbox(props: CheckBoxProps) {
         </Text>
       </View>
 
-      {!!error && <Text style={styles.errorLabel}>{error}</Text>}
+      {!!error && <ErrorMessage message={error} />}
     </Pressable>
   )
 }
