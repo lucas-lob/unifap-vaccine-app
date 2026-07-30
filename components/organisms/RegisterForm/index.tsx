@@ -63,6 +63,7 @@ export function RegisterForm() {
   }, [tab])
 
   const handleBackButton = () => {
+    setError(null)
     tab === 'login' ? setTab('personal') : router.replace('/(auth)')
   }
 
