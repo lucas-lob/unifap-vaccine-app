@@ -15,6 +15,7 @@ type StoryTabProps = {
   symptomsTitle: string
   statiscsDescription: string
   description?: string,
+  videoUrl?: string
   Icon?: ComponentType<LucideProps>
   iconColor?: ThemeColorsEnum
   symptomsTitleColor?: ThemeColorsEnum
@@ -32,6 +33,7 @@ export function DiseaseTab(props: StoryTabProps) {
     symptomsTitleColor = 'orange',
     statiscsDescription,
     diseaseDescriptionColor = 'blue',
+    videoUrl,
     Icon,
     iconColor
   } = props
@@ -65,10 +67,12 @@ export function DiseaseTab(props: StoryTabProps) {
           isTitleColored={true}
         />
 
-        <Button
-          label="Ver vídeo educativo"
-          Icon={Play}
-        />
+        {!!videoUrl &&
+          <Button
+            label="Ver vídeo educativo"
+            Icon={Play}
+          />
+        }
       </DisclosureContent>
     </DisclosureLayout>
   )

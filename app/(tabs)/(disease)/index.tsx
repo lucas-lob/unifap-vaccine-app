@@ -35,6 +35,7 @@ export default function DiseaseScreen() {
               iconColor={disease.showWarningIcon ? 'red' : 'purple'}
               symptomsTitle={disease.symptomsDescription}
               statiscsDescription={disease.statisticsDescription}
+              videoUrl={disease.videoUrl}
             />
           )}
 
