@@ -8,6 +8,6 @@ export const QUIZ_MOCK: quizSchema[] = [
   {
     question: 'Qual vacina previne sarampo, caxumba e rubéola?',
     answers: ['HPV', 'Tríplice Viral', 'Hepatite B', 'Meningocócica'],
-    correctAnswer: 'Hepatite B'
+    correctAnswer: 'Tríplice Viral'
   }
 ]

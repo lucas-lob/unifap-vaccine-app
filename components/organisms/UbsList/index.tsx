@@ -45,7 +45,8 @@ export function UbsList() {
           label="Estado"
           inputTextLines={1}
           modalOptions={{
-            alignment: 'end'
+            alignment: 'end',
+            title: 'Selecione um estado'
           }}
         />
 
@@ -58,7 +59,8 @@ export function UbsList() {
           disabled={!selectedState}
           inputTextLines={1}
           modalOptions={{
-            alignment: 'end'
+            alignment: 'end',
+            title: 'Selecione uma cidade'
           }}
         />
       </View>
