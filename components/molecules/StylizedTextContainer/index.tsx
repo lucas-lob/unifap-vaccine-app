@@ -27,7 +27,7 @@ export function StylizedTextContainer(props: StylizedTextContainerProps) {
     color = 'blue',
     showBorder,
     isHighlightedBorder,
-    isTitleColored,
+    isTitleColored = true,
     Icon,
     tagLabel
   } = props

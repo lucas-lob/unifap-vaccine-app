@@ -5,6 +5,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { useRouter } from 'expo-router';
 
 import Button from "@/components/atoms/Button";
+import { ErrorMessage } from '@/components/atoms/ErrorMessage';
 import { RegisterFormLocationInfos } from './Components/LocationInfos';
 import { RegisterFormLoginInfos } from "./Components/LoginInfos";
 import { RegisterFormPersonalInfos } from './Components/PersonalInfos';
@@ -24,6 +25,7 @@ export function RegisterForm() {
   const { getValues, trigger, clearErrors } = formProps
 
   const [tab, setTab] = useState<TRegisterFormTabs>('personal')
+  const [error, setError] = useState<string | null>(null)
   const [loading, setLoading] = useState<boolean>(false)
 
   const isPersonalTab = tab === 'personal'
@@ -33,6 +35,7 @@ export function RegisterForm() {
     const values = getValues()
 
     console.log(values);
+    setError('Aplicativo em fase de testes, o banco de dados ainda não foi integrado');
 
     // Requisition simulation
     return new Promise((resolve) => setTimeout(() => resolve(true), 1000))
@@ -60,6 +63,7 @@ export function RegisterForm() {
   }, [tab])
 
   const handleBackButton = () => {
+    setError(null)
     tab === 'login' ? setTab('personal') : router.replace('/(auth)')
   }
 
@@ -82,6 +86,8 @@ export function RegisterForm() {
           : (
             <RegisterFormLoginInfos />
           )}
+
+        {!!error && <ErrorMessage message={error} />}
 
         <View style={styles.buttonsContainer}>
           <Button

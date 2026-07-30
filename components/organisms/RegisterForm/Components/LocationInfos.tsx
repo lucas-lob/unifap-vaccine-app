@@ -51,7 +51,7 @@ export function RegisterFormLocationInfos() {
             initialValue={value}
             onChange={onChange}
             error={error?.message}
-            modalOptions={{ alignment: 'end' }}
+            modalOptions={{ alignment: 'end', title: 'Selecione um estado' }}
           />
         )}
       />
@@ -73,7 +73,7 @@ export function RegisterFormLocationInfos() {
             initialValue={value}
             onChange={onChange}
             error={error?.message}
-            modalOptions={{ alignment: 'end' }}
+            modalOptions={{ alignment: 'end', title: 'Selecione uma cidade' }}
           />
         )}
       />

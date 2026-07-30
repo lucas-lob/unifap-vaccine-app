@@ -13,7 +13,7 @@ export function useAuth() {
     await new Promise((resolve) => setTimeout(() => resolve(true), 1000))
 
     const foundUser = USERS_MOCK.find(user =>
-      user.email === email &&
+      user.email.toLowerCase() === email.toLowerCase() &&
       user.password === password
     )
 
