@@ -11,7 +11,7 @@ export function useIbgeLocation() {
   const [isLoading, setIsLoading] = useState<boolean>(false)
 
   const { data: statesData, isLoading: queryIsLoading, error } = useQuery<IbgeState[]>({
-    queryKey: [],
+    queryKey: ['ibgeStates'],
     queryFn: getIbgeStates
   })
 
