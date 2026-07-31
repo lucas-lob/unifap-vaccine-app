@@ -6,14 +6,18 @@ const BASE_URL = "https://servicodados.ibge.gov.br/api/v1/localidades"
  * Get states from IBGE Api
  */
 export const getIbgeStates = async () => {
-  const response = await fetch(`${BASE_URL}/estados?orderBy=nome`)
+  try {
+    const response = await fetch(`${BASE_URL}/estados?orderBy=nome`)
 
-  if (!response.ok) {
-    throw new Error(`Error in the IBGE states fetching: [${response.status}] ${response.statusText}`)
+    if (!response.ok) {
+      throw new Error(`Error in the IBGE states fetching: [${response.status}] ${response.statusText}`)
+    }
+
+    return (await response.json()) as IbgeState[]
   }
-
-  return (await response.json()) as IbgeState[]
-
+  catch (error) {
+    throw error
+  }
 }
 
 /**
@@ -25,11 +29,16 @@ export const getIbgeCities = async (stateAcronym: string) => {
 
   if (!sanitizedStateAcronym) return []
 
-  const response = await fetch(`${BASE_URL}/estados/${sanitizedStateAcronym}/municipios?orderBy=nome`)
+  try {
+    const response = await fetch(`${BASE_URL}/estados/${sanitizedStateAcronym}/municipios?orderBy=nome`)
 
-  if (!response.ok) {
-    throw new Error(`Error in the IBGE states fetching: [${response.status}] ${response.statusText}`)
+    if (!response.ok) {
+      throw new Error(`Error in the IBGE states fetching: [${response.status}] ${response.statusText}`)
+    }
+
+    return (await response.json()) as IbgeCity[]
   }
-
-  return (await response.json()) as IbgeCity[]
+  catch (error) {
+    throw error
+  }
 }
