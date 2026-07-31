@@ -5,10 +5,10 @@ import { MapPin } from "lucide-react-native";
 
 import { Select } from "@/components/atoms/Select";
 
-import { STATES_MOCK } from "@/sdk/mocks/localization.mock";
 import { COLOR, SPACING } from "@/style/tokens";
 
 import type { IRegisterForm } from "../schema";
+import { useIbgeLocation } from "@/hooks/useIbgeLocation";
 
 const styles = StyleSheet.create({
   container: {
@@ -18,19 +18,19 @@ const styles = StyleSheet.create({
 })
 
 export function RegisterFormLocationInfos() {
-  const { control } = useFormContext<IRegisterForm>()
+  const { states, selectedState, setSelectedState, cities, isLoading } = useIbgeLocation()
 
-  const selectedState = useWatch<IRegisterForm>({
+  const { control, setValue } = useFormContext<IRegisterForm>()
+  useWatch<IRegisterForm>({
     name: "state",
-    compute: (data) => data 
+    compute: (stateName) => {
+      setValue('city', '')
+      setSelectedState(undefined, stateName) 
+    }
   })
 
-  const availableStates = useMemo(() => STATES_MOCK.map(state => state.name), [])
-  const availableCities = useMemo(() => {
-    const state = STATES_MOCK.find(state => state.name === selectedState)
-
-    return state?.cities.map(city => city.name) ?? []
-  }, [selectedState])
+  const availableStates = useMemo(() => states.map(state => state.nome), [states])
+  const availableCities = useMemo(() => cities.map(city => city.nome), [cities])
 
   return (
     <View style={styles.container}>
@@ -48,6 +48,7 @@ export function RegisterFormLocationInfos() {
             labelIconConfigs={{ color: COLOR.BLUE_DARK }}
             placeholder="UF"
             items={availableStates}
+            disabled={availableStates.length === 0 || isLoading}
             initialValue={value}
             onChange={onChange}
             error={error?.message}
@@ -64,12 +65,12 @@ export function RegisterFormLocationInfos() {
           fieldState: { error }
         }) => (
           <Select
-            key={`state-${selectedState}`}
+            key={`${selectedState?.id}-cities`}
             label="Cidade"
             labelColor={COLOR.GRAY_700}
             placeholder="Cidade"
             items={availableCities}
-            disabled={!selectedState}
+            disabled={availableCities.length === 0 || isLoading}
             initialValue={value}
             onChange={onChange}
             error={error?.message}

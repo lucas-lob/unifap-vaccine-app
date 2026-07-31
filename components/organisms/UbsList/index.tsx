@@ -3,35 +3,31 @@ import { View } from "react-native"
 
 import { Select } from "@/components/atoms/Select"
 import { PlaceCard } from "@/components/molecules/PlaceCard"
-import { STATES_MOCK } from "@/sdk/mocks/localization.mock"
+import { useIbgeLocation } from "@/hooks/useIbgeLocation"
 import { UBS_MOCK } from "@/sdk/mocks/places.mock"
 
 import { styles } from "./styles"
 import { EmptyUbsInformation } from "./EmptyUbsInformation"
 
 export function UbsList() {
-  const [selectedState, setSelectedState] = useState<string | null>(null)
   const [selectedCity, setSelectedCity] = useState<string | null>(null)
+
+  const { states, selectedState, setSelectedState, cities, isLoading } = useIbgeLocation()
 
   const isUnselected = !selectedState || !selectedCity
 
-  const availableStates = useMemo(() => STATES_MOCK.map(state => state.name), [])
-
-  const availableCities = useMemo(() => {
-    if (!selectedState) return []
-    const state = STATES_MOCK.find(state => state.name === selectedState)
-
-    return state?.cities.map(city => city.name) ?? []
-  }, [selectedState])
+  // Obtains only locations name for the selectors
+  const availableStates = useMemo(() => states.map(state => state.nome), [states])
+  const availableCities = useMemo(() => cities.map(city => city.nome), [cities])
 
   const ubsList = useMemo(() => {
     if (isUnselected) return []
 
-    return UBS_MOCK.filter(ubs => ubs.city === selectedCity && ubs.state === selectedState)
+    return UBS_MOCK.filter(ubs => ubs.city === selectedCity && ubs.state === selectedState.nome)
   }, [selectedCity])
 
-  const handleStateChange = (state: string | null) => {
-    setSelectedState(state)
+  const handleStateChange = (stateName: string) => {
+    setSelectedState(undefined, stateName)
     setSelectedCity(null)
   }
 
@@ -43,6 +39,7 @@ export function UbsList() {
           onChange={handleStateChange}
           placeholder="UF"
           label="Estado"
+          disabled={availableStates.length === 0 || isLoading}
           inputTextLines={1}
           modalOptions={{
             alignment: 'end',
@@ -51,12 +48,12 @@ export function UbsList() {
         />
 
         <Select
-          key={`${selectedState}-cities`}
+          key={`${selectedState?.id}-cities`}
           items={availableCities}
           onChange={setSelectedCity}
           placeholder="Cidade"
           label="Cidade"
-          disabled={!selectedState}
+          disabled={availableCities.length === 0 || isLoading}
           inputTextLines={1}
           modalOptions={{
             alignment: 'end',
