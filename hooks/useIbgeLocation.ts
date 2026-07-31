@@ -1,18 +1,25 @@
+import { useCallback, useState } from 'react';
 import { useQuery } from '@tanstack/react-query';
 
 import { getIbgeStates, getIbgeCities } from '@/services/ibge';
-
 import type { IbgeState, IbgeCity } from '@/services/ibge'
-import { useCallback, useEffect, useState } from 'react';
+
+const ONE_DAY_IN_MILLISECONDS = 1000 * 60 * 60 * 24
 
 export function useIbgeLocation() {
   const [selectedState, setSelectedState] = useState<IbgeState | null>(null)
-  const [cities, setCities] = useState<IbgeCity[]>([])
-  const [isLoading, setIsLoading] = useState<boolean>(false)
 
-  const { data: statesData, isLoading: queryIsLoading, error } = useQuery<IbgeState[]>({
-    queryKey: ['ibgeStates'],
-    queryFn: getIbgeStates
+  const { data: statesData = [], isLoading: isStatesLoading, error: statesError } = useQuery<IbgeState[]>({
+    queryKey: ['ibge', 'states'],
+    queryFn: getIbgeStates,
+    staleTime: ONE_DAY_IN_MILLISECONDS
+  })
+
+  const { data: citiesData = [], isLoading: isCitiesLoading, error: citiesError} = useQuery<IbgeCity[]>({
+    queryKey: ['ibge', 'cities', selectedState],
+    queryFn: () => getIbgeCities(selectedState!.sigla),
+    enabled: !!selectedState?.sigla,
+    staleTime: ONE_DAY_IN_MILLISECONDS
   })
 
   const handleState = useCallback((acronym?: string, stateName?: string) => {
@@ -28,30 +35,16 @@ export function useIbgeLocation() {
 
     setSelectedState(filteredState)
   }, [statesData])
-
-
-  useEffect(() => {
-    if (!selectedState) return
-
-    const updateCities = async () => {
-      setIsLoading(true)
-      const citiesResponse = await getIbgeCities(selectedState.sigla)
-      setCities(citiesResponse)
-      setIsLoading(false)
-    }
-    
-    updateCities()
-  }, [selectedState])
   
   return {
-    states: (statesData ?? []) as IbgeState[],
+    states: statesData as IbgeState[],
     selectedState,
     /**
      * Set the selected state by acronym or state name. The acronym is priorized.
      */
     setSelectedState: handleState,
-    cities,
-    isLoading: isLoading || queryIsLoading,
-    error
+    cities: citiesData as IbgeCity[],
+    isLoading: isStatesLoading || isCitiesLoading,
+    error: statesError || citiesError
   }
 }
