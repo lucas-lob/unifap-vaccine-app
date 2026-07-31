@@ -17,14 +17,8 @@ export function UbsList() {
   const isUnselected = !selectedState || !selectedCity
 
   // Obtains only locations name for the selectors
-  const availableStates = useMemo(
-    () => states.map(state => state.nome).sort((a, b) => a.localeCompare(b)),
-    [states]
-  )
-  const availableCities = useMemo(
-    () => cities.map(city => city.nome).sort((a, b) => a.localeCompare(b)),
-    [cities]
-  )
+  const availableStates = useMemo(() => states.map(state => state.nome), [states])
+  const availableCities = useMemo(() => cities.map(city => city.nome), [cities])
 
   const ubsList = useMemo(() => {
     if (isUnselected) return []
@@ -54,7 +48,7 @@ export function UbsList() {
         />
 
         <Select
-          key={`${selectedState}-cities`}
+          key={`${selectedState?.id}-cities`}
           items={availableCities}
           onChange={setSelectedCity}
           placeholder="Cidade"

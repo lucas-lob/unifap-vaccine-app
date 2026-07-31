@@ -29,15 +29,8 @@ export function RegisterFormLocationInfos() {
     }
   })
 
-  // Obtains only locations name for the selectors
-  const availableStates = useMemo(
-    () => states.map(state => state.nome).sort((a, b) => a.localeCompare(b)),
-    [states]
-  )
-  const availableCities = useMemo(
-    () => cities.map(city => city.nome).sort((a, b) => a.localeCompare(b)),
-    [cities]
-  )
+  const availableStates = useMemo(() => states.map(state => state.nome), [states])
+  const availableCities = useMemo(() => cities.map(city => city.nome), [cities])
 
   return (
     <View style={styles.container}>

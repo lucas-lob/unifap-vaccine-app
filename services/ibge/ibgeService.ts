@@ -6,16 +6,14 @@ const BASE_URL = "https://servicodados.ibge.gov.br/api/v1/localidades"
  * Get states from IBGE Api
  */
 export const getIbgeStates = async () => {
-  try {
-    const response = await fetch(`${BASE_URL}/estados`)
-    const data = await response.json() as IbgeState[]
+  const response = await fetch(`${BASE_URL}/estados?orderBy=nome`)
 
-    return data
+  if (!response.ok) {
+    throw new Error(`Error in the IBGE states fetching: [${response.status}] ${response.statusText}`)
   }
-  catch (error) {
-    console.error(error)
-    throw error
-  }
+
+  return (await response.json()) as IbgeState[]
+
 }
 
 /**
@@ -23,14 +21,15 @@ export const getIbgeStates = async () => {
  * @param stateAcronym the acronym of the brazillian state, example: AP for Amapá 
  */
 export const getIbgeCities = async (stateAcronym: string) => {
-  try {
-    const response = await fetch(`${BASE_URL}/estados/${stateAcronym}/municipios`)
-    const data = await response.json() as IbgeCity[]
+  const sanitizedStateAcronym = stateAcronym.toUpperCase().trim()
 
-    return data
+  if (!sanitizedStateAcronym) return []
+
+  const response = await fetch(`${BASE_URL}/estados/${sanitizedStateAcronym}/municipios?orderBy=nome`)
+
+  if (!response.ok) {
+    throw new Error(`Error in the IBGE states fetching: [${response.status}] ${response.statusText}`)
   }
-  catch (error) {
-    console.error(error)
-    throw error
-  }
+
+  return (await response.json()) as IbgeCity[]
 }
