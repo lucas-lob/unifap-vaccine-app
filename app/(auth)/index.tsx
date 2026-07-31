@@ -36,7 +36,7 @@ export default function AuthScreen() {
         <Button
           label="Entrar"
           variant="tertiary-outline"
-          onPress={() => { router.replace('/LoginForm') }}
+          onPress={() => { router.replace('/(tabs)/(stories)') }}
         />
       </View>
     </View>

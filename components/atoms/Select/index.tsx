@@ -10,7 +10,7 @@ import { ErrorMessage } from "../ErrorMessage"
 
 type SelectProps = {
   items: string[]
-  onChange?: (value: string | null) => void
+  onChange?: (value: string) => void
   initialValue?: string
   modalOptions?: ModalOptions
   label?: string
@@ -41,7 +41,10 @@ export function Select(props: SelectProps) {
   const [selectedValue, setSelectedValue] = useState<string | null>(initialValue ?? null)
   const [isModalOpened, setIsModalOpened] = useState<boolean>(false)
 
-  useEffect(() => { onChange(selectedValue) }, [selectedValue])
+  useEffect(() => { 
+    if(!selectedValue) return
+    onChange(selectedValue) 
+  }, [selectedValue])
 
   return (
     <View style={styles.container}>
