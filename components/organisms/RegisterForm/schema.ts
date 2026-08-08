@@ -5,9 +5,9 @@ import {
   email as _email
 } from 'zod'
 
-import type { infer as _infer } from 'zod'
-
 import { CPF_REGEX } from '@/sdk/utils/constants'
+
+import type { infer as _infer } from 'zod'
 
 export const registerFormSchema = _object({
   name: _string()
@@ -63,4 +63,12 @@ export const FORM_INITIAL_VALUES: IRegisterForm = {
   email: "",
   password: "",
   confirmedPassword: ""
+}
+
+type TRegisterFormStep = 'birthday' | 'personal' | 'login'
+
+export const STEP_FIELDS: Record<TRegisterFormStep, (keyof IRegisterForm)[]> = {
+  birthday: ['birthDay'],
+  personal: ['name', 'responsableName', 'cpf', 'gender', 'state', 'city'],
+  login: ['email', 'password', 'confirmedPassword'],
 }

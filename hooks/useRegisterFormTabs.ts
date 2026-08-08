@@ -1,13 +1,27 @@
 import { useState } from "react"
 import { useRouter } from "expo-router"
 
-const REGISTER_FORM_TABS = [
-  'birthday',
-  'personal',
-  'login'
-] as const
+import { STEP_FIELDS } from "@/components/organisms/RegisterForm/schema"
 
-export type TRegisterFormTabs = typeof REGISTER_FORM_TABS[number]
+type TRegisterFormTab = {
+  name: keyof typeof STEP_FIELDS
+  description: string
+}
+
+const REGISTER_FORM_TABS: readonly TRegisterFormTab[] = [
+  {
+    name: 'birthday',
+    description: 'Preencha sua data de nascimento para começar'
+  },
+  {
+    name: 'personal',
+    description: 'Preencha seus dados pessoais'
+  },
+  {
+    name: 'login',
+    description: 'Preencha seus dados para Login'
+  }
+] as const;
 
 export function useRegisterFormTabs() {
   const router = useRouter()
@@ -18,7 +32,10 @@ export function useRegisterFormTabs() {
   const handleBackTab = () => {
     const newIndex = tabIndex - 1
 
-    if (newIndex < 0) router.replace('/(auth)')
+    if (newIndex < 0) {
+      router.replace('/(auth)')
+      return
+    }
 
     setTabIndex(newIndex)
   }
@@ -29,6 +46,7 @@ export function useRegisterFormTabs() {
 
   return {
     tab: REGISTER_FORM_TABS[tabIndex],
+    isFirstTab: tabIndex === 0,
     isLastTab: tabIndex === maxIndex,
     handleBackTab,
     handleNextTab
