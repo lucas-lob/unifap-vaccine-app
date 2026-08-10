@@ -21,7 +21,7 @@ export function RegisterFormLocationInfos() {
   const { states, selectedState, setSelectedState, cities, isLoading } = useIbgeLocation()
 
   const { control, setValue } = useFormContext<IRegisterForm>()
-  useWatch<IRegisterForm>({
+  useWatch<IRegisterForm, "state">({
     name: "state",
     compute: (stateName) => {
       setValue('city', '')
