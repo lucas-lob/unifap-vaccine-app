@@ -15,6 +15,7 @@ import { FORM_INITIAL_VALUES, registerFormSchema, STEP_FIELDS } from "./schema";
 import { styles } from './styles';
 
 import type { IRegisterForm } from './schema'
+import { RegisterFormVaccinesInfo } from './Components/VaccinesInfo';
 
 export function RegisterForm() {
   const { tab, handleBackTab, handleNextTab, isLastTab } = useRegisterFormTabs()

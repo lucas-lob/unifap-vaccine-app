@@ -1,15 +1,15 @@
 import {
-  object as _object,
-  string as _string,
-  enum as _enum,
+  array as _array,
   email as _email,
-  array as _array
+  enum as _enum,
+  object as _object,
+  string as _string
 } from 'zod'
 
 import { CPF_REGEX } from '@/sdk/utils/constants'
 
-import type { infer as _infer } from 'zod'
 import { vaccineFormSchema } from '@/components/molecules/VaccineForm/schema'
+import type { infer as _infer } from 'zod'
 
 export const registerFormSchema = _object({
   name: _string()
@@ -69,7 +69,13 @@ export const FORM_INITIAL_VALUES: IRegisterForm = {
       isPeriodic: false,
       doses: 2,
       applicationDate: '2002-05-23'
-    }
+    },
+    {
+      name: "Hepatite B",
+      isPeriodic: false,
+      doses: 2,
+      applicationDate: '2002-05-23'
+    },
   ],
   email: "",
   password: "",
