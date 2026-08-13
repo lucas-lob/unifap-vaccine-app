@@ -13,7 +13,7 @@ export const vaccineFormSchema = _object({
   isPeriodic: _boolean(),
   doses: _number()
     .optional(),
-  applicationDate: _string("Campo obrigatório")
+  lastApplicationDate: _string("Campo obrigatório")
     .min(1, "Campo obrigatório")
 }).superRefine((data, context) => {
   if (!data.isPeriodic && !data.doses) {
@@ -32,5 +32,5 @@ export const FORM_INITIAL_VALUES: IVaccineForm = {
   name: "",
   isPeriodic: false,
   doses: undefined,
-  applicationDate: ""
+  lastApplicationDate: ""
 } 

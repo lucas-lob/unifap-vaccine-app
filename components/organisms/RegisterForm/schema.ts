@@ -7,8 +7,8 @@ import {
 } from 'zod'
 
 import { CPF_REGEX } from '@/sdk/utils/constants'
-
 import { vaccineFormSchema } from '@/components/molecules/VaccineForm/schema'
+
 import type { infer as _infer } from 'zod'
 
 export const registerFormSchema = _object({
@@ -68,13 +68,13 @@ export const FORM_INITIAL_VALUES: IRegisterForm = {
       name: "Hepatite B",
       isPeriodic: false,
       doses: 2,
-      applicationDate: '2002-05-23'
+      lastApplicationDate: '2002-05-23'
     },
     {
       name: "Hepatite B",
       isPeriodic: false,
       doses: 2,
-      applicationDate: '2002-05-23'
+      lastApplicationDate: '2002-05-23'
     },
   ],
   email: "",
