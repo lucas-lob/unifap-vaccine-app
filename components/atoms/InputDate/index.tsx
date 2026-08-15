@@ -27,7 +27,7 @@ export function InputDate(props: InputDateProps) {
     error,
     onChangeText,
     style: textInputPropsStyle,
-    value,
+    value = "",
     ...textInputProps
   } = props
   const intl = useIntl()
@@ -40,9 +40,9 @@ export function InputDate(props: InputDateProps) {
       month: '2-digit',
       year: 'numeric'
     })
-    : (value ? value : null)
-
-  useEffect(() => { onChangeText(formattedDate) }, [formattedDate])
+    : value
+    
+    useEffect(() => { onChangeText(formattedDate) }, [formattedDate])
 
   return (
     <View style={styles.container}>
