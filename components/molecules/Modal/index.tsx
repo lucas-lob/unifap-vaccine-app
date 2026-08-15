@@ -1,6 +1,6 @@
 import { useCallback, useMemo } from "react"
 import { Pressable, Modal as NativeModal, Text, View } from "react-native"
-import { SafeAreaView, useSafeAreaInsets } from "react-native-safe-area-context"
+import { SafeAreaView } from "react-native-safe-area-context"
 import { X } from "lucide-react-native"
 
 import { centerAlignmentStyles, endAlignmentStyles, generalStyles } from "./styles"
@@ -31,7 +31,6 @@ export function Modal(props: ModalProps & ModalOptions) {
     alignment = 'center',
     children
   } = props
-  const insets = useSafeAreaInsets()
 
   const { showHeader, styles } = useMemo(() => {
     const showHeader = !!title || showCloseIcon
@@ -53,8 +52,8 @@ export function Modal(props: ModalProps & ModalOptions) {
   if (!visible) return null
 
   return (
-    <NativeModal visible={visible} transparent={true} animationType="none" statusBarTranslucent={true}
-      navigationBarTranslucent={true}>
+    <NativeModal visible={visible} transparent={true} animationType="none" statusBarTranslucent={false}
+      navigationBarTranslucent={false}>
       <SafeAreaView>
         <View style={[styles.container, styles.containerAlignment]}>
           <Pressable style={styles.overlayContainer} onPress={handleClose} />
@@ -62,7 +61,6 @@ export function Modal(props: ModalProps & ModalOptions) {
           <View style={[
             styles.contentContainer,
             styles.contentContainerAlignment,
-            alignment === 'end' && { paddingBottom: insets.bottom }
           ]}>
             <View style={[styles.contentWrapper, styles.contentWrapperAlignment]}>
               {showHeader && (
