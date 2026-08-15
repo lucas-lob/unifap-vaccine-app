@@ -12,11 +12,12 @@ import { styles } from "./styles";
 import { ErrorMessage } from "../ErrorMessage";
 
 interface InputDateProps extends TextInputProps {
+  onChangeText: (date: string | null) => void
   label?: string
   LabelIcon?: ComponentType<LucideProps>
   error?: string
   labelIconConfigs?: LucideProps
-  onChangeText: (date: string | null) => void
+  maxDate?: Date
 }
 
 export function InputDate(props: InputDateProps) {
@@ -28,6 +29,7 @@ export function InputDate(props: InputDateProps) {
     onChangeText,
     style: textInputPropsStyle,
     value = "",
+    maxDate,
     ...textInputProps
   } = props
   const intl = useIntl()
@@ -79,7 +81,7 @@ export function InputDate(props: InputDateProps) {
           mode='date'
           display='spinner'
           themeVariant='light'
-          maximumDate={new Date()}
+          maximumDate={maxDate ?? new Date()}
           onValueChange={(_event, selectedDate) => {
             setDate(selectedDate)
             setOpenModal(false)
