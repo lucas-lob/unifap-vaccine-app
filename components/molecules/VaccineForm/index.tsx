@@ -1,53 +1,45 @@
 import { Controller, useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
 import { View } from "react-native";
 
-import { Checkbox } from "@/components/atoms/Checkbox";
 import { Input } from "@/components/atoms/Input";
 import { InputDate } from "@/components/atoms/InputDate";
-
-import { styles } from "./styles";
-import { FORM_INITIAL_VALUES } from "./schema";
-
-import type { IVaccineForm } from "./schema"
 import Button from "@/components/atoms/Button";
 
+import { vaccineFormSchema, type IVaccineForm } from "./schema"
+import { styles } from "./styles";
+
 type VaccineFormProps = {
+  vaccineName: string
+  isPeriodic: boolean
   onSaveData: (formData: IVaccineForm) => void
 }
 
 export function VaccineForm(props: VaccineFormProps) {
-  const { onSaveData } = props
+  const { vaccineName, isPeriodic, onSaveData } = props
+
+  const FORM_INITIAL_VALUES: IVaccineForm = {
+  name: vaccineName,
+  isPeriodic,
+  doses: undefined,
+  lastApplicationDate: ""
+} 
 
   const { control, watch, handleSubmit, getValues } = useForm<IVaccineForm>({
-    defaultValues: FORM_INITIAL_VALUES
+    defaultValues: FORM_INITIAL_VALUES,
+    resolver: zodResolver(vaccineFormSchema),
+    reValidateMode: 'onSubmit'
   })
 
   const isPeriodicVaccine = watch('isPeriodic')
 
   const onSubmit = () => {
     const formData = getValues()
-
     onSaveData(formData)
   }
 
   return (
     <View style={styles.container}>
-      <Controller
-        control={control}
-        name="isPeriodic"
-        render={({
-          field: { value, onChange },
-          fieldState: { error }
-        }) =>
-          <Checkbox
-            label="Vacina periódica"
-            isActive={value}
-            onPress={onChange}
-            error={error?.message}
-          />
-        }
-      />
-
       {!isPeriodicVaccine && (
         <Controller
           control={control}
@@ -60,8 +52,10 @@ export function VaccineForm(props: VaccineFormProps) {
               label="Quantidade de doses"
               placeholder="0"
               value={value?.toString() ?? ""}
-              onChangeText={onChange}
+              onChangeText={text => onChange(text.replaceAll(/\D/g, ""))}
               error={error?.message}
+              maxLength={2}
+              keyboardType="numeric"
             />
           }
         />
@@ -69,7 +63,7 @@ export function VaccineForm(props: VaccineFormProps) {
 
       <Controller
         control={control}
-        name="applicationDate"
+        name="lastApplicationDate"
         render={({
           field: { value, onChange },
           fieldState: { error }
@@ -84,12 +78,13 @@ export function VaccineForm(props: VaccineFormProps) {
         }
       />
 
-      <Button
-        label="Salvar"
-        variant="secondary-solid"
-        onPress={handleSubmit(onSubmit)}
-        style={styles.saveButton}
-      />
+      <View style={styles.saveButtonContainer}>
+        <Button
+          label="Salvar"
+          variant="secondary-solid"
+          onPress={handleSubmit(onSubmit)}
+        />
+      </View>
     </View>
   )
 }

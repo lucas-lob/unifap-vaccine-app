@@ -5,7 +5,7 @@ export const styles = StyleSheet.create({
   container: {
     gap: SPACING.SSM
   },
-  saveButton: {
+  saveButtonContainer: {
     marginTop: SPACING.XL
   }
 })

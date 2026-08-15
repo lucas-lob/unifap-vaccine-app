@@ -1,18 +1,22 @@
+import { useState } from "react";
 import { Syringe } from "lucide-react-native";
 import { useFieldArray, useFormContext } from "react-hook-form";
 import { StyleSheet, Text, View } from "react-native";
 
 import Button from "@/components/atoms/Button";
-import { 
-  BORDER_RADIUS, COLOR, FONT_SIZE, 
-  FONT_WEIGHT, LINE_HEIGHT, SPACING 
+import {
+  BORDER_RADIUS, COLOR, FONT_SIZE,
+  FONT_WEIGHT, LINE_HEIGHT, SPACING
 } from "@/style/tokens";
 
 import { VaccineItem } from "./VaccineItem";
+import { NewVaccineModal } from "./NewVaccineModal";
 
 import type { IRegisterForm } from "../../schema";
 
 export function RegisterFormVaccinesInfo() {
+  const [isModalOpened, setIsModalOpened] = useState<boolean>(false)
+
   const { control } = useFormContext<IRegisterForm>()
   const { fields, append, remove } = useFieldArray({
     control,
@@ -34,7 +38,7 @@ export function RegisterFormVaccinesInfo() {
           {fields.map((vaccine, index) =>
             <VaccineItem
               key={vaccine.id}
-              onRemove={() => {remove(index)}}
+              onRemove={() => { remove(index) }}
               {...vaccine}
             />
           )}
@@ -44,8 +48,15 @@ export function RegisterFormVaccinesInfo() {
           label="Adicionar vacina"
           variant="secondary-solid"
           height={40}
+          onPress={() => setIsModalOpened(true)}
         />
       </View>
+
+      <NewVaccineModal
+        isOpened={isModalOpened}
+        setIsOpened={setIsModalOpened}
+        onAppend={append}
+      />
     </View>
   )
 }
@@ -68,6 +79,7 @@ const styles = StyleSheet.create({
   contentContainer: {
     minHeight: 200,
     justifyContent: 'space-between',
+    gap: SPACING.LG,
     padding: SPACING.MD,
     borderColor: COLOR.GRAY_500,
     borderWidth: 1,
@@ -75,8 +87,5 @@ const styles = StyleSheet.create({
   },
   listContainer: {
     gap: SPACING.SM
-  },
-  addItemButton: {
-    height: 40
   }
 })

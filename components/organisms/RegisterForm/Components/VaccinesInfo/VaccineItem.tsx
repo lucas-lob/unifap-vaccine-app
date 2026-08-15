@@ -32,9 +32,11 @@ const styles = StyleSheet.create({
   container: {
     flexDirection: 'row',
     justifyContent: 'space-between',
+    alignItems: 'center',
     gap: SPACING.MD
   },
   name: {
+    flexShrink: 1,
     color: COLOR.GRAY_600,
     fontSize: FONT_SIZE.BASE,
     lineHeight: LINE_HEIGHT.BASE,
