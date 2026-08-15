@@ -63,20 +63,7 @@ export const FORM_INITIAL_VALUES: IRegisterForm = {
   gender: "",
   state: "",
   city: "",
-  vaccines: [
-    {
-      name: "Hepatite B",
-      isPeriodic: false,
-      doses: 2,
-      lastApplicationDate: '2002-05-23'
-    },
-    {
-      name: "Hepatite B",
-      isPeriodic: false,
-      doses: 2,
-      lastApplicationDate: '2002-05-23'
-    },
-  ],
+  vaccines: [],
   email: "",
   password: "",
   confirmedPassword: ""
