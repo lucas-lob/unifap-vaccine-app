@@ -12,6 +12,7 @@ export interface ButtonProps extends PressableProps {
   Icon?: ComponentType<LucideProps>
   variant?: 'primary-solid' | 'primary-outline' | 'secondary-solid' | 'secondary-outline' | 'tertiary' | 'tertiary-outline',
   width?: DimensionValue,
+  height?: DimensionValue,
   loading?: boolean
 }
 
@@ -20,6 +21,7 @@ export default function Button(props: ButtonProps) {
     label,
     Icon,
     width = '100%',
+    height = 52,
     variant = 'primary-solid',
     loading,
     ...restProps
@@ -33,7 +35,8 @@ export default function Button(props: ButtonProps) {
       style={[
         styles.wrapper,
         styles.wrapperVariant,
-        { width }
+        { width },
+        { height }
       ]}
       {...restProps}
     >

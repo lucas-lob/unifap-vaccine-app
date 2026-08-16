@@ -38,7 +38,7 @@ export function RegisterFormPersonalInfos() {
           />
         )}
       />
-
+      
       <Controller
         name={'responsableName'}
         control={control}
@@ -56,26 +56,7 @@ export function RegisterFormPersonalInfos() {
             error={error?.message}
           />
         )}
-      />
-
-      <Controller
-        name={'birthDay'}
-        control={control}
-        render={({
-          field: { onChange, value },
-          fieldState: { error }
-        }) => (
-          <InputDate
-            label="Data de nascimento"
-            LabelIcon={Calendar}
-            labelIconConfigs={{ color: COLOR.ORANGE_DARK }}
-            placeholder="dd/mm/aaaa"
-            value={value}
-            onChangeText={onChange}
-            error={error?.message}
-          />
-        )}
-      />
+      />  
 
       <Controller
         name={'cpf'}

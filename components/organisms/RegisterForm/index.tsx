@@ -2,21 +2,23 @@ import { useCallback, useState } from 'react';
 import { Text, View } from "react-native";
 import { FormProvider, useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { useRouter } from 'expo-router';
 
 import Button from "@/components/atoms/Button";
 import { ErrorMessage } from '@/components/atoms/ErrorMessage';
+import { useRegisterFormTabs } from '@/hooks/useRegisterFormTabs';
+
 import { RegisterFormLocationInfos } from './Components/LocationInfos';
 import { RegisterFormLoginInfos } from "./Components/LoginInfos";
 import { RegisterFormPersonalInfos } from './Components/PersonalInfos';
-
-import { FORM_INITIAL_VALUES, type IRegisterForm, registerFormSchema } from "./schema";
+import { RegisterFormBirthdayInfo } from './Components/BirthdayInfo';
+import { RegisterFormVaccinesInfo } from './Components/VaccinesInfo';
+import { FORM_INITIAL_VALUES, registerFormSchema, STEP_FIELDS } from "./schema";
 import { styles } from './styles';
 
-type TRegisterFormTabs = 'personal' | 'login'
+import type { IRegisterForm } from './schema'
 
 export function RegisterForm() {
-  const router = useRouter()
+  const { tab, handleBackTab, handleNextTab, isLastTab } = useRegisterFormTabs()
   const formProps = useForm<IRegisterForm>({
     defaultValues: FORM_INITIAL_VALUES,
     resolver: zodResolver(registerFormSchema),
@@ -24,12 +26,13 @@ export function RegisterForm() {
   })
   const { getValues, trigger, clearErrors } = formProps
 
-  const [tab, setTab] = useState<TRegisterFormTabs>('personal')
   const [error, setError] = useState<string | null>(null)
   const [loading, setLoading] = useState<boolean>(false)
 
-  const isPersonalTab = tab === 'personal'
-  const buttonLabel = isPersonalTab ? 'Continuar' : 'Cadastrar'
+  const isBirthdayTab = tab.name === 'birthday'
+  const isPersonalTab = tab.name === 'personal'
+  const isVaccinesTab = tab.name === 'vaccines'
+  const submitButtonLabel = isLastTab ? 'Cadastrar' : 'Continuar'
 
   const onSubmit = async () => {
     const values = getValues()
@@ -44,28 +47,20 @@ export function RegisterForm() {
   const handleSubmitButton = useCallback(async () => {
     setLoading(true)
 
-    const isValidPersonalStep = await trigger([
-      'name', 'responsableName', 'birthDay', 'cpf', 'gender', 'state', 'city'
-    ])
-    const isValidLoginStep = await trigger([
-      'email', 'password', 'confirmedPassword'
-    ])
+    const isValidStep = await trigger(STEP_FIELDS[tab.name])
 
-    if (isPersonalTab && isValidPersonalStep) {
+    if (isValidStep) {
       clearErrors()
-      setTab('login')
 
-    } else if (isValidLoginStep) {
-      await onSubmit()
+      if (isLastTab) {
+        await onSubmit()
+      } else {
+        handleNextTab()
+      }
     }
 
     setLoading(false)
-  }, [tab])
-
-  const handleBackButton = () => {
-    setError(null)
-    tab === 'login' ? setTab('personal') : router.replace('/(auth)')
-  }
+  }, [tab, isLastTab, onSubmit, handleNextTab, clearErrors])
 
   return (
     <FormProvider {...formProps}>
@@ -73,25 +68,27 @@ export function RegisterForm() {
         <View style={styles.headerContainer}>
           <Text style={styles.headerTitle}>Cadastro</Text>
 
-          <Text style={styles.headerDescription}>Preencha seus dados para começar</Text>
+          <Text style={styles.headerDescription}>{tab.description}</Text>
         </View>
 
-        {isPersonalTab
-          ? (
-            <>
-              <RegisterFormPersonalInfos />
-              <RegisterFormLocationInfos />
-            </>
-          )
-          : (
-            <RegisterFormLoginInfos />
-          )}
+        {isBirthdayTab && <RegisterFormBirthdayInfo />}
+
+        {isPersonalTab && (
+          <>
+            <RegisterFormPersonalInfos />
+            <RegisterFormLocationInfos />
+          </>
+        )}
+
+        {isVaccinesTab && <RegisterFormVaccinesInfo />}
+
+        {isLastTab && <RegisterFormLoginInfos />}
 
         {!!error && <ErrorMessage message={error} />}
 
         <View style={styles.buttonsContainer}>
           <Button
-            label={buttonLabel}
+            label={submitButtonLabel}
             onPress={handleSubmitButton}
             loading={loading}
           />
@@ -99,7 +96,10 @@ export function RegisterForm() {
           <Button
             variant='primary-outline'
             label='Voltar'
-            onPress={handleBackButton}
+            onPress={() => {
+              setError(null)
+              handleBackTab()
+            }}
           />
         </View>
       </View>

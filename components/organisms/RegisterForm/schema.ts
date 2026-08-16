@@ -1,13 +1,15 @@
 import {
-  object as _object,
-  string as _string,
+  array as _array,
+  email as _email,
   enum as _enum,
-  email as _email
+  object as _object,
+  string as _string
 } from 'zod'
 
-import type { infer as _infer } from 'zod'
-
 import { CPF_REGEX } from '@/sdk/utils/constants'
+import { vaccineFormSchema } from '@/components/molecules/VaccineForm/schema'
+
+import type { infer as _infer } from 'zod'
 
 export const registerFormSchema = _object({
   name: _string()
@@ -24,6 +26,7 @@ export const registerFormSchema = _object({
     .min(1, "Campo obrigatório"),
   city: _string()
     .min(1, "Campo obrigatório"),
+  vaccines: _array(vaccineFormSchema),
   email: _email("Formato inválido")
     .min(1, "Campo obrigatório"),
   password: _string("Formato inválido")
@@ -60,7 +63,17 @@ export const FORM_INITIAL_VALUES: IRegisterForm = {
   gender: "",
   state: "",
   city: "",
+  vaccines: [],
   email: "",
   password: "",
   confirmedPassword: ""
+}
+
+type TRegisterFormStep = 'birthday' | 'personal' | 'vaccines' | 'login'
+
+export const STEP_FIELDS: Record<TRegisterFormStep, (keyof IRegisterForm)[]> = {
+  birthday: ['birthDay'],
+  personal: ['name', 'responsableName', 'cpf', 'gender', 'state', 'city'],
+  vaccines: [],
+  login: ['email', 'password', 'confirmedPassword'],
 }
