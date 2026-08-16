@@ -69,10 +69,11 @@ export const FORM_INITIAL_VALUES: IRegisterForm = {
   confirmedPassword: ""
 }
 
-type TRegisterFormStep = 'birthday' | 'personal' | 'login'
+type TRegisterFormStep = 'birthday' | 'personal' | 'vaccines' | 'login'
 
 export const STEP_FIELDS: Record<TRegisterFormStep, (keyof IRegisterForm)[]> = {
   birthday: ['birthDay'],
   personal: ['name', 'responsableName', 'cpf', 'gender', 'state', 'city'],
+  vaccines: [],
   login: ['email', 'password', 'confirmedPassword'],
 }

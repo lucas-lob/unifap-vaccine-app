@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Pressable, Text, View } from "react-native";
+import { Pressable, StyleSheet, Text, View } from "react-native";
 
 import { Modal } from "@/components/molecules/Modal";
 import { AVAILABLE_VACCINES_MOCK } from "@/sdk/mocks/availableVaccines.mock";
@@ -7,6 +7,7 @@ import { VaccineForm } from "@/components/molecules/VaccineForm";
 
 import type { UseFieldArrayAppend } from "react-hook-form"
 import type { IRegisterForm } from "../../schema";
+import { COLOR, FONT_SIZE, LINE_HEIGHT, SPACING } from "@/style/tokens";
 
 type NewVaccineModalProps = {
   isOpened: boolean
@@ -35,13 +36,13 @@ export function NewVaccineModal(props: NewVaccineModalProps) {
     >
       {!selectedVaccine
         ? (
-          <View>
+          <View style={styles.listContainer}>
             {AVAILABLE_VACCINES_MOCK.map((vaccine, index) =>
               <Pressable
                 key={`${index} - ${vaccine.name}`}
                 onPress={() => setSelectedVaccine(vaccine)}
               >
-                <Text>
+                <Text style={styles.listItem}>
                   {vaccine.name}
                 </Text>
               </Pressable>
@@ -65,3 +66,14 @@ export function NewVaccineModal(props: NewVaccineModalProps) {
     </Modal>
   )
 }
+
+const styles = StyleSheet.create({
+  listContainer: {
+    gap: SPACING.MD
+  },
+  listItem: {
+    color: COLOR.GRAY_700,
+    fontSize: FONT_SIZE.BASE,
+    lineHeight: LINE_HEIGHT.BASE,
+  }
+})

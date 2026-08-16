@@ -11,11 +11,11 @@ import { RegisterFormLocationInfos } from './Components/LocationInfos';
 import { RegisterFormLoginInfos } from "./Components/LoginInfos";
 import { RegisterFormPersonalInfos } from './Components/PersonalInfos';
 import { RegisterFormBirthdayInfo } from './Components/BirthdayInfo';
+import { RegisterFormVaccinesInfo } from './Components/VaccinesInfo';
 import { FORM_INITIAL_VALUES, registerFormSchema, STEP_FIELDS } from "./schema";
 import { styles } from './styles';
 
 import type { IRegisterForm } from './schema'
-import { RegisterFormVaccinesInfo } from './Components/VaccinesInfo';
 
 export function RegisterForm() {
   const { tab, handleBackTab, handleNextTab, isLastTab } = useRegisterFormTabs()
@@ -31,6 +31,7 @@ export function RegisterForm() {
 
   const isBirthdayTab = tab.name === 'birthday'
   const isPersonalTab = tab.name === 'personal'
+  const isVaccinesTab = tab.name === 'vaccines'
   const submitButtonLabel = isLastTab ? 'Cadastrar' : 'Continuar'
 
   const onSubmit = async () => {
@@ -79,6 +80,8 @@ export function RegisterForm() {
           </>
         )}
 
+        {isVaccinesTab && <RegisterFormVaccinesInfo />}
+
         {isLastTab && <RegisterFormLoginInfos />}
 
         {!!error && <ErrorMessage message={error} />}
@@ -93,7 +96,10 @@ export function RegisterForm() {
           <Button
             variant='primary-outline'
             label='Voltar'
-            onPress={handleBackTab}
+            onPress={() => {
+              setError(null)
+              handleBackTab()
+            }}
           />
         </View>
       </View>

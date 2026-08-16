@@ -18,6 +18,10 @@ const REGISTER_FORM_TABS: readonly TRegisterFormTab[] = [
     description: 'Preencha seus dados pessoais'
   },
   {
+    name: 'vaccines',
+    description: 'Preencha seus dados vacinais'
+  },
+  {
     name: 'login',
     description: 'Preencha seus dados para Login'
   }
