@@ -25,7 +25,7 @@ export function RegisterFormBirthdayInfo() {
             labelIconConfigs={{ color: COLOR.ORANGE_DARK }}
             placeholder="dd/mm/aaaa"
             value={value}
-            onChangeText={onChange}
+            onChangeDate={onChange}
             error={error?.message}
           />
         )}

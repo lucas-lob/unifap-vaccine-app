@@ -72,7 +72,7 @@ export function VaccineForm(props: VaccineFormProps) {
             label="Data da última aplicação"
             placeholder="dd/mm/aaaa"
             value={value}
-            onChangeText={onChange}
+            onChangeDate={onChange}
             error={error?.message}
           />
         }
