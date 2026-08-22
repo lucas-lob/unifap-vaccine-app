@@ -1,9 +1,8 @@
 import { StyleSheet, View } from "react-native";
 import { Controller, useFormContext } from "react-hook-form";
-import { Calendar, CreditCard, User } from "lucide-react-native";
+import { CreditCard, User } from "lucide-react-native";
 
 import { Input } from "@/components/atoms/Input";
-import { InputDate } from "@/components/atoms/InputDate";
 import { CheckboxList } from "@/components/molecules/CheckboxList";
 
 import { applyCpfMask } from "@/sdk/utils/masks";
