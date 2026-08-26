@@ -1,4 +1,4 @@
-type VaccineSchema = {
+export type VaccineSchema = {
   id: string
   name: string
   isPeriodic: boolean

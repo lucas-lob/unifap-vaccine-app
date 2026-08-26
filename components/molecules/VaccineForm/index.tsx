@@ -9,31 +9,34 @@ import Button from "@/components/atoms/Button";
 import { vaccineFormSchema, type IVaccineForm } from "./schema"
 import { styles } from "./styles";
 
+import type { VaccineSchema } from "@/sdk/mocks/availableVaccines.mock";
+
 type VaccineFormProps = {
-  vaccineName: string
-  isPeriodic: boolean
+  vaccine: VaccineSchema
   onSaveData: (formData: IVaccineForm) => void
 }
 
 export function VaccineForm(props: VaccineFormProps) {
-  const { vaccineName, isPeriodic, onSaveData } = props
+  const { vaccine, onSaveData } = props
 
   const FORM_INITIAL_VALUES: IVaccineForm = {
-  name: vaccineName,
-  isPeriodic,
-  doses: undefined,
-  lastApplicationDate: ""
-} 
+    id: vaccine.id,
+    name: vaccine.name,
+    isPeriodic: vaccine.isPeriodic,
+    doses: undefined,
+    lastApplicationDate: ""
+  }
 
-  const { control, watch, handleSubmit, getValues } = useForm<IVaccineForm>({
+  const { control, handleSubmit, getValues } = useForm<IVaccineForm>({
     defaultValues: FORM_INITIAL_VALUES,
     resolver: zodResolver(vaccineFormSchema),
     reValidateMode: 'onSubmit'
   })
 
-  const isPeriodicVaccine = watch('isPeriodic')
+  const isPeriodicVaccine = getValues('isPeriodic')
 
   const onSubmit = () => {
+    // TODO - Adicionar validação de maxDoses
     const formData = getValues()
     onSaveData(formData)
   }

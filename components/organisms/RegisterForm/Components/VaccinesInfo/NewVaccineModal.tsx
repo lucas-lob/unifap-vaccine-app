@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Pressable, StyleSheet, Text, View } from "react-native";
 
 import { Modal } from "@/components/molecules/Modal";
-import { AVAILABLE_VACCINES_MOCK } from "@/sdk/mocks/availableVaccines.mock";
+import { AVAILABLE_VACCINES_MOCK, type VaccineSchema } from "@/sdk/mocks/availableVaccines.mock";
 import { VaccineForm } from "@/components/molecules/VaccineForm";
 
 import type { UseFieldArrayAppend } from "react-hook-form"
@@ -15,12 +15,10 @@ type NewVaccineModalProps = {
   onAppend: UseFieldArrayAppend<IRegisterForm, 'vaccines'>
 }
 
-type Vaccine = typeof AVAILABLE_VACCINES_MOCK[number]
-
 export function NewVaccineModal(props: NewVaccineModalProps) {
   const { isOpened, setIsOpened, onAppend } = props
 
-  const [selectedVaccine, setSelectedVaccine] = useState<Vaccine | null>(null)
+  const [selectedVaccine, setSelectedVaccine] = useState<VaccineSchema | null>(null)
 
   const modalTitle = !selectedVaccine
     ? "Selecione uma vacina"
@@ -52,8 +50,7 @@ export function NewVaccineModal(props: NewVaccineModalProps) {
         : (
           <View>
             <VaccineForm
-              vaccineName={selectedVaccine.name}
-              isPeriodic={selectedVaccine.isPeriodic}
+              vaccine={selectedVaccine}
               onSaveData={formData => {
                 onAppend(formData)
                 setIsOpened(false)
