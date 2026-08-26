@@ -1,13 +1,14 @@
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import { Pressable, StyleSheet, Text, View } from "react-native";
 
 import { Modal } from "@/components/molecules/Modal";
-import { AVAILABLE_VACCINES_MOCK, type VaccineSchema } from "@/sdk/mocks/availableVaccines.mock";
 import { VaccineForm } from "@/components/molecules/VaccineForm";
-
-import type { UseFieldArrayAppend } from "react-hook-form"
-import type { IRegisterForm } from "../../schema";
+import { AVAILABLE_VACCINES_MOCK, type VaccineSchema } from "@/sdk/mocks/availableVaccines.mock";
 import { COLOR, FONT_SIZE, LINE_HEIGHT, SPACING } from "@/style/tokens";
+
+import { useFormContext, type UseFieldArrayAppend } from "react-hook-form";
+
+import type { IRegisterForm } from "../../schema";
 
 type NewVaccineModalProps = {
   isOpened: boolean
@@ -19,10 +20,22 @@ export function NewVaccineModal(props: NewVaccineModalProps) {
   const { isOpened, setIsOpened, onAppend } = props
 
   const [selectedVaccine, setSelectedVaccine] = useState<VaccineSchema | null>(null)
+  const { getValues } = useFormContext<IRegisterForm>()
 
   const modalTitle = !selectedVaccine
     ? "Selecione uma vacina"
     : `Insira os dados de aplicação da vacina ${selectedVaccine.name}`
+
+  const missingAvailableVaccines = (() => {
+    const userVaccines = getValues('vaccines')
+    const userVaccinesIds = userVaccines.map(vaccine => vaccine.id)
+
+    const filteredVaccines = AVAILABLE_VACCINES_MOCK.filter(
+      vaccine => !userVaccinesIds.includes(vaccine.id)
+    )
+
+    return filteredVaccines
+  })()
 
   return (
     <Modal
@@ -35,7 +48,7 @@ export function NewVaccineModal(props: NewVaccineModalProps) {
       {!selectedVaccine
         ? (
           <View style={styles.listContainer}>
-            {AVAILABLE_VACCINES_MOCK.map((vaccine, index) =>
+            {missingAvailableVaccines.map((vaccine, index) =>
               <Pressable
                 key={`${index} - ${vaccine.name}`}
                 onPress={() => setSelectedVaccine(vaccine)}
