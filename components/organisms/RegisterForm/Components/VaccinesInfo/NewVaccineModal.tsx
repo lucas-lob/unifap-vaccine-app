@@ -4,7 +4,7 @@ import { Pressable, StyleSheet, Text, View } from "react-native";
 import { Modal } from "@/components/molecules/Modal";
 import { VaccineForm } from "@/components/molecules/VaccineForm";
 import { AVAILABLE_VACCINES_MOCK, type VaccineSchema } from "@/sdk/mocks/availableVaccines.mock";
-import { COLOR, FONT_SIZE, LINE_HEIGHT, SPACING } from "@/style/tokens";
+import { COLOR, FONT_SIZE, FONT_WEIGHT, LINE_HEIGHT, SPACING } from "@/style/tokens";
 
 import { useFormContext, type UseFieldArrayAppend } from "react-hook-form";
 
@@ -48,16 +48,25 @@ export function NewVaccineModal(props: NewVaccineModalProps) {
       {!selectedVaccine
         ? (
           <View style={styles.listContainer}>
-            {missingAvailableVaccines.map((vaccine, index) =>
-              <Pressable
-                key={`${index} - ${vaccine.name}`}
-                onPress={() => setSelectedVaccine(vaccine)}
-              >
-                <Text style={styles.listItem}>
-                  {vaccine.name}
-                </Text>
-              </Pressable>
-            )}
+            {missingAvailableVaccines.length == 0
+              ? (
+                <Text style={[styles.listItem, styles.emptyListText]}>
+                  Todas vacinas foram selecionadas!
+                  </Text>
+              )
+              : (
+                missingAvailableVaccines.map((vaccine, index) =>
+                  <Pressable
+                    key={`${index} - ${vaccine.name}`}
+                    onPress={() => setSelectedVaccine(vaccine)}
+                  >
+                    <Text style={styles.listItem}>
+                      {vaccine.name}
+                    </Text>
+                  </Pressable>
+                )
+              )
+            }
           </View>
         )
         : (
@@ -85,5 +94,8 @@ const styles = StyleSheet.create({
     color: COLOR.GRAY_700,
     fontSize: FONT_SIZE.BASE,
     lineHeight: LINE_HEIGHT.BASE,
+  },
+  emptyListText: {
+    paddingBlock: SPACING.MD
   }
 })
