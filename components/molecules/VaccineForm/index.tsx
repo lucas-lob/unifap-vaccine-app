@@ -27,7 +27,7 @@ export function VaccineForm(props: VaccineFormProps) {
     lastApplicationDate: ""
   }
 
-  const { control, handleSubmit, getValues } = useForm<IVaccineForm>({
+  const { control, handleSubmit, getValues, setError } = useForm<IVaccineForm>({
     defaultValues: FORM_INITIAL_VALUES,
     resolver: zodResolver(vaccineFormSchema),
     reValidateMode: 'onSubmit'
@@ -36,8 +36,18 @@ export function VaccineForm(props: VaccineFormProps) {
   const isPeriodicVaccine = getValues('isPeriodic')
 
   const onSubmit = () => {
-    // TODO - Adicionar validação de maxDoses
     const formData = getValues()
+
+    if (
+      formData.doses && vaccine.maxDoses &&
+      formData.doses > vaccine.maxDoses
+    ) {
+      setError('doses', {
+        message: `O número máximo de doses é ${vaccine.maxDoses}`
+      })
+      return
+    }
+
     onSaveData(formData)
   }
 
