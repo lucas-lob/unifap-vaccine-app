@@ -9,32 +9,47 @@ import Button from "@/components/atoms/Button";
 import { vaccineFormSchema, type IVaccineForm } from "./schema"
 import { styles } from "./styles";
 
+import type { VaccineSchema } from "@/sdk/mocks/availableVaccines.mock";
+
 type VaccineFormProps = {
-  vaccineName: string
-  isPeriodic: boolean
+  vaccine: VaccineSchema
   onSaveData: (formData: IVaccineForm) => void
+  initialDoses?: number
+  initialLastApplicationDate?: string
 }
 
 export function VaccineForm(props: VaccineFormProps) {
-  const { vaccineName, isPeriodic, onSaveData } = props
+  const { vaccine, onSaveData, initialDoses, initialLastApplicationDate } = props
 
   const FORM_INITIAL_VALUES: IVaccineForm = {
-  name: vaccineName,
-  isPeriodic,
-  doses: undefined,
-  lastApplicationDate: ""
-} 
+    id: vaccine.id,
+    name: vaccine.name,
+    isPeriodic: vaccine.isPeriodic,
+    doses: initialDoses,
+    lastApplicationDate: initialLastApplicationDate ?? ""
+  }
 
-  const { control, watch, handleSubmit, getValues } = useForm<IVaccineForm>({
+  const { control, handleSubmit, getValues, setError } = useForm<IVaccineForm>({
     defaultValues: FORM_INITIAL_VALUES,
     resolver: zodResolver(vaccineFormSchema),
     reValidateMode: 'onSubmit'
   })
 
-  const isPeriodicVaccine = watch('isPeriodic')
+  const isPeriodicVaccine = getValues('isPeriodic')
 
   const onSubmit = () => {
     const formData = getValues()
+
+    if (
+      formData.doses && vaccine.maxDoses &&
+      formData.doses > vaccine.maxDoses
+    ) {
+      setError('doses', {
+        message: `O número máximo de doses é ${vaccine.maxDoses}`
+      })
+      return
+    }
+
     onSaveData(formData)
   }
 
@@ -72,7 +87,7 @@ export function VaccineForm(props: VaccineFormProps) {
             label="Data da última aplicação"
             placeholder="dd/mm/aaaa"
             value={value}
-            onChangeText={onChange}
+            onChangeDate={onChange}
             error={error?.message}
           />
         }

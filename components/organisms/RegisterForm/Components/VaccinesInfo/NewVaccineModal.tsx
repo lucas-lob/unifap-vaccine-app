@@ -1,13 +1,14 @@
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import { Pressable, StyleSheet, Text, View } from "react-native";
 
 import { Modal } from "@/components/molecules/Modal";
-import { AVAILABLE_VACCINES_MOCK } from "@/sdk/mocks/availableVaccines.mock";
 import { VaccineForm } from "@/components/molecules/VaccineForm";
+import { AVAILABLE_VACCINES_MOCK, type VaccineSchema } from "@/sdk/mocks/availableVaccines.mock";
+import { COLOR, FONT_SIZE, FONT_WEIGHT, LINE_HEIGHT, SPACING } from "@/style/tokens";
 
-import type { UseFieldArrayAppend } from "react-hook-form"
+import { useFormContext, type UseFieldArrayAppend } from "react-hook-form";
+
 import type { IRegisterForm } from "../../schema";
-import { COLOR, FONT_SIZE, LINE_HEIGHT, SPACING } from "@/style/tokens";
 
 type NewVaccineModalProps = {
   isOpened: boolean
@@ -15,16 +16,26 @@ type NewVaccineModalProps = {
   onAppend: UseFieldArrayAppend<IRegisterForm, 'vaccines'>
 }
 
-type Vaccine = typeof AVAILABLE_VACCINES_MOCK[number]
-
 export function NewVaccineModal(props: NewVaccineModalProps) {
   const { isOpened, setIsOpened, onAppend } = props
 
-  const [selectedVaccine, setSelectedVaccine] = useState<Vaccine | null>(null)
+  const [selectedVaccine, setSelectedVaccine] = useState<VaccineSchema | null>(null)
+  const { getValues } = useFormContext<IRegisterForm>()
 
   const modalTitle = !selectedVaccine
     ? "Selecione uma vacina"
     : `Insira os dados de aplicação da vacina ${selectedVaccine.name}`
+
+  const missingAvailableVaccines = (() => {
+    const userVaccines = getValues('vaccines')
+    const userVaccinesIds = userVaccines.map(vaccine => vaccine.id)
+
+    const filteredVaccines = AVAILABLE_VACCINES_MOCK.filter(
+      vaccine => !userVaccinesIds.includes(vaccine.id)
+    )
+
+    return filteredVaccines
+  })()
 
   return (
     <Modal
@@ -37,23 +48,31 @@ export function NewVaccineModal(props: NewVaccineModalProps) {
       {!selectedVaccine
         ? (
           <View style={styles.listContainer}>
-            {AVAILABLE_VACCINES_MOCK.map((vaccine, index) =>
-              <Pressable
-                key={`${index} - ${vaccine.name}`}
-                onPress={() => setSelectedVaccine(vaccine)}
-              >
-                <Text style={styles.listItem}>
-                  {vaccine.name}
-                </Text>
-              </Pressable>
-            )}
+            {missingAvailableVaccines.length == 0
+              ? (
+                <Text style={[styles.listItem, styles.emptyListText]}>
+                  Todas vacinas foram selecionadas!
+                  </Text>
+              )
+              : (
+                missingAvailableVaccines.map((vaccine, index) =>
+                  <Pressable
+                    key={`${index} - ${vaccine.name}`}
+                    onPress={() => setSelectedVaccine(vaccine)}
+                  >
+                    <Text style={styles.listItem}>
+                      {vaccine.name}
+                    </Text>
+                  </Pressable>
+                )
+              )
+            }
           </View>
         )
         : (
           <View>
             <VaccineForm
-              vaccineName={selectedVaccine.name}
-              isPeriodic={selectedVaccine.isPeriodic}
+              vaccine={selectedVaccine}
               onSaveData={formData => {
                 onAppend(formData)
                 setIsOpened(false)
@@ -75,5 +94,8 @@ const styles = StyleSheet.create({
     color: COLOR.GRAY_700,
     fontSize: FONT_SIZE.BASE,
     lineHeight: LINE_HEIGHT.BASE,
+  },
+  emptyListText: {
+    paddingBlock: SPACING.MD
   }
 })

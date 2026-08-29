@@ -1,9 +1,8 @@
 import { StyleSheet, View } from "react-native";
 import { Controller, useFormContext } from "react-hook-form";
-import { Calendar, CreditCard, User } from "lucide-react-native";
+import { CreditCard, User } from "lucide-react-native";
 
 import { Input } from "@/components/atoms/Input";
-import { InputDate } from "@/components/atoms/InputDate";
 import { CheckboxList } from "@/components/molecules/CheckboxList";
 
 import { applyCpfMask } from "@/sdk/utils/masks";
@@ -12,11 +11,18 @@ import { COLOR, SPACING } from "@/style/tokens";
 import type { IRegisterForm } from "../schema";
 
 const styles = StyleSheet.create({
-  container: {gap: SPACING.LG}
+  container: { gap: SPACING.LG }
 })
 
+const SIXTEEN_YEARS_IN_MILLISECONDS = 5049216e+05
+
 export function RegisterFormPersonalInfos() {
-  const { control } = useFormContext<IRegisterForm>()
+  const { control, getValues } = useFormContext<IRegisterForm>()
+
+  const userBirthday = getValues('birthDay')
+  const userBirthdayTimestamp = new Date(userBirthday).getTime()
+  const isUserLegalAge = !isNaN(userBirthdayTimestamp) &&
+    (Date.now() - userBirthdayTimestamp) >= SIXTEEN_YEARS_IN_MILLISECONDS
 
   return (
     <View style={styles.container}>
@@ -38,25 +44,27 @@ export function RegisterFormPersonalInfos() {
           />
         )}
       />
-      
-      <Controller
-        name={'responsableName'}
-        control={control}
-        render={({
-          field: { onChange, value },
-          fieldState: { error }
-        }) => (
-          <Input
-            label="Nome do Responsável"
-            LabelIcon={User}
-            labelIconConfigs={{ color: COLOR.GREEN_DARK }}
-            placeholder="Nome do responsável legal"
-            value={value}
-            onChangeText={onChange}
-            error={error?.message}
-          />
-        )}
-      />  
+
+      {!isUserLegalAge && (
+        <Controller
+          name={'responsableName'}
+          control={control}
+          render={({
+            field: { onChange, value },
+            fieldState: { error }
+          }) => (
+            <Input
+              label="Nome do Responsável"
+              LabelIcon={User}
+              labelIconConfigs={{ color: COLOR.GREEN_DARK }}
+              placeholder="Nome do responsável legal"
+              value={value}
+              onChangeText={onChange}
+              error={error?.message}
+            />
+          )}
+        />
+      )}
 
       <Controller
         name={'cpf'}

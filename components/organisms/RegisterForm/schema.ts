@@ -15,7 +15,7 @@ export const registerFormSchema = _object({
   name: _string()
     .min(1, "Campo obrigatório"),
   responsableName: _string()
-    .min(1, "Campo obrigatório"),
+    .optional(),
   birthDay: _string("Campo obrigatório")
     .min(1, "Campo obrigatório"),
   cpf: _string()

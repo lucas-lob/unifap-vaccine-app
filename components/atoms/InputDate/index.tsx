@@ -1,18 +1,19 @@
-import { ComponentType, useEffect, useState } from "react";
-import { useIntl } from "react-intl";
-import { Pressable, Text, TextInput, View } from "react-native";
 import DateTimePicker from '@react-native-community/datetimepicker';
 import { LucideProps } from "lucide-react-native";
+import { ComponentType, useState } from "react";
+import { useIntl } from "react-intl";
+import { Pressable, Text, TextInput, View } from "react-native";
 
 import type { TextInputProps } from "react-native";
 
+import { getOnlyDateISOString } from '@/sdk/utils/date';
 import { COLOR } from "@/style/tokens";
 
-import { styles } from "./styles";
 import { ErrorMessage } from "../ErrorMessage";
+import { styles } from "./styles";
 
 interface InputDateProps extends TextInputProps {
-  onChangeText: (date: string | null) => void
+  onChangeDate: (date: string | null) => void
   label?: string
   LabelIcon?: ComponentType<LucideProps>
   error?: string
@@ -26,7 +27,7 @@ export function InputDate(props: InputDateProps) {
     LabelIcon,
     labelIconConfigs,
     error,
-    onChangeText,
+    onChangeDate,
     style: textInputPropsStyle,
     value = "",
     maxDate,
@@ -34,17 +35,19 @@ export function InputDate(props: InputDateProps) {
   } = props
   const intl = useIntl()
   const [openModal, setOpenModal] = useState<boolean>(false)
-  const [date, setDate] = useState<Date | null>(null)
 
-  const formattedDate = date
-    ? intl.formatDate(date, {
+  // Check if value is valid date ISO string
+  const parsedDate = value ? new Date(value) : null;
+  const isValidDate = parsedDate && !isNaN(parsedDate.getTime());
+
+  const formattedDateToDisplay = isValidDate
+    ? intl.formatDate(parsedDate, {
       day: '2-digit',
       month: '2-digit',
-      year: 'numeric'
+      year: 'numeric',
+      timeZone: 'UTC'
     })
     : value
-    
-    useEffect(() => { onChangeText(formattedDate) }, [formattedDate])
 
   return (
     <View style={styles.container}>
@@ -68,22 +71,23 @@ export function InputDate(props: InputDateProps) {
           ]}
           placeholderTextColor={COLOR.GRAY_500}
           readOnly
-          value={formattedDate ? formattedDate : ""}
+          value={formattedDateToDisplay}
         />
       </Pressable>
 
       {!!error && <ErrorMessage message={error} />}
 
-      {
-        openModal &&
+      {openModal &&
         <DateTimePicker
-          value={date ?? new Date()}
+          value={new Date()}
           mode='date'
           display='spinner'
           themeVariant='light'
           maximumDate={maxDate ?? new Date()}
           onValueChange={(_event, selectedDate) => {
-            setDate(selectedDate)
+            const onlyDateISOString = getOnlyDateISOString(selectedDate)
+
+            onChangeDate(onlyDateISOString)
             setOpenModal(false)
           }}
           onDismiss={() => setOpenModal(false)}

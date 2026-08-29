@@ -4,17 +4,19 @@ import {
   boolean as _boolean,
   object as _object
 } from 'zod'
- 
+
 import type { infer as _infer } from 'zod'
 
 export const vaccineFormSchema = _object({
+  id: _string()
+    .min(1, "Campo obrigatório"),
   name: _string()
     .min(1, "Campo obrigatório"),
   isPeriodic: _boolean(),
   doses: _coerce.number<number>("Insira um valor válido")
     .optional(),
   lastApplicationDate: _string("Insira um valor válido")
-}).superRefine((data, ctx) => {  
+}).superRefine((data, ctx) => {
   if (!data.isPeriodic && !data.doses) {
     ctx.addIssue({
       code: "invalid_value",
