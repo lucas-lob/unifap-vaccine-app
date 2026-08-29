@@ -18,7 +18,7 @@ export function RegisterFormVaccinesInfo() {
   const [isModalOpened, setIsModalOpened] = useState<boolean>(false)
 
   const { control } = useFormContext<IRegisterForm>()
-  const { fields, append, remove } = useFieldArray({
+  const { fields, append, remove, update } = useFieldArray({
     control,
     name: 'vaccines'
   })
@@ -38,7 +38,9 @@ export function RegisterFormVaccinesInfo() {
           {fields.map((vaccine, index) =>
             <VaccineItem
               key={vaccine.id}
+              index={index}
               onRemove={() => { remove(index) }}
+              onUpdate={update}
               {...vaccine}
             />
           )}

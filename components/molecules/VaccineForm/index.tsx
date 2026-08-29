@@ -14,17 +14,19 @@ import type { VaccineSchema } from "@/sdk/mocks/availableVaccines.mock";
 type VaccineFormProps = {
   vaccine: VaccineSchema
   onSaveData: (formData: IVaccineForm) => void
+  initialDoses?: number
+  initialLastApplicationDate?: string
 }
 
 export function VaccineForm(props: VaccineFormProps) {
-  const { vaccine, onSaveData } = props
+  const { vaccine, onSaveData, initialDoses, initialLastApplicationDate } = props
 
   const FORM_INITIAL_VALUES: IVaccineForm = {
     id: vaccine.id,
     name: vaccine.name,
     isPeriodic: vaccine.isPeriodic,
-    doses: undefined,
-    lastApplicationDate: ""
+    doses: initialDoses,
+    lastApplicationDate: initialLastApplicationDate ?? ""
   }
 
   const { control, handleSubmit, getValues, setError } = useForm<IVaccineForm>({
